@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "579973215640",
+    "project_id": "irohubproject",
+    "storage_bucket": "irohubproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:579973215640:android:16976286b339d2821b67ed",
+        "android_client_info": {
+          "package_name": "com.example.irohub_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKnjn8ZFncv75HKZYM4ua2DkczDy5Mjcg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:irohub_project/itemcartedscreen1.dart';
+import 'package:irohub_project/showallscreen.dart';
 
 import '../imageclass/classA.dart';
 import '../imageclass/classB.dart';
@@ -124,7 +125,7 @@ class _HomeState extends State<Home> {
               ],
             ),
           ),
-          Showall(text: "New Arrivals"),
+          Showallbutton(text: "New Arrivals"),
           LimitedBox(
             maxHeight: 240,
             child: ListView.builder(
@@ -189,7 +190,15 @@ class _HomeState extends State<Home> {
                   );
                 }),
           ),
-          Showall(text: "Top Trends"),
+          InkWell(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            Showallscreen(name: "New arrivals")));
+              },
+              child: Showallbutton(text: "Top Trends")),
           LimitedBox(
             maxHeight: 240,
             child: ListView.builder(
@@ -248,7 +257,7 @@ class _HomeState extends State<Home> {
                   );
                 }),
           ),
-          Showall(text: "Best sellers"),
+          Showallbutton(text: "Top Trends"),
           LimitedBox(
             maxHeight: 730,
             child: ListView.separated(

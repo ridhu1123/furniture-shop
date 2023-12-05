@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:irohub_project/showallscreen.dart';
 
-class Showall extends StatelessWidget {
+class Showallbutton extends StatefulWidget {
   final text;
-  
-  const Showall({required this.text});
 
+  Showallbutton({required this.text});
+
+  @override
+  State<Showallbutton> createState() => _ShowallbuttonState();
+}
+
+class _ShowallbuttonState extends State<Showallbutton> {
+  List names = ["New Arravals", "Top Trends", "Best sellers", "Trending"];
+// final SharedPreferences sharedPreferences = SharedPreferences.getInstance();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -14,11 +22,18 @@ class Showall extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            text,
+            widget.text,
             style: GoogleFonts.robotoSlab(fontSize: 20),
           ),
           TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Showallscreen(
+                              name: names.toString(),
+                            )));
+              },
               style: TextButton.styleFrom(foregroundColor: Colors.black),
               child: Row(
                 children: [

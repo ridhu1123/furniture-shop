@@ -104,7 +104,7 @@ class _ExplorescreenState extends State<Explorescreen> {
                     );
                   }),
             ),
-            Showall(text: "Best sellers"),
+            Showallbutton(text: "Best sellers"),
             Container(
               height: 600,
               child: GridView.builder(

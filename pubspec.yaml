@@ -43,6 +43,7 @@ dependencies:
   five_pointed_star: ^1.0.3
   babylonjs_viewer: ^1.2.1
   getwidget: ^4.0.0
+  shared_preferences: ^2.2.2
 dev_dependencies:
   flutter_test:
     sdk: flutter

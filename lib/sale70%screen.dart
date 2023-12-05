@@ -90,7 +90,7 @@ class _CybermondayState extends State<Cybermonday> {
                 )
               ]),
             ),
-            Showall(text: "Chairs(10)"),
+            Showallbutton(text: "Chairs(10)"),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
@@ -205,7 +205,7 @@ class _CybermondayState extends State<Cybermonday> {
                 ],
               ),
             ),
-            Showall(text: "Lamps(10)"),
+            Showallbutton(text: "Lamps(10)"),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
@@ -320,7 +320,7 @@ class _CybermondayState extends State<Cybermonday> {
                 ],
               ),
             ),
-            Showall(text: "Tables(20)"),
+            Showallbutton(text: "Tables(20)"),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(

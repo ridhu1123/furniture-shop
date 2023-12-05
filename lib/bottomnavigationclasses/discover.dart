@@ -107,7 +107,7 @@ class _DiscoverState extends State<Discover> {
                 );
               }),
         ),
-        Showall(text: "Trending"),
+        Showallbutton(text: "Trending"),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
@@ -404,7 +404,7 @@ Winter""",
         SizedBox(
           height: 10,
         ),
-        Showall(text: "Best Selling"),
+        Showallbutton(text: "Best Selling"),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(

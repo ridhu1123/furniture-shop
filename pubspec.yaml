@@ -39,11 +39,17 @@ dependencies:
   flutter_facebook_auth: ^6.0.2
   firebase_auth: ^4.12.1
   motion_toast: ^2.7.9
+  carousel_slider: ^4.2.1
   flutter_carousel_slider: ^1.1.0
   five_pointed_star: ^1.0.3
   babylonjs_viewer: ^1.2.1
   getwidget: ^4.0.0
   shared_preferences: ^2.2.2
+  image_picker: ^1.0.4
+  path_provider: ^2.1.1
+  permission_handler: ^11.0.1
+  path: ^1.8.3
+  flutter_spinkit: ^5.2.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

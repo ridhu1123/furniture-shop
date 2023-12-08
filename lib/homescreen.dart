@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_carousel_slider/carousel_slider.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:irohub_project/bottomnavigationclasses/discover.dart';
 import 'package:irohub_project/bottomnavigationclasses/explore.dart';
 import 'package:irohub_project/bottomnavigationclasses/home.dart';
 import 'package:irohub_project/cartscreen.dart';
 import 'package:irohub_project/colections.dart';
-import 'package:irohub_project/imageclass/classA.dart';
-import 'package:irohub_project/imageclass/classB.dart';
-import 'package:irohub_project/imageclass/classC.dart';
+
 import 'package:irohub_project/profilepage.dart';
-import 'package:irohub_project/thankupage.dart';
-import 'package:irohub_project/widget/textandshowall.dart';
+import 'package:irohub_project/tables.dart';
 
 import 'categoryscreen.dart';
 
@@ -40,45 +37,9 @@ class Homescreen extends StatefulWidget {
 
 class _HomescreenState extends State<Homescreen> {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  // List exploreimage = [
-  //   "https://i.pinimg.com/564x/79/91/58/799158da597625ffa054d48fecdef369.jpg",
-  //   "https://i.pinimg.com/564x/f1/20/ba/f120ba0160225cf18a564a67e3bb22c6.jpg",
-  //   "https://i.pinimg.com/564x/df/66/0e/df660ef6ec3351b9c8ef06606661893e.jpg"
-  // ];
-  // List newarrivals = [
-  //   "assets/New Works by Studio Cecilia Xinyu Zhang.jpg",
-  //   "assets/40446cd0-7055-4954-89fa-e2bb3c0ecb5b.jpg",
-  //   "assets/New Works by Studio Cecilia Xinyu Zhang.jpg",
-  //   "assets/New Works by Studio Cecilia Xinyu Zhang.jpg",
-  //   "assets/New Works by Studio Cecilia Xinyu Zhang.jpg",
-  //   "assets/New Works by Studio Cecilia Xinyu Zhang.jpg",
-  //   "assets/New Works by Studio Cecilia Xinyu Zhang.jpg",
-  //   "assets/New Works by Studio Cecilia Xinyu Zhang.jpg",
-  // ];
-  // List newarrivalsname = [
-  //   "Nancy chair",
-  //   "Nancy chair",
-  //   "Nancy chair",
-  //   "Nancy chair",
-  //   "Nancy chair",
-  //   "Nancy chair",
-  //   "Nancy chair",
-  //   "Nancy chair",
-  // ];
-  // List newarrivalsprize = [
-  //   "€29.00",
-  //   "€29.00",
-  //   "€29.00",
-  //   "€29.00",
-  //   "€29.00",
-  //   "€29.00",
-  //   "€29.00",
-  //   "€29.00",
-  // ];
-  // List explorename = ["Sofa", "Lamps", "Chair"];
-  // List exploreitems = ["10", "5", "6"];
+
   List<Color> iconcolor = [Colors.white, Colors.black, Colors.black];
-  // List slideimage = [ClassA(), ClassB(), CLassC()];
+
   var size, height, width;
   bool _isfavourite = false;
   int favouritecount = 0;
@@ -255,9 +216,15 @@ class _HomescreenState extends State<Homescreen> {
               trailing: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(
-                    Icons.search_outlined,
-                    color: Colors.black,
+                  IconButton(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Sofa()));
+                    },
+                    icon: Icon(
+                      Icons.search_outlined,
+                      color: Colors.black,
+                    ),
                   ),
                   SizedBox(
                     width: 10,

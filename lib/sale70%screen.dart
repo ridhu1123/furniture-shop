@@ -3,8 +3,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:irohub_project/widget/textandshowall.dart';
 
 class Cybermonday extends StatefulWidget {
-  const Cybermonday({super.key});
-
+  String? title;
+  String? subtitile;
+  String? images1;
+  Cybermonday({super.key});
+  Cybermonday.name(
+      {required this.title, required this.subtitile, required this.images1});
   @override
   State<Cybermonday> createState() => _CybermondayState();
 }
@@ -34,7 +38,7 @@ class _CybermondayState extends State<Cybermonday> {
                   left: 5,
                   right: 5,
                   child: Image.asset(
-                    "assets/[removal.ai]_5203868e-b78f-4659-a105-c2647c1cc614-7043761_861-1.png",
+                    widget.images1!,
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -42,7 +46,7 @@ class _CybermondayState extends State<Cybermonday> {
                   bottom: 152,
                   left: 26,
                   child: Text(
-                    "Cyber Monday",
+                    widget.subtitile!,
                     style: GoogleFonts.robotoSlab(
                         color: Colors.grey[500],
                         fontSize: 12,
@@ -53,8 +57,7 @@ class _CybermondayState extends State<Cybermonday> {
                   bottom: 80,
                   left: 25,
                   child: Text(
-                    """Sale Up To
-70% Off""",
+                    widget.title!,
                     style: GoogleFonts.robotoSlab(
                         color: Colors.black,
                         fontSize: 30,
@@ -320,7 +323,7 @@ class _CybermondayState extends State<Cybermonday> {
                 ],
               ),
             ),
-            Showallbutton(text: "Tables(20)"),
+            Showallbutton(text: "Tables(10)"),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(

@@ -13,7 +13,7 @@ class _CollectiontabbarState extends State<Collectiontabbar> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: GridView.builder(
-          itemCount: 4,
+          itemCount: 6,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2, mainAxisExtent: 260),
           itemBuilder: (context, index) {

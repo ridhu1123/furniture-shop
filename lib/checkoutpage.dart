@@ -11,6 +11,7 @@ class Checkoutscreen extends StatefulWidget {
 
 class _CheckoutscreenState extends State<Checkoutscreen> {
   String _selectedvalue = "1";
+  String _selectedvalue1 = "1";
   Icon _icon = Icon(Icons.done);
   List paymentname = ["VISA", "Paypal", "Master Card"];
   List paymentid = [
@@ -81,11 +82,10 @@ class _CheckoutscreenState extends State<Checkoutscreen> {
             ),
             LimitedBox(
               maxHeight: 75,
-              child: ListView.builder(
-                itemCount: 2,
+              child: ListView(
                 scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return Padding(
+                children: [
+                  Padding(
                     padding: const EdgeInsets.only(
                         left: 12, right: 6, top: 6, bottom: 6),
                     child: Container(
@@ -112,7 +112,7 @@ class _CheckoutscreenState extends State<Checkoutscreen> {
                                 decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(8)),
-                                child: icons[index]),
+                                child: icons[0]),
                           ),
                           Positioned(
                             top: 13,
@@ -135,7 +135,7 @@ class _CheckoutscreenState extends State<Checkoutscreen> {
                             right: 5,
                             top: 6,
                             child: Radio(
-                              value: "",
+                              value: "1",
                               groupValue: _selectedvalue,
                               onChanged: (value) {
                                 setState(() {
@@ -147,8 +147,71 @@ class _CheckoutscreenState extends State<Checkoutscreen> {
                         ],
                       ),
                     ),
-                  );
-                },
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 12, right: 6, top: 6, bottom: 6),
+                    child: Container(
+                      height: 50,
+                      width: 265,
+                      decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                                spreadRadius: 0.25,
+                                blurRadius: 2,
+                                offset: Offset(0, 3),
+                                color: Colors.grey.withOpacity(0.5))
+                          ],
+                          color: Colors.grey[200],
+                          borderRadius: BorderRadius.circular(9)),
+                      child: Stack(
+                        children: [
+                          Positioned(
+                            left: 10,
+                            top: 12,
+                            child: Container(
+                                height: 40,
+                                width: 40,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(8)),
+                                child: icons[1]),
+                          ),
+                          Positioned(
+                            top: 13,
+                            left: 60,
+                            child: Text(
+                              "658 Yost Island Apt",
+                              style: GoogleFonts.robotoSlab(
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ),
+                          Positioned(
+                            top: 30,
+                            left: 60,
+                            child: Text(
+                              "Seattle , US",
+                              style: GoogleFonts.robotoSlab(color: Colors.grey),
+                            ),
+                          ),
+                          Positioned(
+                            right: 5,
+                            top: 6,
+                            child: Radio(
+                              value: "2",
+                              groupValue: _selectedvalue,
+                              onChanged: (value) {
+                                setState(() {
+                                  _selectedvalue = value!;
+                                });
+                              },
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  )
+                ],
               ),
             ),
             Padding(
@@ -168,44 +231,141 @@ class _CheckoutscreenState extends State<Checkoutscreen> {
                       borderRadius: BorderRadius.circular(6),
                       border: Border.all(
                           color: const Color.fromARGB(255, 219, 217, 217))),
-                  child: ListView.separated(
-                    physics: NeverScrollableScrollPhysics(),
-                    separatorBuilder: (context, index) => Padding(
-                      padding: const EdgeInsets.only(left: 8, right: 8),
-                      child: Divider(),
-                    ),
-                    itemCount: paymentimages.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
+                  child: Column(
+                    children: [
+                      Padding(
                         padding: const EdgeInsets.only(top: 14),
                         child: ListTile(
                           leading: CircleAvatar(
                             backgroundColor: Colors.white,
-                            backgroundImage: AssetImage(paymentimages[index]),
+                            backgroundImage: AssetImage(paymentimages[0]),
                           ),
                           title: Text(
-                            paymentid[index],
+                            paymentid[0],
                             style: GoogleFonts.robotoSlab(
                                 fontWeight: FontWeight.w600,
                                 color: Colors.grey[700]),
                           ),
                           subtitle: Text(
-                            paymentname[index],
+                            paymentname[0],
                             style: GoogleFonts.robotoSlab(color: Colors.grey),
                           ),
                           trailing: Radio(
-                            value: "",
-                            groupValue: _selectedvalue,
+                            value: "3",
+                            groupValue: _selectedvalue1,
                             onChanged: (value) {
                               setState(() {
-                                _selectedvalue = value!;
+                                _selectedvalue1 = value!;
                               });
                             },
                           ),
                         ),
-                      );
-                    },
-                  )),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8, right: 8),
+                        child: Divider(),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 14),
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            backgroundColor: Colors.white,
+                            backgroundImage: AssetImage(paymentimages[1]),
+                          ),
+                          title: Text(
+                            paymentid[1],
+                            style: GoogleFonts.robotoSlab(
+                                fontWeight: FontWeight.w600,
+                                color: Colors.grey[700]),
+                          ),
+                          subtitle: Text(
+                            paymentname[1],
+                            style: GoogleFonts.robotoSlab(color: Colors.grey),
+                          ),
+                          trailing: Radio(
+                            value: "4",
+                            groupValue: _selectedvalue1,
+                            onChanged: (value) {
+                              setState(() {
+                                _selectedvalue1 = value!;
+                              });
+                            },
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8, right: 8),
+                        child: Divider(),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 14),
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            backgroundColor: Colors.white,
+                            backgroundImage: AssetImage(paymentimages[2]),
+                          ),
+                          title: Text(
+                            paymentid[2],
+                            style: GoogleFonts.robotoSlab(
+                                fontWeight: FontWeight.w600,
+                                color: Colors.grey[700]),
+                          ),
+                          subtitle: Text(
+                            paymentname[2],
+                            style: GoogleFonts.robotoSlab(color: Colors.grey),
+                          ),
+                          trailing: Radio(
+                            value: "5",
+                            groupValue: _selectedvalue1,
+                            onChanged: (value) {
+                              setState(() {
+                                _selectedvalue1 = value!;
+                              });
+                            },
+                          ),
+                        ),
+                      )
+                    ],
+                  )
+                  // ListView.separated(
+                  //   physics: NeverScrollableScrollPhysics(),
+                  //   separatorBuilder: (context, index) => Padding(
+                  //     padding: const EdgeInsets.only(left: 8, right: 8),
+                  //     child: Divider(),
+                  //   ),
+                  //   itemCount: paymentimages.length,
+                  //   itemBuilder: (context, index) {
+                  //     return Padding(
+                  //       padding: const EdgeInsets.only(top: 14),
+                  //       child: ListTile(
+                  //         leading: CircleAvatar(
+                  //           backgroundColor: Colors.white,
+                  //           backgroundImage: AssetImage(paymentimages[index]),
+                  //         ),
+                  //         title: Text(
+                  //           paymentid[index],
+                  //           style: GoogleFonts.robotoSlab(
+                  //               fontWeight: FontWeight.w600,
+                  //               color: Colors.grey[700]),
+                  //         ),
+                  //         subtitle: Text(
+                  //           paymentname[index],
+                  //           style: GoogleFonts.robotoSlab(color: Colors.grey),
+                  //         ),
+                  //         trailing: Radio(
+                  //           value: "3",
+                  //           groupValue: _selectedvalue,
+                  //           onChanged: (value) {
+                  //             setState(() {
+                  //               _selectedvalue = value!;
+                  //             });
+                  //           },
+                  //         ),
+                  //       ),
+                  //     );
+                  //   },
+                  // )
+                  ),
             ),
             Divider(),
             Padding(

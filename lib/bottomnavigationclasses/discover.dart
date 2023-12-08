@@ -658,7 +658,9 @@ Winter""",
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          Secondcollectionpage()));
+                                          Secondcollectionpage(
+                                          
+                                          )));
                             },
                             child: Row(
                               children: [

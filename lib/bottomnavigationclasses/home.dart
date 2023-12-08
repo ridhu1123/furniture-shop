@@ -72,7 +72,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     var size, height, width;
-
+   
     size = MediaQuery.of(context).size;
     height = size.height;
     width = size.width;

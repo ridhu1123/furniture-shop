@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:irohub_project/colections.dart';
+
 import 'package:irohub_project/sale70%25screen.dart';
 
 class Secondcollectionpage extends StatefulWidget {
-  const Secondcollectionpage({super.key});
-
+  String? title;
+  String? subtitle;
+  String? images1;
+  Secondcollectionpage({
+    super.key,
+  });
+  Secondcollectionpage.name(
+      {required this.title, required this.subtitle, required this.images1});
   @override
   State<Secondcollectionpage> createState() => _SecondcollectionpageState();
 }
@@ -47,7 +53,7 @@ class _SecondcollectionpageState extends State<Secondcollectionpage> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Image.asset(
-                    "assets/[removal.ai]_5203868e-b78f-4659-a105-c2647c1cc614-7043761_861-1.png",
+                    widget.images1!,
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -56,7 +62,7 @@ class _SecondcollectionpageState extends State<Secondcollectionpage> {
                   child: Align(
                     alignment: Alignment.bottomLeft,
                     child: Text(
-                      "Cyber Monday",
+                      widget.subtitle!,
                       style: GoogleFonts.robotoSlab(
                           color: Colors.grey[500],
                           fontSize: 12,
@@ -69,8 +75,7 @@ class _SecondcollectionpageState extends State<Secondcollectionpage> {
                   child: Align(
                     alignment: Alignment.bottomLeft,
                     child: Text(
-                      """Sale Up To
-70% Off""",
+                      widget.title!,
                       style: GoogleFonts.robotoSlab(
                           color: Colors.black,
                           fontSize: 30,
@@ -87,7 +92,7 @@ class _SecondcollectionpageState extends State<Secondcollectionpage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Cybermonday()));
+                                  builder: (context) => Cybermonday.name(title:widget.title,subtitile: widget.subtitle,images1: widget.images1,)));
                         },
                         child: Row(
                           children: [

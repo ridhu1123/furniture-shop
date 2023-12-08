@@ -10,6 +10,12 @@ class Collections extends StatefulWidget {
 }
 
 class _CollectionsState extends State<Collections> {
+  List images1 = [
+    "assets/[removal.ai]_5203868e-b78f-4659-a105-c2647c1cc614-7043761_861-1.png",
+    "assets/zyro-image (2).png",
+    "assets/[removal.ai]_5ca82d1a-9eb1-479f-a6e8-8fd2665afd0c-7043766_866.png"
+  ];
+
   List images = [
     "assets/zyro-image (4).png",
     "assets/zyro-image (5).png",
@@ -116,7 +122,11 @@ Winder""",
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            Secondcollectionpage()));
+                                            Secondcollectionpage.name(
+                                              title: names[index],
+                                              subtitle: shortname[index],
+                                              images1: images1[index],
+                                            )));
                               },
                               child: Row(
                                 children: [

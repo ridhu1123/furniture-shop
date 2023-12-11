@@ -64,10 +64,10 @@ Please check the delivery status at""",
                         MaterialPageRoute(builder: (context) => Homescreen()));
                   },
                   style:
-                      ElevatedButton.styleFrom(backgroundColor: Colors.black),
+                      ElevatedButton.styleFrom(shape: RoundedRectangleBorder(),backgroundColor: Colors.black),
                   child: Text(
                     "Continue shopping",
-                    style: GoogleFonts.robotoSlab(),
+                    style: GoogleFonts.robotoSlab(color: Colors.white),
                   ))
             ],
           ),

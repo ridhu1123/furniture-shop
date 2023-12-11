@@ -1,7 +1,7 @@
 import 'package:five_pointed_star/five_pointed_star.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:irohub_project/cartscreen.dart';
+
 
 class Addtocart1 extends StatefulWidget {
   const Addtocart1({super.key});
@@ -393,7 +393,7 @@ class _Addtocart1State extends State<Addtocart1> {
                         height: 10,
                       ),
                       LimitedBox(
-                        maxHeight: 240,
+                        maxHeight: 242,
                         maxWidth: 300,
                         child: ListView.builder(
                             itemCount: newarrivalsname.length,
@@ -463,7 +463,7 @@ class _Addtocart1State extends State<Addtocart1> {
                 //       MaterialPageRoute(builder: (context) => cartscreen()));
                 // }
               },
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
+              style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(),backgroundColor: Colors.black),
               child: Text(
                 onclick == true ? "GO TO CART" : "ADD TO CART",
                 style: GoogleFonts.robotoSlab(color: Colors.white),
@@ -484,7 +484,7 @@ class _Addtocart1State extends State<Addtocart1> {
             padding: EdgeInsetsDirectional.fromSTEB(15, 0, 10, 0),
             child: Stack(children: [
               Container(
-                width: MediaQuery.of(context).size.width * 0.36,
+                width: MediaQuery.of(context).size.width * 0.34,
                 height: 8,
                 decoration: BoxDecoration(
                     color: Colors.grey[400],
@@ -492,7 +492,7 @@ class _Addtocart1State extends State<Addtocart1> {
                 child: Text(''),
               ),
               Container(
-                width: MediaQuery.of(context).size.width * (pct / 100) * 0.36,
+                width: MediaQuery.of(context).size.width * (pct / 100) * 0.34,
                 height: 8,
                 decoration: BoxDecoration(
                     color: Colors.blue,

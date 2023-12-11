@@ -111,7 +111,7 @@ class _SignupscreenState extends State<Signupscreen> {
               ),
             );
           },
-          style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
+          style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(),backgroundColor: Colors.black),
           child: Text(
             "SIGN UP",
             style: GoogleFonts.aBeeZee(color: Colors.white),

@@ -88,7 +88,7 @@ class _LoginscreenState extends State<Loginscreen> {
                   ),
                 );
               },
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
+              style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(),backgroundColor: Colors.black),
               child: Text(
                 "LOGIN",
                 style: GoogleFonts.aBeeZee(color: Colors.white),
@@ -124,7 +124,7 @@ class _LoginscreenState extends State<Loginscreen> {
                 //   MotionToast.error(description: Text("error")).show(context);
                 // }
               },
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
+              style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(),backgroundColor: Colors.white),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

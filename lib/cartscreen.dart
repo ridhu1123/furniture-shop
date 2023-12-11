@@ -11,7 +11,7 @@ class cartscreen extends StatefulWidget {
 }
 
 class _cartscreenState extends State<cartscreen> {
-  cart() {
+ Widget cart() {
     if (cartitems.isEmpty) {
       return Column(
         children: [
@@ -74,7 +74,7 @@ class _cartscreenState extends State<cartscreen> {
             child: ListView.separated(
                 separatorBuilder: (context, index) => Padding(
                       padding: const EdgeInsets.only(left: 60),
-                      child: Divider(),
+                      child: Divider(thickness: 0.4,),
                     ),
                 itemCount: cartitems.length,
                 itemBuilder: (context, index) {
@@ -188,7 +188,7 @@ class _cartscreenState extends State<cartscreen> {
                 }),
           ),
           Divider(
-            thickness: 1,
+            thickness: 0.5,
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -207,7 +207,7 @@ class _cartscreenState extends State<cartscreen> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.only(top: 8,left: 8,right: 8,bottom: 5),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -304,7 +304,7 @@ class _cartscreenState extends State<cartscreen> {
             SizedBox(
               height: 15,
             ),
-            Divider(),
+            Divider(thickness: 0.5,),
             cart()
           ],
         ),

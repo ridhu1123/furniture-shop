@@ -12,7 +12,7 @@ class Checkoutscreen extends StatefulWidget {
 class _CheckoutscreenState extends State<Checkoutscreen> {
   String _selectedvalue = "1";
   String _selectedvalue1 = "1";
-  Icon _icon = Icon(Icons.done);
+
   List paymentname = ["VISA", "Paypal", "Master Card"];
   List paymentid = [
     "**** **** **** 3765",
@@ -65,7 +65,7 @@ class _CheckoutscreenState extends State<Checkoutscreen> {
                     fontWeight: FontWeight.w500),
               ),
             ),
-            Divider(),
+            Divider(thickness: 0.5,),
             SizedBox(
               height: 5,
             ),
@@ -367,7 +367,7 @@ class _CheckoutscreenState extends State<Checkoutscreen> {
                   // )
                   ),
             ),
-            Divider(),
+            Divider(thickness: 0.5,),
             Padding(
               padding: const EdgeInsets.only(left: 8, right: 8, bottom: 5),
               child: Row(

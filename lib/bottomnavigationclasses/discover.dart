@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:irohub_project/itemcartedscreen1.dart';
+import 'package:irohub_project/addtocart.dart';
 import 'package:irohub_project/widget/textandshowall.dart';
 
 import '../collection1page.dart';
-import '../sale70%screen.dart';
+
 
 class Discover extends StatefulWidget {
   const Discover({super.key});
@@ -108,143 +108,13 @@ class _DiscoverState extends State<Discover> {
               }),
         ),
         Showallbutton(text: "Trending"),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              InkWell(
-                onTap: () {},
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.circular(6)),
-                  width: 90,
-                  height: 90,
-                  // child: Image.network("src"),
-                ),
-              ),
-              Column(
-                children: [
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Padding(
-                      padding:
-                          const EdgeInsets.only(left: 8, right: 8, top: 15),
-                      child: Text(
-                        newarrivalsname[1],
-                        style:
-                            GoogleFonts.robotoSlab(fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                  ),
-                  Text(
-                    newarrivalsprize[1],
-                    style: GoogleFonts.robotoSlab(color: Colors.grey[400]),
-                  ),
-                ],
-              ),
-              SizedBox(
-                width: 55,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 20),
-                child: ElevatedButton(
-                    onPressed: () {
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) =>
-                      //             Secondcollectionpage()));
-                    },
-                    style:
-                        ElevatedButton.styleFrom(backgroundColor: Colors.black),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          border: Border(
-                              bottom:
-                                  BorderSide(color: Colors.black, width: 1.0))),
-                      child: Text(
-                        "SHOP NOW",
-                        style: GoogleFonts.robotoSlab(
-                          fontSize: 10,
-                          color: Colors.white,
-                        ),
-                      ),
-                    )),
-              ),
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              InkWell(
-                onTap: () {},
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.circular(6)),
-                  width: 90,
-                  height: 90,
-                  // child: Image.network("src"),
-                ),
-              ),
-              Column(
-                children: [
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Padding(
-                      padding:
-                          const EdgeInsets.only(left: 8, right: 8, top: 15),
-                      child: Text(
-                        newarrivalsname[1],
-                        style:
-                            GoogleFonts.robotoSlab(fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                  ),
-                  Text(
-                    newarrivalsprize[1],
-                    style: GoogleFonts.robotoSlab(color: Colors.grey[400]),
-                  ),
-                ],
-              ),
-              SizedBox(
-                width: 55,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 20),
-                child: ElevatedButton(
-                    onPressed: () {
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) =>
-                      //             Secondcollectionpage()));
-                    },
-                    style:
-                        ElevatedButton.styleFrom(backgroundColor: Colors.black),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          border: Border(
-                              bottom:
-                                  BorderSide(color: Colors.black, width: 1.0))),
-                      child: Text(
-                        "SHOP NOW",
-                        style: GoogleFonts.robotoSlab(
-                          fontSize: 10,
-                          color: Colors.white,
-                        ),
-                      ),
-                    )),
-              ),
-            ],
-          ),
-        ),
-        Padding(
+        LimitedBox(
+          maxHeight: 322,
+          child: ListView.builder(
+            itemCount: 3,
+            physics: NeverScrollableScrollPhysics(),
+            itemBuilder: (context,index){
+            return Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -290,10 +160,12 @@ class _DiscoverState extends State<Discover> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => Addtocart1()));
+                              builder: (context) =>
+                                  Addtocart1()));
                     },
                     style:
-                        ElevatedButton.styleFrom(backgroundColor: Colors.black),
+                        ElevatedButton.styleFrom(shape: RoundedRectangleBorder()
+                        ,backgroundColor: Colors.black),
                     child: Container(
                       decoration: BoxDecoration(
                           border: Border(
@@ -310,8 +182,11 @@ class _DiscoverState extends State<Discover> {
               ),
             ],
           ),
-        ),
-        LimitedBox(
+        );
+          }),
+        )
+        
+       , LimitedBox(
           maxHeight: 266,
           child: ListView.builder(
               itemCount: 3,
@@ -405,7 +280,13 @@ Winter""",
           height: 10,
         ),
         Showallbutton(text: "Best Selling"),
-        Padding(
+         LimitedBox(
+          maxHeight: 322,
+          child: ListView.builder(
+            itemCount: 3,
+            physics: NeverScrollableScrollPhysics(),
+            itemBuilder: (context,index){
+            return Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -448,14 +329,15 @@ Winter""",
                 padding: const EdgeInsets.only(top: 20),
                 child: ElevatedButton(
                     onPressed: () {
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) =>
-                      //             Secondcollectionpage()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  Addtocart1()));
                     },
                     style:
-                        ElevatedButton.styleFrom(backgroundColor: Colors.black),
+                        ElevatedButton.styleFrom(shape: RoundedRectangleBorder()
+                        ,backgroundColor: Colors.black),
                     child: Container(
                       decoration: BoxDecoration(
                           border: Border(
@@ -472,142 +354,8 @@ Winter""",
               ),
             ],
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              InkWell(
-                onTap: () {},
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.circular(6)),
-                  width: 90,
-                  height: 90,
-                  // child: Image.network("src"),
-                ),
-              ),
-              Column(
-                children: [
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Padding(
-                      padding:
-                          const EdgeInsets.only(left: 8, right: 8, top: 15),
-                      child: Text(
-                        newarrivalsname[1],
-                        style:
-                            GoogleFonts.robotoSlab(fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                  ),
-                  Text(
-                    newarrivalsprize[1],
-                    style: GoogleFonts.robotoSlab(color: Colors.grey[400]),
-                  ),
-                ],
-              ),
-              SizedBox(
-                width: 55,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 20),
-                child: ElevatedButton(
-                    onPressed: () {
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) =>
-                      //             Secondcollectionpage()));
-                    },
-                    style:
-                        ElevatedButton.styleFrom(backgroundColor: Colors.black),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          border: Border(
-                              bottom:
-                                  BorderSide(color: Colors.black, width: 1.0))),
-                      child: Text(
-                        "SHOP NOW",
-                        style: GoogleFonts.robotoSlab(
-                          fontSize: 10,
-                          color: Colors.white,
-                        ),
-                      ),
-                    )),
-              ),
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              InkWell(
-                onTap: () {},
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.circular(6)),
-                  width: 90,
-                  height: 90,
-                  // child: Image.network("src"),
-                ),
-              ),
-              Column(
-                children: [
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Padding(
-                      padding:
-                          const EdgeInsets.only(left: 8, right: 8, top: 15),
-                      child: Text(
-                        newarrivalsname[1],
-                        style:
-                            GoogleFonts.robotoSlab(fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                  ),
-                  Text(
-                    newarrivalsprize[1],
-                    style: GoogleFonts.robotoSlab(color: Colors.grey[400]),
-                  ),
-                ],
-              ),
-              SizedBox(
-                width: 55,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 20),
-                child: ElevatedButton(
-                    onPressed: () {
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) =>
-                      //             Secondcollectionpage()));
-                    },
-                    style:
-                        ElevatedButton.styleFrom(backgroundColor: Colors.black),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          border: Border(
-                              bottom:
-                                  BorderSide(color: Colors.black, width: 1.0))),
-                      child: Text(
-                        "SHOP NOW",
-                        style: GoogleFonts.robotoSlab(
-                          fontSize: 10,
-                          color: Colors.white,
-                        ),
-                      ),
-                    )),
-              ),
-            ],
-          ),
+        );
+          }),
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),

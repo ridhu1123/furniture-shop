@@ -45,7 +45,7 @@ class CLassC extends StatelessWidget {
               left: 25,
               child: Container(
                   height: 30,
-                  width: 100,
+                  width: 110,
                   child: ElevatedButton(
                       onPressed: () {
                         Navigator.push(
@@ -53,9 +53,9 @@ class CLassC extends StatelessWidget {
                             MaterialPageRoute(
                                 builder: (context) => Cybermonday()));
                       },
-                      style: ElevatedButton.styleFrom(
+                      style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(),
                           backgroundColor: Colors.black),
-                      child: Text("Shop now",
+                      child: Text("ShopNow",maxLines: 1,
                           style: GoogleFonts.aBeeZee(color: Colors.white)))))
         ],
       ),

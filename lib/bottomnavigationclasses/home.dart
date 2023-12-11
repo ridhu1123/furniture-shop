@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:irohub_project/itemcartedscreen1.dart';
+import 'package:irohub_project/addtocart.dart';
 import 'package:irohub_project/showallscreen.dart';
 
 import '../imageclass/classA.dart';
@@ -127,7 +127,7 @@ class _HomeState extends State<Home> {
           ),
           Showallbutton(text: "New Arrivals"),
           LimitedBox(
-            maxHeight: 240,
+            maxHeight: 242,
             child: ListView.builder(
                 itemCount: newarrivals.length,
                 scrollDirection: Axis.horizontal,
@@ -200,7 +200,7 @@ class _HomeState extends State<Home> {
               },
               child: Showallbutton(text: "Top Trends")),
           LimitedBox(
-            maxHeight: 240,
+            maxHeight: 242,
             child: ListView.builder(
                 itemCount: newarrivals.length,
                 scrollDirection: Axis.horizontal,
@@ -261,7 +261,7 @@ class _HomeState extends State<Home> {
           LimitedBox(
             maxHeight: 730,
             child: ListView.separated(
-                separatorBuilder: (context, index) => Divider(),
+                separatorBuilder: (context, index) => Divider(thickness: 0.3,),
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),

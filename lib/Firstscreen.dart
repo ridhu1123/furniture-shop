@@ -37,7 +37,7 @@ class _FirstscreenState extends State<Firstscreen> {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => Signupscreen()));
               },
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
+              style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(),backgroundColor: Colors.white),
               child: Text("Sign up",
                   style: GoogleFonts.aBeeZee(color: Colors.black)),
             ),
@@ -55,7 +55,7 @@ class _FirstscreenState extends State<Firstscreen> {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => Loginscreen()));
               },
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
+              style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(),backgroundColor: Colors.black),
               child: Text("LOGIN",
                   style: GoogleFonts.aBeeZee(color: Colors.white)),
             ),

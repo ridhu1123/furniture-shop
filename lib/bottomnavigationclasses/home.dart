@@ -71,6 +71,7 @@ class _HomeState extends State<Home> {
   // }
   var newarriavls=[];
   var Toptrends=[];
+  var Topdeals=[];
 void getdata()async{
  var storage = FirebaseStorage.instance;
  var ref=storage.ref().child("homescreenimages/new arrival");
@@ -93,7 +94,15 @@ setState(() {
  });
  });
  
- 
+ var ref2=storage.ref().child("homescreenimages/Top deals");
+var imageurl2=await ref2.listAll();
+await Future.forEach(imageurl2.items, (Reference reference) async{
+  var url2=await reference.getDownloadURL();
+setState(() {
+   Topdeals.add(url2);
+ print("dddddddd $Topdeals");
+ });
+ });
  
 }
 @override
@@ -245,7 +254,9 @@ setState(() {
                                 borderRadius: BorderRadius.circular(6)),
                             width: 160,
                             height: 190,
-                            child: Image.network(Toptrends[index],fit: BoxFit.fill,)
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(6),
+                              child: Image.network(Toptrends[index],fit: BoxFit.fill,))
                           ),
                         ),
                         Align(
@@ -275,14 +286,15 @@ setState(() {
                             Showallscreen(name: "Top Deals")));
             },
             child: Showallbutton(text: "Top Deals")),
+           
           LimitedBox(
-            maxHeight: 730,
+            maxHeight: 700,
             child: ListView.separated(
                 separatorBuilder: (context, index) => Divider(thickness: 0.3,),
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: newarrivals.length,
+                itemCount: Topdeals.length,
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () {
@@ -302,7 +314,9 @@ setState(() {
                                 borderRadius: BorderRadius.circular(6)),
                             width: 90,
                             height: 90,
-                            // child: Image.network("src"),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(6),
+                              child: Image.network(Topdeals[index],fit: BoxFit.fill,)),
                           ),
                           Column(
                             children: [
@@ -330,272 +344,7 @@ setState(() {
                   );
                 }),
           ),
-          // Padding(
-          //   padding: const EdgeInsets.all(8.0),
-          //   child: Row(
-          //     crossAxisAlignment: CrossAxisAlignment.start,
-          //     children: [
-          //       InkWell(
-          //         onTap: () {},
-          //         child: Container(
-          //           decoration: BoxDecoration(
-          //               color: Colors.grey[200],
-          //               borderRadius: BorderRadius.circular(6)),
-          //           width: 90,
-          //           height: 90,
-          //           // child: Image.network("src"),
-          //         ),
-          //       ),
-          //       Column(
-          //         children: [
-          //           Align(
-          //             alignment: Alignment.topLeft,
-          //             child: Padding(
-          //               padding:
-          //                   const EdgeInsets.only(left: 8, right: 8, top: 8),
-          //               child: Text(
-          //                 newarrivalsname[1],
-          //                 style: GoogleFonts.robotoSlab(),
-          //               ),
-          //             ),
-          //           ),
-          //           Text(
-          //             newarrivalsprize[1],
-          //             style: GoogleFonts.robotoSlab(color: Colors.grey[400]),
-          //           ),
-          //         ],
-          //       )
-          //     ],
-          //   ),
-          // ),
-          // Padding(
-          //   padding: const EdgeInsets.all(8.0),
-          //   child: Row(
-          //     crossAxisAlignment: CrossAxisAlignment.start,
-          //     children: [
-          //       InkWell(
-          //         onTap: () {},
-          //         child: Container(
-          //           decoration: BoxDecoration(
-          //               color: Colors.grey[200],
-          //               borderRadius: BorderRadius.circular(6)),
-          //           width: 90,
-          //           height: 90,
-          //           // child: Image.network("src"),
-          //         ),
-          //       ),
-          //       Column(
-          //         children: [
-          //           Align(
-          //             alignment: Alignment.topLeft,
-          //             child: Padding(
-          //               padding:
-          //                   const EdgeInsets.only(left: 8, right: 8, top: 8),
-          //               child: Text(
-          //                 newarrivalsname[2],
-          //                 style: GoogleFonts.robotoSlab(),
-          //               ),
-          //             ),
-          //           ),
-          //           Text(
-          //             newarrivalsprize[2],
-          //             style: GoogleFonts.robotoSlab(color: Colors.grey[400]),
-          //           ),
-          //         ],
-          //       )
-          //     ],
-          //   ),
-          // ),
-          // Padding(
-          //   padding: const EdgeInsets.all(8.0),
-          //   child: Row(
-          //     crossAxisAlignment: CrossAxisAlignment.start,
-          //     children: [
-          //       InkWell(
-          //         onTap: () {},
-          //         child: Container(
-          //           decoration: BoxDecoration(
-          //               color: Colors.grey[200],
-          //               borderRadius: BorderRadius.circular(6)),
-          //           width: 90,
-          //           height: 90,
-          //           // child: Image.network("src"),
-          //         ),
-          //       ),
-          //       Column(
-          //         children: [
-          //           Align(
-          //             alignment: Alignment.topLeft,
-          //             child: Padding(
-          //               padding:
-          //                   const EdgeInsets.only(left: 8, right: 8, top: 8),
-          //               child: Text(
-          //                 newarrivalsname[3],
-          //                 style: GoogleFonts.robotoSlab(),
-          //               ),
-          //             ),
-          //           ),
-          //           Text(
-          //             newarrivalsprize[3],
-          //             style: GoogleFonts.robotoSlab(color: Colors.grey[400]),
-          //           ),
-          //         ],
-          //       )
-          //     ],
-          //   ),
-          // ),
-          // Padding(
-          //   padding: const EdgeInsets.all(8.0),
-          //   child: Row(
-          //     crossAxisAlignment: CrossAxisAlignment.start,
-          //     children: [
-          //       InkWell(
-          //         onTap: () {},
-          //         child: Container(
-          //           decoration: BoxDecoration(
-          //               color: Colors.grey[200],
-          //               borderRadius: BorderRadius.circular(6)),
-          //           width: 90,
-          //           height: 90,
-          //           // child: Image.network("src"),
-          //         ),
-          //       ),
-          //       Column(
-          //         children: [
-          //           Align(
-          //             alignment: Alignment.topLeft,
-          //             child: Padding(
-          //               padding:
-          //                   const EdgeInsets.only(left: 8, right: 8, top: 8),
-          //               child: Text(
-          //                 newarrivalsname[4],
-          //                 style: GoogleFonts.robotoSlab(),
-          //               ),
-          //             ),
-          //           ),
-          //           Text(
-          //             newarrivalsprize[4],
-          //             style: GoogleFonts.robotoSlab(color: Colors.grey[400]),
-          //           ),
-          //         ],
-          //       )
-          //     ],
-          //   ),
-          // ),
-          // Padding(
-          //   padding: const EdgeInsets.all(8.0),
-          //   child: Row(
-          //     crossAxisAlignment: CrossAxisAlignment.start,
-          //     children: [
-          //       InkWell(
-          //         onTap: () {},
-          //         child: Container(
-          //           decoration: BoxDecoration(
-          //               color: Colors.grey[200],
-          //               borderRadius: BorderRadius.circular(6)),
-          //           width: 90,
-          //           height: 90,
-          //           // child: Image.network("src"),
-          //         ),
-          //       ),
-          //       Column(
-          //         children: [
-          //           Align(
-          //             alignment: Alignment.topLeft,
-          //             child: Padding(
-          //               padding:
-          //                   const EdgeInsets.only(left: 8, right: 8, top: 8),
-          //               child: Text(
-          //                 newarrivalsname[5],
-          //                 style: GoogleFonts.robotoSlab(),
-          //               ),
-          //             ),
-          //           ),
-          //           Text(
-          //             newarrivalsprize[5],
-          //             style: GoogleFonts.robotoSlab(color: Colors.grey[400]),
-          //           ),
-          //         ],
-          //       )
-          //     ],
-          //   ),
-          // ),
-          // Padding(
-          //   padding: const EdgeInsets.all(8.0),
-          //   child: Row(
-          //     crossAxisAlignment: CrossAxisAlignment.start,
-          //     children: [
-          //       InkWell(
-          //         onTap: () {},
-          //         child: Container(
-          //           decoration: BoxDecoration(
-          //               color: Colors.grey[200],
-          //               borderRadius: BorderRadius.circular(6)),
-          //           width: 90,
-          //           height: 90,
-          //           // child: Image.network("src"),
-          //         ),
-          //       ),
-          //       Column(
-          //         children: [
-          //           Align(
-          //             alignment: Alignment.topLeft,
-          //             child: Padding(
-          //               padding:
-          //                   const EdgeInsets.only(left: 8, right: 8, top: 8),
-          //               child: Text(
-          //                 newarrivalsname[6],
-          //                 style: GoogleFonts.robotoSlab(),
-          //               ),
-          //             ),
-          //           ),
-          //           Text(
-          //             newarrivalsprize[6],
-          //             style: GoogleFonts.robotoSlab(color: Colors.grey[400]),
-          //           ),
-          //         ],
-          //       )
-          //     ],
-          //   ),
-          // ),
-          // Padding(
-          //   padding: const EdgeInsets.all(8.0),
-          //   child: Row(
-          //     crossAxisAlignment: CrossAxisAlignment.start,
-          //     children: [
-          //       InkWell(
-          //         onTap: () {},
-          //         child: Container(
-          //           decoration: BoxDecoration(
-          //               color: Colors.grey[200],
-          //               borderRadius: BorderRadius.circular(6)),
-          //           width: 90,
-          //           height: 90,
-          //           // child: Image.network("src"),
-          //         ),
-          //       ),
-          //       Column(
-          //         children: [
-          //           Align(
-          //             alignment: Alignment.topLeft,
-          //             child: Padding(
-          //               padding:
-          //                   const EdgeInsets.only(left: 8, right: 8, top: 8),
-          //               child: Text(
-          //                 newarrivalsname[7],
-          //                 style: GoogleFonts.robotoSlab(),
-          //               ),
-          //             ),
-          //           ),
-          //           Text(
-          //             newarrivalsprize[7],
-          //             style: GoogleFonts.robotoSlab(color: Colors.grey[400]),
-          //           ),
-          //         ],
-          //       )
-          //     ],
-          //   ),
-          // ),
+      
         ],
       ),
     );

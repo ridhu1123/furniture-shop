@@ -50,34 +50,23 @@ class _ExplorescreenState extends State<Explorescreen> {
     "€29.00",
     "€29.00",
   ];
-  var imageurls=[];
+  var Bestsellers=[];
   void getdata()async{
-    try{
  var storage = FirebaseStorage.instance;
+var ref=storage.ref().child("homescreenimages/Top trends");
+var imageurl=await ref.listAll();
+await Future.forEach(imageurl.items, (Reference reference) async{
+  var url=await reference.getDownloadURL();
+setState(() {
+   Bestsellers.add(url);
+ print("dddddddd $Bestsellers");
+ });
+ });
+
  
- var folders = ['new arrival', 'Top trend', 'Top deals'];
-
- for (var folder in folders) {
-        var ref = storage.ref().child('homescreenimages/$folder');
-
-        var imageUrls = await ref.listAll();
-
-        List<String> urls = [];
-
-        for (var imageRef in imageUrls.items) {
-          var url = await imageRef.getDownloadURL();
-          urls.add(url);
-        }
-
-        setState(() {
-          folderImageUrls[folder] = urls;
-        });
-      }
-    } catch (error) {
-      print('Error fetching images: $error');
-    }
-  }
-
+ 
+ 
+}
 @override
   void initState() {
     // TODO: implement initState
@@ -153,7 +142,7 @@ class _ExplorescreenState extends State<Explorescreen> {
             Container(
               height: 600,
               child: GridView.builder(
-                itemCount: imageurls.length,
+                itemCount: Bestsellers.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     mainAxisSpacing: 4, crossAxisCount: 2, mainAxisExtent: 250),
                 itemBuilder: (context, index) {
@@ -170,7 +159,7 @@ class _ExplorescreenState extends State<Explorescreen> {
                                   borderRadius: BorderRadius.circular(6)),
                               width: 160,
                               height: 190,
-                              child:Image.network(imageurls[index]["new arrival"])
+                              child:Image.network(Bestsellers[index])
                             ),
                           ),
                           Align(

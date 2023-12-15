@@ -17,7 +17,7 @@ class _ShowallbuttonState extends State<Showallbutton> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 12),
+      padding: const EdgeInsets.only(left: 12,top: 15),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -25,17 +25,7 @@ class _ShowallbuttonState extends State<Showallbutton> {
             widget.text,
             style: GoogleFonts.robotoSlab(fontSize: 20),
           ),
-          TextButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => Showallscreen(
-                              name: names.toString(),
-                            )));
-              },
-              style: TextButton.styleFrom(foregroundColor: Colors.black),
-              child: Row(
+           Row(
                 children: [
                   Text(
                     "Show all",
@@ -43,7 +33,7 @@ class _ShowallbuttonState extends State<Showallbutton> {
                   ),
                   Icon(Icons.arrow_right)
                 ],
-              ))
+              )
         ],
       ),
     );

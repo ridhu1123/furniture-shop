@@ -52,6 +52,8 @@ dependencies:
   flutter_spinkit: ^5.2.0
   google_maps_flutter: ^2.5.0
   location: ^5.0.3
+  firebase_core: ^2.24.2
+  firebase_storage: ^11.5.5
 dev_dependencies:
   flutter_test:
     sdk: flutter

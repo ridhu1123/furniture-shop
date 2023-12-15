@@ -1,5 +1,7 @@
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:irohub_project/showallscreen.dart';
 import 'package:irohub_project/widget/textandshowall.dart';
 
 class Explorescreen extends StatefulWidget {
@@ -10,6 +12,7 @@ class Explorescreen extends StatefulWidget {
 }
 
 class _ExplorescreenState extends State<Explorescreen> {
+  Map<String, List<String>> folderImageUrls = {};
   List exploreimage = [
     "https://i.pinimg.com/564x/79/91/58/799158da597625ffa054d48fecdef369.jpg",
     "https://i.pinimg.com/564x/f1/20/ba/f120ba0160225cf18a564a67e3bb22c6.jpg",
@@ -47,6 +50,40 @@ class _ExplorescreenState extends State<Explorescreen> {
     "€29.00",
     "€29.00",
   ];
+  var imageurls=[];
+  void getdata()async{
+    try{
+ var storage = FirebaseStorage.instance;
+ 
+ var folders = ['new arrival', 'Top trend', 'Top deals'];
+
+ for (var folder in folders) {
+        var ref = storage.ref().child('homescreenimages/$folder');
+
+        var imageUrls = await ref.listAll();
+
+        List<String> urls = [];
+
+        for (var imageRef in imageUrls.items) {
+          var url = await imageRef.getDownloadURL();
+          urls.add(url);
+        }
+
+        setState(() {
+          folderImageUrls[folder] = urls;
+        });
+      }
+    } catch (error) {
+      print('Error fetching images: $error');
+    }
+  }
+
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getdata();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,11 +141,19 @@ class _ExplorescreenState extends State<Explorescreen> {
                     );
                   }),
             ),
-            Showallbutton(text: "Best sellers"),
+            InkWell(
+              onTap: () {
+                 Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            Showallscreen(name: "Best sellers")));
+              },
+              child: Showallbutton(text: "Best sellers")),
             Container(
               height: 600,
               child: GridView.builder(
-                itemCount: newarrivals.length,
+                itemCount: imageurls.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     mainAxisSpacing: 4, crossAxisCount: 2, mainAxisExtent: 250),
                 itemBuilder: (context, index) {
@@ -125,20 +170,7 @@ class _ExplorescreenState extends State<Explorescreen> {
                                   borderRadius: BorderRadius.circular(6)),
                               width: 160,
                               height: 190,
-                              child: Stack(
-                                children: [
-                                  Align(
-                                    alignment: Alignment.topRight,
-                                    child: IconButton(
-                                        color: Colors.black,
-                                        onPressed: () {},
-                                        icon: Icon(
-                                          Icons.favorite_border,
-                                          size: 18,
-                                        )),
-                                  )
-                                ],
-                              ),
+                              child:Image.network(imageurls[index]["new arrival"])
                             ),
                           ),
                           Align(

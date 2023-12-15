@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:irohub_project/addtocart.dart';
+import 'package:irohub_project/showallscreen.dart';
 import 'package:irohub_project/widget/textandshowall.dart';
 
 import '../collection1page.dart';
@@ -107,7 +108,15 @@ class _DiscoverState extends State<Discover> {
                 );
               }),
         ),
-        Showallbutton(text: "Trending"),
+        InkWell(
+          onTap: () {
+              Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            Showallscreen(name: "Trending")));
+          },
+          child: Showallbutton(text: "Trending")),
         LimitedBox(
           maxHeight: 322,
           child: ListView.builder(
@@ -279,7 +288,15 @@ Winter""",
         SizedBox(
           height: 10,
         ),
-        Showallbutton(text: "Best Selling"),
+        InkWell(
+          onTap: () {
+              Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            Showallscreen(name: "Best Selling")));
+          },
+          child: Showallbutton(text: "Best Selling")),
          LimitedBox(
           maxHeight: 322,
           child: ListView.builder(

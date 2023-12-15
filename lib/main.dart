@@ -1,11 +1,14 @@
 import 'dart:async';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:irohub_project/Firstscreen.dart';
 import 'package:irohub_project/introductionscreen.dart';
 
-void main(List<String> args) {
+void main(List<String> args) async{
+ WidgetsFlutterBinding.ensureInitialized();
+ await Firebase.initializeApp();
   runApp(MyApp());
 }
 

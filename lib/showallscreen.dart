@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
@@ -12,25 +13,39 @@ class Showallscreen extends StatefulWidget {
 }
 
 class _ShowallscreenState extends State<Showallscreen> {
-  // String names="";
+  @override
+ 
+
   List Carousilimage = [
     "https://i.pinimg.com/564x/44/f2/d7/44f2d7ecb050d611f20e5ac54056b7c5.jpg",
     "https://i.pinimg.com/564x/e4/59/ba/e459ba1bf1de4ea4dc81acee68d8fb30.jpg",
     "https://i.pinimg.com/564x/84/05/c4/8405c4fdc6d8bac92e9aca82fe627b5d.jpg"
   ];
+  var imageurls=[];
+void getdata()async{
+ var storage = FirebaseStorage.instance;
+ var ref=storage.ref().child("homescreenimages/new arrival");
+     
+
+ var imageurl=await ref.listAll();
+ await Future.forEach(imageurl.items, (Reference reference) async{
+  var url=await reference.getDownloadURL();
+setState(() {
+   imageurls.add(url);
+ print("hhhhhhhhhhhhhhhhhh $ref");
+ });
+ });
+ print(imageurl);
+}
+ @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getdata();
+  }
   @override
   Widget build(BuildContext context) {
-    // if (widget.name == "New Arrivals") {
-    //   names = "New Arrivals";
-    // }
-    // if(widget.name=="Top Trends"){
-    //    names = "Top Trends";
-    // } if (widget.name == "Best sellers") {
-    //   names = "Best sellers";
-    // }
-    // if(widget.name=="Trending"){
-    //    names = "Trending";
-    // }
+
     return SafeArea(
       child: Scaffold(
           backgroundColor: Colors.white,
@@ -42,7 +57,7 @@ class _ShowallscreenState extends State<Showallscreen> {
                 iconTheme: IconThemeData(color: Colors.black),
                 backgroundColor: Colors.white,
                 title: Text(
-                  "Best sellers",
+                  widget.name,
                   style: GoogleFonts.robotoSlab(
                       color: Colors.black,
                       fontSize: 30,

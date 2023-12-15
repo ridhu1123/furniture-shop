@@ -1,3 +1,4 @@
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -55,20 +56,52 @@ class _HomeState extends State<Home> {
   List slideimage = [ClassA(), ClassB(), CLassC()];
   List explorename = ["Sofa", "Lamps", "Chair"];
   List exploreitems = ["10", "5", "6"];
-  bool _isfavourite = false;
-  int favouritecount = 0;
-  void favourite() {
-    setState(() {
-      if (_isfavourite) {
-        favouritecount -= 1;
-        _isfavourite = false;
-      } else {
-        favouritecount += 1;
-        _isfavourite = true;
-      }
-    });
+  // bool _isfavourite = false;
+  // int favouritecount = 0;
+  // void favourite() {
+  //   setState(() {
+  //     if (_isfavourite) {
+  //       favouritecount -= 1;
+  //       _isfavourite = false;
+  //     } else {
+  //       favouritecount += 1;
+  //       _isfavourite = true;
+  //     }
+  //   });
+  // }
+  var newarriavls=[];
+  var Toptrends=[];
+void getdata()async{
+ var storage = FirebaseStorage.instance;
+ var ref=storage.ref().child("homescreenimages/new arrival");
+     print("hhhhhhhhhhhhhhhhhh $ref");
+var ref1=storage.ref().child("homescreenimages/Top trends");
+var imageurl1=await ref1.listAll();
+await Future.forEach(imageurl1.items, (Reference reference) async{
+  var url1=await reference.getDownloadURL();
+setState(() {
+   Toptrends.add(url1);
+ print("dddddddd $Toptrends");
+ });
+ });
+ var imageurl=await ref.listAll();
+ await Future.forEach(imageurl.items, (Reference reference) async{
+  var url=await reference.getDownloadURL();
+setState(() {
+   newarriavls.add(url);
+ print("dddddddd $newarrivals");
+ });
+ });
+ 
+ 
+ 
+}
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getdata();
   }
-
   @override
   Widget build(BuildContext context) {
     var size, height, width;
@@ -125,11 +158,19 @@ class _HomeState extends State<Home> {
               ],
             ),
           ),
-          Showallbutton(text: "New Arrivals"),
+          InkWell(
+            onTap: () {
+               Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            Showallscreen(name: "New Arrivals")));
+            },
+            child: Showallbutton(text: "New Arrivals")),
           LimitedBox(
             maxHeight: 242,
             child: ListView.builder(
-                itemCount: newarrivals.length,
+                itemCount: newarriavls.length,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
                   return Padding(
@@ -150,28 +191,9 @@ class _HomeState extends State<Home> {
                                 borderRadius: BorderRadius.circular(6)),
                             width: 160,
                             height: 190,
-                            child: Align(
-                              alignment: Alignment.topRight,
-                              child: Stack(
-                                children: [
-                                  IconButton(
-                                    onPressed: () {
-                                      favourite();
-                                    },
-                                    icon: (_isfavourite
-                                        ? Icon(
-                                            Icons.favorite,
-                                            size: 18,
-                                          )
-                                        : Icon(
-                                            Icons.favorite_border,
-                                            size: 18,
-                                          )),
-                                    color: Colors.black,
-                                  ),
-                                ],
-                              ),
-                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(6),
+                              child: Image.network(newarriavls[index],fit: BoxFit.fill,)),
                           ),
                         ),
                         Align(
@@ -196,13 +218,13 @@ class _HomeState extends State<Home> {
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            Showallscreen(name: "New arrivals")));
+                            Showallscreen(name: "Top Trends")));
               },
               child: Showallbutton(text: "Top Trends")),
           LimitedBox(
             maxHeight: 242,
             child: ListView.builder(
-                itemCount: newarrivals.length,
+                itemCount: Toptrends.length,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
                   return Padding(
@@ -223,20 +245,7 @@ class _HomeState extends State<Home> {
                                 borderRadius: BorderRadius.circular(6)),
                             width: 160,
                             height: 190,
-                            child: Stack(
-                              children: [
-                                Align(
-                                  alignment: Alignment.topRight,
-                                  child: IconButton(
-                                      color: Colors.black,
-                                      onPressed: () {},
-                                      icon: Icon(
-                                        Icons.favorite_border,
-                                        size: 18,
-                                      )),
-                                )
-                              ],
-                            ),
+                            child: Image.network(Toptrends[index],fit: BoxFit.fill,)
                           ),
                         ),
                         Align(
@@ -257,7 +266,15 @@ class _HomeState extends State<Home> {
                   );
                 }),
           ),
-          Showallbutton(text: "Top Trends"),
+          InkWell(
+            onTap: () {
+               Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            Showallscreen(name: "Top Deals")));
+            },
+            child: Showallbutton(text: "Top Deals")),
           LimitedBox(
             maxHeight: 730,
             child: ListView.separated(

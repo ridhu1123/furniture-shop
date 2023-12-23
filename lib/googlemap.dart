@@ -35,6 +35,7 @@ class _SofascreenState extends State<googlemap> {
         markers: {
           Marker(
               markerId: MarkerId("_currentLocation"),
+              
               icon: BitmapDescriptor.defaultMarker,
               position: _current!),
           Marker(

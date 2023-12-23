@@ -114,84 +114,108 @@ class _HomescreenState extends State<Homescreen> {
                   ),
                 ],
               )),
-              IconButton(
-                onPressed: () {},
-                icon: Row(
-                  children: [
-                    Icon(Icons.home),
-                    Text(
-                      "Home",
-                      style: GoogleFonts.robotoSlab(),
-                    )
-                  ],
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: IconButton(
+                  onPressed: () {},
+                  icon: Row(
+                    children: [
+                      Icon(Icons.home),
+                       SizedBox(width: 10,),
+                      Text(
+                        "Home",
+                        style: GoogleFonts.robotoSlab(),
+                      )
+                    ],
+                  ),
                 ),
               ),
-              IconButton(
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Collections()));
-                },
-                icon: Row(
-                  children: [
-                    Icon(Icons.collections_bookmark_outlined),
-                    Text(
-                      "Collections",
-                      style: GoogleFonts.robotoSlab(),
-                    )
-                  ],
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: IconButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Collections()));
+                  },
+                  icon: Row(
+                    children: [
+                      Icon(Icons.collections_bookmark_outlined),
+                       SizedBox(width: 10,),
+                      Text(
+                        "Collections",
+                        style: GoogleFonts.robotoSlab(),
+                      )
+                    ],
+                  ),
                 ),
               ),
-              IconButton(
-                onPressed: () {},
-                icon: Row(
-                  children: [
-                    Icon(Icons.deblur),
-                    Text(
-                      "Top Deals",
-                      style: GoogleFonts.robotoSlab(),
-                    )
-                  ],
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: IconButton(
+                  onPressed: () {},
+                  icon: Row(
+                    children: [
+                      Icon(Icons.deblur),
+                       SizedBox(width: 10,),
+                      Text(
+                        "Top Deals",
+                        style: GoogleFonts.robotoSlab(),
+                      )
+                    ],
+                  ),
                 ),
               ),
-              IconButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => categoryscreen()));
-                },
-                icon: Row(
-                  children: [
-                    Icon(Icons.category_rounded),
-                    Text(
-                      "Categories",
-                      style: GoogleFonts.robotoSlab(),
-                    )
-                  ],
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => categoryscreen()));
+                  },
+                  icon: Row(
+                    children: [
+                      Icon(Icons.category_rounded),
+                       SizedBox(width: 10,),
+                      Text(
+                        "Categories",
+                        style: GoogleFonts.robotoSlab(),
+                      )
+                    ],
+                  ),
                 ),
               ),
-              IconButton(
-                onPressed: () {},
-                icon: Row(
-                  children: [
-                    Icon(Icons.settings),
-                    Text(
-                      "Settings",
-                      style: GoogleFonts.robotoSlab(),
-                    )
-                  ],
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: IconButton(
+                  onPressed: () {},
+                  icon: Row(
+                    children: [
+                      Icon(Icons.settings),
+                       SizedBox(width: 10,),
+                      Text(
+                        "Settings",
+                        style: GoogleFonts.robotoSlab(),
+                      )
+                    ],
+                  ),
                 ),
               ),
-              IconButton(
-                onPressed: () {},
-                icon: Row(
-                  children: [
-                    Icon(Icons.logout_sharp),
-                    Text(
-                      "Sign out",
-                      style: GoogleFonts.robotoSlab(),
-                    )
-                  ],
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: IconButton(
+                  onPressed: () {},
+                  icon: Row(
+                    children: [
+                      Icon(Icons.logout_sharp),
+                      SizedBox(width: 10,),
+                      Text(
+                        "Sign out",
+                        style: GoogleFonts.robotoSlab(),
+                      )
+                    ],
+                  ),
                 ),
               ),
               // Text(

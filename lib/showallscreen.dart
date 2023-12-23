@@ -3,6 +3,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:irohub_project/Filterscreen.dart';
 
 class Showallscreen extends StatefulWidget {
   String name;
@@ -52,6 +53,23 @@ setState(() {
           body: CustomScrollView(
             slivers: [
               SliverAppBar(
+                actions: [
+                   TextButton(
+                                 onPressed: () {
+                                   Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Filterscreen()));
+                                 },
+                                 child: Row(mainAxisSize: MainAxisSize.min,
+                                   children: [
+                                     Text(
+                                       "Filters",
+                                       style: GoogleFonts.robotoSlab(color: Colors.grey[600],fontWeight: FontWeight.w500),
+                                     ),
+                                     Icon(Icons.filter_alt_sharp,size: 15,color: Colors.grey[600],)
+                                   ],
+                                 )),
+                   
+                ],
                 // floating: true,
                 elevation: 0,
                 iconTheme: IconThemeData(color: Colors.black),

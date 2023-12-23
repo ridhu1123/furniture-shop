@@ -1,6 +1,7 @@
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:irohub_project/addtocart.dart';
 import 'package:irohub_project/showallscreen.dart';
 import 'package:irohub_project/widget/textandshowall.dart';
 
@@ -53,7 +54,7 @@ class _ExplorescreenState extends State<Explorescreen> {
   var Bestsellers=[];
   void getdata()async{
  var storage = FirebaseStorage.instance;
-var ref=storage.ref().child("homescreenimages/Top trends");
+var ref=storage.ref().child("homescreenimages/Best sellers");
 var imageurl=await ref.listAll();
 await Future.forEach(imageurl.items, (Reference reference) async{
   var url=await reference.getDownloadURL();
@@ -99,30 +100,47 @@ setState(() {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
-                        width: 160,
+                        width: 146,
                         child: Column(
                           children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(6),
-                              child: Image.network(
-                                exploreimage[index],
-                                height: 172,
-                                width: double.infinity,
-                                fit: BoxFit.fill,
+                            Container(
+                              decoration: BoxDecoration(
+                                 boxShadow: [
+                                BoxShadow(
+                                    offset: Offset(3, 3),
+                                    blurRadius: 5,
+                                    color: Color.fromARGB(255, 119, 117, 117))
+                              ],
+                              ),
+                              child: ClipRRect(
+                                
+                                borderRadius: BorderRadius.circular(6),
+                                child: Image.network(
+                                  exploreimage[index],
+                                  height: 158,
+                                  width: double.infinity,
+                                  fit: BoxFit.fill,
+                                ),
                               ),
                             ),
                             Align(
                                 alignment: Alignment.topLeft,
-                                child: Text(
-                                  explorename[index],
-                                  style: GoogleFonts.robotoSlab(),
+                                child: Padding(
+                                  padding: const EdgeInsets.only(top: 8,left: 8),
+                                  child: Text(
+                                    explorename[index],
+                                    style: GoogleFonts.robotoSlab(),
+                                  ),
                                 )),
                             Align(
                                 alignment: Alignment.topLeft,
-                                child: Text(
-                                  "${exploreitems[index]} items",
-                                  style: GoogleFonts.robotoSlab(
-                                      color: Colors.grey[400]),
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 8),
+                                  child: Text(
+                                    "${exploreitems[index]} items",
+                                    style: GoogleFonts.robotoSlab(
+                                        color: Colors.grey[400]),
+                                  ),
                                 ))
                           ],
                         ),
@@ -140,8 +158,9 @@ setState(() {
               },
               child: Showallbutton(text: "Best sellers")),
             Container(
-              height: 600,
+              height: 580,
               child: GridView.builder(
+                // physics: NeverScrollableScrollPhysics(),
                 itemCount: Bestsellers.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     mainAxisSpacing: 4, crossAxisCount: 2, mainAxisExtent: 250),
@@ -152,14 +171,18 @@ setState(() {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>Addtocart1()));
+                            },
                             child: Container(
                               decoration: BoxDecoration(
                                   color: Colors.grey[200],
                                   borderRadius: BorderRadius.circular(6)),
                               width: 160,
                               height: 190,
-                              child:Image.network(Bestsellers[index])
+                              child:ClipRRect(
+                                borderRadius: BorderRadius.circular(6),
+                                child: Image.network(Bestsellers[index],fit: BoxFit.fill,))
                             ),
                           ),
                           Align(

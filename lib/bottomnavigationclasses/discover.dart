@@ -1,3 +1,6 @@
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:irohub_project/addtocart.dart';
@@ -15,6 +18,12 @@ class Discover extends StatefulWidget {
 }
 
 class _DiscoverState extends State<Discover> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getdata();
+  }
   List exploreimage = [
     "https://i.pinimg.com/564x/79/91/58/799158da597625ffa054d48fecdef369.jpg",
     "https://i.pinimg.com/564x/f1/20/ba/f120ba0160225cf18a564a67e3bb22c6.jpg",
@@ -23,14 +32,14 @@ class _DiscoverState extends State<Discover> {
   List discovername = ["Sofa", "Lamps", "Chair"];
   List discoveritem = ["10", "5", "6"];
   List newarrivals = [
-    "assets/New Works by Studio Cecilia Xinyu Zhang.jpg",
-    "assets/40446cd0-7055-4954-89fa-e2bb3c0ecb5b.jpg",
-    "assets/New Works by Studio Cecilia Xinyu Zhang.jpg",
-    "assets/New Works by Studio Cecilia Xinyu Zhang.jpg",
-    "assets/New Works by Studio Cecilia Xinyu Zhang.jpg",
-    "assets/New Works by Studio Cecilia Xinyu Zhang.jpg",
-    "assets/New Works by Studio Cecilia Xinyu Zhang.jpg",
-    "assets/New Works by Studio Cecilia Xinyu Zhang.jpg",
+    "assets/BLOTT WORKS - Handmade lamps and clocks - Shop.jpg",
+    "assets/SOUTHERN LIGHT.jpg",
+    "assets/Wood working projects woodworking plans__woodworking plans furniture.jpg"
+  ];
+  List carousilimage=[
+    "assets/__ World Clock _ Elevenpl.jpg",
+    "assets/Realistic Vintage School Wall Clock Sketch Freebie.jpg",
+    "assets/fashiontoolsandmotorcycles.jpg"
   ];
 
   List newarrivalsname = [
@@ -53,6 +62,28 @@ class _DiscoverState extends State<Discover> {
     "€29.00",
     "€29.00",
   ];
+  var Trending=[];
+  var Bestselling=[];
+  void getdata()async{
+    var storage=FirebaseStorage.instance;
+    var ref=storage.ref().child("homescreenimages/Trending");
+    var imageurl=await ref.listAll();
+    await Future.forEach(imageurl.items, (Reference reference)async {
+      var url= await reference.getDownloadURL();
+      setState(() {
+        Trending.add(url);
+      });
+    } );
+    var ref1=storage.ref().child("homescreenimages/Best selling");
+    var imageurl1=await ref1.listAll();
+
+    await Future.forEach(imageurl1.items, (Reference reference) async{
+      var url1=await reference.getDownloadURL();
+      setState(() {
+        Bestselling.add(url1);
+      });
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,52 +93,44 @@ class _DiscoverState extends State<Discover> {
           child: Text(
             "Discover",
             style: GoogleFonts.robotoSlab(
-                fontSize: 30, fontWeight: FontWeight.w400),
+                fontSize: 35, fontWeight: FontWeight.w500),
           ),
         ),
         SizedBox(
           height: 10,
         ),
-        LimitedBox(
-          maxHeight: 250,
-          child: ListView.builder(
-              itemCount: exploreimage.length,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    width: 140,
-                    child: Column(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(6),
-                          child: Image.network(
-                            exploreimage[index],
-                            height: 190,
-                            width: double.infinity,
-                            fit: BoxFit.fill,
+         CarouselSlider.builder(
+                      itemCount: carousilimage
+                      .length,
+                      itemBuilder: (context, index, realIndex) {
+                        return Container(
+                          margin: EdgeInsets.all(6),
+                          decoration: BoxDecoration(
+                             boxShadow: [
+                                BoxShadow(
+                                    offset: Offset(3, 2),
+                                    blurRadius:4,
+                                    color: Color.fromARGB(255, 119, 117, 117))
+                              ],
+                            borderRadius: BorderRadius.circular(8.0),
+                            image: DecorationImage(
+                              image: AssetImage(carousilimage[index]),
+                              fit: BoxFit.cover,
+                            ),
                           ),
-                        ),
-                        Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              discovername[index],
-                              style: GoogleFonts.robotoSlab(),
-                            )),
-                        Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "${discoveritem[index]} items",
-                              style: GoogleFonts.robotoSlab(
-                                  color: Colors.grey[400]),
-                            ))
-                      ],
+                        );
+                      },
+                      options: CarouselOptions(
+                        height: 180.0,
+                        enlargeCenterPage: true,
+                        autoPlay: true,
+                        aspectRatio: 16 / 9,
+                        autoPlayCurve: Curves.fastOutSlowIn,
+                        enableInfiniteScroll: true,
+                        autoPlayAnimationDuration: Duration(milliseconds: 800),
+                        viewportFraction: 0.8,
+                      ),
                     ),
-                  ),
-                );
-              }),
-        ),
         InkWell(
           onTap: () {
               Navigator.push(
@@ -120,7 +143,7 @@ class _DiscoverState extends State<Discover> {
         LimitedBox(
           maxHeight: 322,
           child: ListView.builder(
-            itemCount: 3,
+            itemCount: Trending.length,
             physics: NeverScrollableScrollPhysics(),
             itemBuilder: (context,index){
             return Padding(
@@ -136,7 +159,9 @@ class _DiscoverState extends State<Discover> {
                       borderRadius: BorderRadius.circular(6)),
                   width: 90,
                   height: 90,
-                  // child: Image.network("src"),
+                  child: ClipRRect(
+                       borderRadius: BorderRadius.circular(6),
+                    child: Image.network(Trending[index],fit: BoxFit.fill,)),
                 ),
               ),
               Column(
@@ -198,7 +223,7 @@ class _DiscoverState extends State<Discover> {
        , LimitedBox(
           maxHeight: 266,
           child: ListView.builder(
-              itemCount: 3,
+              itemCount: newarrivals.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
                 return Padding(
@@ -222,7 +247,9 @@ class _DiscoverState extends State<Discover> {
                               color: Colors.grey[200]),
                           child: Stack(
                             children: [
-                              // Image.network(""),
+                               ClipRRect(
+                                borderRadius:BorderRadius.circular(15) ,
+                                child: Image.asset(newarrivals[index],fit: BoxFit.fill,width: double.infinity,)),
                               Positioned(
                                   left: 25,
                                   top: 30,
@@ -233,17 +260,17 @@ class _DiscoverState extends State<Discover> {
                                   )),
                               Positioned(
                                   left: 25,
-                                  top: 55,
+                                  top: 65,
                                   child: Text(
                                     """New Arrivals
 Winter""",
                                     style: GoogleFonts.robotoSlab(
-                                        color: Colors.black,
+                                        color: Colors.white,
                                         fontSize: 25,
                                         fontWeight: FontWeight.w500),
                                   )),
                               Positioned(
-                                bottom: 30,
+                                bottom: 10,
                                 left: 25,
                                 child: TextButton(
                                     onPressed: () {
@@ -265,7 +292,7 @@ Winter""",
                                             "SHOP NOW",
                                             style: GoogleFonts.robotoSlab(
                                               fontSize: 10,
-                                              color: Colors.black,
+                                              color: const Color.fromARGB(255, 0, 0, 0),
                                             ),
                                           ),
                                         ),
@@ -300,7 +327,7 @@ Winter""",
          LimitedBox(
           maxHeight: 322,
           child: ListView.builder(
-            itemCount: 3,
+            itemCount: Bestselling.length,
             physics: NeverScrollableScrollPhysics(),
             itemBuilder: (context,index){
             return Padding(
@@ -316,7 +343,9 @@ Winter""",
                       borderRadius: BorderRadius.circular(6)),
                   width: 90,
                   height: 90,
-                  // child: Image.network("src"),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(6),
+                    child: Image.network(Bestselling[index],fit: BoxFit.fill,)),
                 ),
               ),
               Column(
@@ -395,7 +424,7 @@ Winter""",
                       color: Colors.grey[200]),
                   child: Stack(
                     children: [
-                      // Image.network(""),
+                      Image.asset("assets/zyro-images1.png",width: 200,),
                       Positioned(
                           right: 25,
                           top: 30,

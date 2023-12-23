@@ -93,8 +93,14 @@ class _CybermondayState extends State<Cybermonday> {
                 )
               ]),
             ),
-            Showallbutton(text: "Chairs(10)"),
-            Padding(
+            Showallbutton(text: "Chairs(5)"),
+            LimitedBox(
+              maxHeight: 325,
+              child: ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: 3,
+                itemBuilder: (context,index){
+                 return  Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -131,8 +137,17 @@ class _CybermondayState extends State<Cybermonday> {
                   )
                 ],
               ),
-            ),
-            Padding(
+            );
+              }),
+            )
+           , Showallbutton(text: "Lamps(5)"),
+             LimitedBox(
+              maxHeight: 325,
+              child: ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: 3,
+                itemBuilder: (context,index){
+                 return  Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -169,8 +184,17 @@ class _CybermondayState extends State<Cybermonday> {
                   )
                 ],
               ),
+            );
+              }),
             ),
-            Padding(
+            Showallbutton(text: "Tables(5)"),
+              LimitedBox(
+              maxHeight: 325,
+              child: ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: 3,
+                itemBuilder: (context,index){
+                 return  Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -207,237 +231,9 @@ class _CybermondayState extends State<Cybermonday> {
                   )
                 ],
               ),
-            ),
-            Showallbutton(text: "Lamps(10)"),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  InkWell(
-                    onTap: () {},
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          borderRadius: BorderRadius.circular(6)),
-                      width: 90,
-                      height: 90,
-                      // child: Image.network("src"),
-                    ),
-                  ),
-                  Column(
-                    children: [
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: Padding(
-                          padding:
-                              const EdgeInsets.only(left: 8, right: 8, top: 8),
-                          child: Text(
-                            "Nancy chair",
-                            style: GoogleFonts.robotoSlab(),
-                          ),
-                        ),
-                      ),
-                      Text(
-                        " €29.00",
-                        style: GoogleFonts.robotoSlab(color: Colors.grey[400]),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  InkWell(
-                    onTap: () {},
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          borderRadius: BorderRadius.circular(6)),
-                      width: 90,
-                      height: 90,
-                      // child: Image.network("src"),
-                    ),
-                  ),
-                  Column(
-                    children: [
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: Padding(
-                          padding:
-                              const EdgeInsets.only(left: 8, right: 8, top: 8),
-                          child: Text(
-                            "Nancy chair",
-                            style: GoogleFonts.robotoSlab(),
-                          ),
-                        ),
-                      ),
-                      Text(
-                        " €29.00",
-                        style: GoogleFonts.robotoSlab(color: Colors.grey[400]),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  InkWell(
-                    onTap: () {},
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          borderRadius: BorderRadius.circular(6)),
-                      width: 90,
-                      height: 90,
-                      // child: Image.network("src"),
-                    ),
-                  ),
-                  Column(
-                    children: [
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: Padding(
-                          padding:
-                              const EdgeInsets.only(left: 8, right: 8, top: 8),
-                          child: Text(
-                            "Nancy chair",
-                            style: GoogleFonts.robotoSlab(),
-                          ),
-                        ),
-                      ),
-                      Text(
-                        "€29.00",
-                        style: GoogleFonts.robotoSlab(color: Colors.grey[400]),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ),
-            Showallbutton(text: "Tables(10)"),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  InkWell(
-                    onTap: () {},
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          borderRadius: BorderRadius.circular(6)),
-                      width: 90,
-                      height: 90,
-                      // child: Image.network("src"),
-                    ),
-                  ),
-                  Column(
-                    children: [
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: Padding(
-                          padding:
-                              const EdgeInsets.only(left: 8, right: 8, top: 8),
-                          child: Text(
-                            "Nancy chair",
-                            style: GoogleFonts.robotoSlab(),
-                          ),
-                        ),
-                      ),
-                      Text(
-                        " €29.00",
-                        style: GoogleFonts.robotoSlab(color: Colors.grey[400]),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  InkWell(
-                    onTap: () {},
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          borderRadius: BorderRadius.circular(6)),
-                      width: 90,
-                      height: 90,
-                      // child: Image.network("src"),
-                    ),
-                  ),
-                  Column(
-                    children: [
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: Padding(
-                          padding:
-                              const EdgeInsets.only(left: 8, right: 8, top: 8),
-                          child: Text(
-                            "Nancy chair",
-                            style: GoogleFonts.robotoSlab(),
-                          ),
-                        ),
-                      ),
-                      Text(
-                        " €29.00",
-                        style: GoogleFonts.robotoSlab(color: Colors.grey[400]),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  InkWell(
-                    onTap: () {},
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          borderRadius: BorderRadius.circular(6)),
-                      width: 90,
-                      height: 90,
-                      // child: Image.network("src"),
-                    ),
-                  ),
-                  Column(
-                    children: [
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: Padding(
-                          padding:
-                              const EdgeInsets.only(left: 8, right: 8, top: 8),
-                          child: Text(
-                            "Nancy chair",
-                            style: GoogleFonts.robotoSlab(),
-                          ),
-                        ),
-                      ),
-                      Text(
-                        "€29.00",
-                        style: GoogleFonts.robotoSlab(color: Colors.grey[400]),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ),
+            );
+              }),
+            )
           ],
         ),
       ),

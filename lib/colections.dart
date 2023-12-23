@@ -12,12 +12,12 @@ class Collections extends StatefulWidget {
 class _CollectionsState extends State<Collections> {
   List images1 = [
     "assets/[removal.ai]_5203868e-b78f-4659-a105-c2647c1cc614-7043761_861-1.png",
-    "assets/zyro-image (2).png",
+    "assets/[removal.ai]_7b6353a1-14a6-4138-98bf-b2e9552230d1-primitive--simple--dolmena-chair-by-russian-manufacturer-polli-_-oen-1.png",
     "assets/[removal.ai]_5ca82d1a-9eb1-479f-a6e8-8fd2665afd0c-7043766_866.png"
   ];
 
   List images = [
-    "assets/zyro-image (4).png",
+    "assets/[removal.ai]_a0492e82-9141-4c26-91c0-f1cc881945f3-light-lamp1.png",
     "assets/zyro-image (5).png",
     "assets/[removal.ai]_33655040-e27e-4330-aa79-6c6eb56b0649-04d5a5dc11dea0cedb32dcee45b7a884.png"
   ];

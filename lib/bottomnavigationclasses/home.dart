@@ -56,19 +56,7 @@ class _HomeState extends State<Home> {
   List slideimage = [ClassA(), ClassB(), CLassC()];
   List explorename = ["Sofa", "Lamps", "Chair"];
   List exploreitems = ["10", "5", "6"];
-  // bool _isfavourite = false;
-  // int favouritecount = 0;
-  // void favourite() {
-  //   setState(() {
-  //     if (_isfavourite) {
-  //       favouritecount -= 1;
-  //       _isfavourite = false;
-  //     } else {
-  //       favouritecount += 1;
-  //       _isfavourite = true;
-  //     }
-  //   });
-  // }
+
   var newarriavls=[];
   var Toptrends=[];
   var Topdeals=[];
@@ -80,10 +68,13 @@ var ref1=storage.ref().child("homescreenimages/Top trends");
 var imageurl1=await ref1.listAll();
 await Future.forEach(imageurl1.items, (Reference reference) async{
   var url1=await reference.getDownloadURL();
-setState(() {
+  
+    setState(() {
    Toptrends.add(url1);
  print("dddddddd $Toptrends");
  });
+  
+
  });
  var imageurl=await ref.listAll();
  await Future.forEach(imageurl.items, (Reference reference) async{

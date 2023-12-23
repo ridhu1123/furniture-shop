@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:math';
+
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -35,7 +35,6 @@ class _ProfilepageState extends State<Profilepage> {
       }
     });
   }
-
   getimage() async {
     final pickedimage =
         await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -50,7 +49,6 @@ class _ProfilepageState extends State<Profilepage> {
       }
     });
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,7 +1,8 @@
+// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'loginscreen.dart';
+// import 'loginscreen.dart';
 
 class Signupscreen extends StatefulWidget {
   const Signupscreen({super.key});
@@ -10,11 +11,18 @@ class Signupscreen extends StatefulWidget {
   State<Signupscreen> createState() => _SignupscreenState();
 }
 
+TextEditingController _fullnamecontroller = TextEditingController();
 TextEditingController _emailcontroller = TextEditingController();
-TextEditingController _passwordcontroller = TextEditingController();
+TextEditingController  _passwordcontroller= TextEditingController();
 TextEditingController _phonecontroller = TextEditingController();
-TextEditingController _birthcontroller = TextEditingController();
-TextEditingController _adresscontroller = TextEditingController();
+
+
+
+// final db=FirebaseFirestore.instance;
+//   createuser(){
+//     db.collection("user").add({"fullname":_fullnamecontroller.text, "email":_emailcontroller.text,"password":_passwordcontroller.text
+//     ,"phonenumber":_phonecontroller.text,});
+//   }
 
 class _SignupscreenState extends State<Signupscreen> {
   @override
@@ -35,6 +43,18 @@ class _SignupscreenState extends State<Signupscreen> {
         child: Text(
           "Personal details",
           style: GoogleFonts.robotoSlab(fontSize: 25),
+        ),
+      ),
+      Padding(
+        padding: const EdgeInsets.only(left: 25, right: 25, bottom: 13),
+        child: TextFormField(
+          controller: _fullnamecontroller,
+          decoration: InputDecoration(
+            border: UnderlineInputBorder(),
+            labelText: "Fullname",
+            labelStyle:
+                TextStyle(fontWeight: FontWeight.w400, color: Colors.grey[400]),
+          ),
         ),
       ),
       Padding(
@@ -73,30 +93,7 @@ class _SignupscreenState extends State<Signupscreen> {
           ),
         ),
       ),
-      Padding(
-        padding: const EdgeInsets.only(left: 25, right: 25, bottom: 13),
-        child: TextFormField(
-          controller: _birthcontroller,
-          decoration: InputDecoration(
-            border: UnderlineInputBorder(),
-            labelText: "date of birth",
-            labelStyle:
-                TextStyle(fontWeight: FontWeight.w400, color: Colors.grey[400]),
-          ),
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.only(left: 25, right: 25, bottom: 13),
-        child: TextFormField(
-          controller: _adresscontroller,
-          decoration: InputDecoration(
-            border: UnderlineInputBorder(),
-            labelText: "address",
-            labelStyle:
-                TextStyle(fontWeight: FontWeight.w400, color: Colors.grey[400]),
-          ),
-        ),
-      ),
+    
       SizedBox(
         height: 60,
       ),
@@ -104,12 +101,13 @@ class _SignupscreenState extends State<Signupscreen> {
         padding: const EdgeInsets.all(17.0),
         child: ElevatedButton(
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => Loginscreen(),
-              ),
-            );
+// createuser();
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(
+            //     builder: (context) => Loginscreen(),
+            //   ),
+            // );
           },
           style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(),backgroundColor: Colors.black),
           child: Text(

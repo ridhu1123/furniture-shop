@@ -1,4 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
@@ -173,106 +175,25 @@ setState(() {
               }, childCount: 3))
             ],
           )
-          // Column(
-          //     crossAxisAlignment: CrossAxisAlignment.start,
-          //     children: [
-          //       // Padding(
-          //       //   padding: const EdgeInsets.only(top: 20, left: 25),
-          //       //   child: Text(
-          //       //     "Best sellers",
-          //       //     style: GoogleFonts.robotoSlab(
-          //       //         fontSize: 30, fontWeight: FontWeight.w500),
-          //       //   ),
-          //       // ),
-          //       Padding(
-          //         padding: const EdgeInsets.only(top: 13),
-          //         child: CarouselSlider.builder(
-          //           itemCount: 3,
-          //           itemBuilder: (context, index, realIndex) {
-          //             return Container(
-          //               margin: EdgeInsets.all(6),
-          //               decoration: BoxDecoration(
-          //                 borderRadius: BorderRadius.circular(8.0),
-          //                 image: DecorationImage(
-          //                   image: NetworkImage(Carousilimage[index]),
-          //                   fit: BoxFit.cover,
-          //                 ),
-          //               ),
-          //             );
-          //           },
-          //           options: CarouselOptions(
-          //             height: 180.0,
-          //             enlargeCenterPage: true,
-          //             autoPlay: true,
-          //             aspectRatio: 16 / 9,
-          //             autoPlayCurve: Curves.fastOutSlowIn,
-          //             enableInfiniteScroll: true,
-          //             autoPlayAnimationDuration: Duration(milliseconds: 800),
-          //             viewportFraction: 0.8,
-          //           ),
-          //         ),
-          //       ),
-          //       Padding(
-          //         padding: const EdgeInsets.only(top: 20),
-          //         child: LimitedBox(
-          //           maxHeight: 500,
-          //           child: GridView.builder(
-          //               itemCount: 10,
-          //               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          //                   crossAxisCount: 2, mainAxisExtent: 260),
-          //               itemBuilder: (context, index) {
-          //                 return Padding(
-          //                   padding: const EdgeInsets.only(
-          //                       left: 9.0, right: 9, top: 12, bottom: 5),
-          //                   child: Column(
-          //                     crossAxisAlignment: CrossAxisAlignment.start,
-          //                     children: [
-          //                       InkWell(
-          //                         onTap: () {},
-          //                         child: Container(
-          //                           decoration: BoxDecoration(
-          //                               color: Colors.grey[200],
-          //                               borderRadius: BorderRadius.circular(6)),
-          //                           width: 160,
-          //                           height: 200,
-          //                           child: Stack(
-          //                             children: [
-          //                               Align(
-          //                                 alignment: Alignment.topRight,
-          //                                 child: IconButton(
-          //                                     color: Colors.black,
-          //                                     onPressed: () {},
-          //                                     icon: Icon(
-          //                                       Icons.favorite_border,
-          //                                       size: 18,
-          //                                     )),
-          //                               )
-          //                             ],
-          //                           ),
-          //                         ),
-          //                       ),
-          //                       Align(
-          //                           alignment: Alignment.topLeft,
-          //                           child: Text(
-          //                             "newarrivalsname[index]",
-          //                             style: GoogleFonts.robotoSlab(),
-          //                           )),
-          //                       Align(
-          //                           alignment: Alignment.topLeft,
-          //                           child: Text(
-          //                             "29",
-          //                             style: GoogleFonts.robotoSlab(
-          //                                 color: Colors.grey[400]),
-          //                           ))
-          //                     ],
-          //                   ),
-          //                 );
-          //               }),
-          //         ),
-          //       ),
-          //     ],
-          //   ),
+         
           ),
     );
+  }
+ 
+ var newarrivals=[];
+ var toptrends=[];
+ var topdeals=[];
+ var bestsellers=[];
+ var trending=[];
+ var bestselling=[];
+
+ Future<void> addditemtostorage()async{
+      UserCredential userCredential=await FirebaseAuth.instance.signInAnonymously();
+      var uid=userCredential.user!.uid;
+      await FirebaseFirestore.instance.collection("users").doc(uid).set({
+        "image": newarrivals,
+
+      });
+
   }
 }

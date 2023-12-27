@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:irohub_project/collection1page.dart';
@@ -10,6 +12,15 @@ class Collections extends StatefulWidget {
 }
 
 class _CollectionsState extends State<Collections> {
+   @override
+  void initState() {
+    // TODO: implement initState
+    
+     adduser();
+         users=FirebaseFirestore.instance.collection("user");
+    print("aaaaaaaaaaaaaaaaaaaaaa ${users}");
+  }
+  CollectionReference users=FirebaseFirestore.instance.collection("user");
   List images1 = [
     "assets/[removal.ai]_5203868e-b78f-4659-a105-c2647c1cc614-7043761_861-1.png",
     "assets/[removal.ai]_7b6353a1-14a6-4138-98bf-b2e9552230d1-primitive--simple--dolmena-chair-by-russian-manufacturer-polli-_-oen-1.png",
@@ -30,6 +41,15 @@ Winder""",
     """Sale Up To 
 70% Off"""
   ];
+  Future<void> adduser()async{
+  await users.add({"title":names,"subtitile":shortname,"image1":images1});
+  }
+  late CollectionReference users1;
+Future<List<QueryDocumentSnapshot>> fetchdata()async{
+  QuerySnapshot querySnapshot=await users.get();
+  return querySnapshot.docs;
+}
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -118,6 +138,16 @@ Winder""",
                           left: 25,
                           child: TextButton(
                               onPressed: () {
+                               
+  //                              if (FirebaseAuth.instance.currentUser != null) {
+  // // User is signed in, proceed with Firestore write operation
+
+  //                          await 
+  //                       } else {
+  // // User is not signed in, handle accordingly (e.g., prompt user to sign in)
+  //                      print("User is not signed in");
+  //                     }
+                               
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -126,7 +156,8 @@ Winder""",
                                               title: names[index],
                                               subtitle: shortname[index],
                                               images1: images1[index],
-                                            )));
+                                            )
+                                            ));
                               },
                               child: Row(
                                 children: [

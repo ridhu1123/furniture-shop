@@ -11,6 +11,7 @@ class cartscreen extends StatefulWidget {
 }
 
 class _cartscreenState extends State<cartscreen> {
+
  Widget cart() {
     if (cartitems.isEmpty) {
       return Column(
@@ -78,112 +79,131 @@ class _cartscreenState extends State<cartscreen> {
                     ),
                 itemCount: cartitems.length,
                 itemBuilder: (context, index) {
-                  return Row(
-                    children: [
-                      Padding(
-                        padding:
-                            const EdgeInsets.only(left: 19, bottom: 25, top: 5),
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: Colors.grey[200],
-                              borderRadius: BorderRadius.circular(6)),
-                          width: 90,
-                          height: 110,
-                          child: Stack(
-                            children: [
-                              Positioned(
-                                left: 10,
-                                top: 5,
-                                child: CircleAvatar(
-                                  radius: 10,
-                                  backgroundColor: Colors.black,
-                                  child: Text(
-                                    "1",
-                                    style: GoogleFonts.robotoSlab(
-                                        fontSize: 10, color: Colors.white),
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8, bottom: 10),
-                            child: Text(
-                              "Atelier Ottoman Takumi series",
-                              style: GoogleFonts.robotoSlab(
-                                  fontWeight: FontWeight.w500),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8, top: 3),
-                            child: Text(
-                              "24.00",
-                              style:
-                                  GoogleFonts.robotoSlab(color: Colors.black),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8, top: 8),
-                            child: Row(
+                  return Dismissible(
+                    key: UniqueKey(),
+                    direction: DismissDirection.endToStart,
+                    onDismissed: (direction) {
+                      setState(() {
+                        cartitems.removeAt(index);
+                      });
+                    },
+                    background: Container(
+                        width: 90,
+                            height: 110,
+                            color: Colors.red,
+                    ),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding:
+                              const EdgeInsets.only(left: 19, bottom: 25, top: 5),
+                          child:
+                           Container(
+                            decoration: BoxDecoration(
+                                color: Colors.grey[200],
+                                borderRadius: BorderRadius.circular(6)),
+                            width: 90,
+                            height: 110,
+                            child: Stack(
                               children: [
-                                Container(
-                                  height: 10,
-                                  width: 10,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: Colors.black),
-                                ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  "Black",
-                                  style: GoogleFonts.robotoSlab(
-                                      color: Colors.grey[400]),
-                                ),
-                                SizedBox(
-                                  width: 8,
-                                ),
-                                Text(
-                                  "|",
-                                  style: TextStyle(color: Colors.grey[400]),
-                                ),
-                                SizedBox(
-                                  width: 8,
-                                ),
-                                Text(
-                                  "Size :",
-                                  style: GoogleFonts.robotoSlab(
-                                      color: Colors.grey),
-                                ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  "38",
-                                  style: GoogleFonts.robotoSlab(
-                                      color: Colors.black),
-                                ),
-                                SizedBox(
-                                  width: 30,
-                                ),
-                                IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(
-                                      Icons.delete_rounded,
-                                      color: Colors.black,
-                                    ))
+                                Positioned(
+                                  left: 10,
+                                  top: 5,
+                                  child: CircleAvatar(
+                                    radius: 10,
+                                    backgroundColor: Colors.black,
+                                    child: Text(
+                                      "1",
+                                      style: GoogleFonts.robotoSlab(
+                                          fontSize: 10, color: Colors.white),
+                                    ),
+                                  ),
+                                )
                               ],
                             ),
                           ),
-                        ],
-                      ),
-                    ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8, bottom: 10),
+                              child: Text(
+                                "Atelier Ottoman Takumi series",
+                                style: GoogleFonts.robotoSlab(
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8, top: 3),
+                              child: Text(
+                                "24.00",
+                                style:
+                                    GoogleFonts.robotoSlab(color: Colors.black),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8, top: 8),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    height: 10,
+                                    width: 10,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        color: Colors.black),
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(
+                                    "Black",
+                                    style: GoogleFonts.robotoSlab(
+                                        color: Colors.grey[400]),
+                                  ),
+                                  SizedBox(
+                                    width: 8,
+                                  ),
+                                  Text(
+                                    "|",
+                                    style: TextStyle(color: Colors.grey[400]),
+                                  ),
+                                  SizedBox(
+                                    width: 8,
+                                  ),
+                                  Text(
+                                    "Size :",
+                                    style: GoogleFonts.robotoSlab(
+                                        color: Colors.grey),
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(
+                                    "38",
+                                    style: GoogleFonts.robotoSlab(
+                                        color: Colors.black),
+                                  ),
+                                  SizedBox(
+                                    width: 30,
+                                  ),
+                                  IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          cartitems.removeAt(index);
+                                        });
+                                      },
+                                      icon: Icon(
+                                        Icons.delete_rounded,
+                                        color: Colors.black,
+                                      ))
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   );
                 }),
           ),

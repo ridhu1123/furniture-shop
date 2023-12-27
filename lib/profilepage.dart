@@ -28,7 +28,7 @@ class _ProfilepageState extends State<Profilepage> {
       if (camerapicked != null) {
         _image1 = camerapicked.path;
         _image = File(camerapicked.path);
-        print(json.encode(_image1));
+        print(json.encode(_image1));  
         print("filepath.............");
       } else {
         print("no image found");
@@ -42,8 +42,7 @@ class _ProfilepageState extends State<Profilepage> {
       if (pickedimage != null) {
         _image1 = pickedimage.path;
         _image = File(pickedimage.path);
-        print(json.encode(_image1));
-        print("filepath.............");
+      
       } else {
         print("no image found");
       }

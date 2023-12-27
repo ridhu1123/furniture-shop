@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:irohub_project/colections.dart';
+import 'package:irohub_project/collection1page.dart';
 import 'package:irohub_project/sale70%25screen.dart';
 
 class CLassC extends StatelessWidget {
@@ -51,7 +53,7 @@ class CLassC extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Cybermonday()));
+                                builder: (context) => Collections()));
                       },
                       style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(),
                           backgroundColor: Colors.black),

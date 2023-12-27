@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
@@ -23,35 +25,50 @@ class _HomeState extends State<Home> {
     "https://i.pinimg.com/564x/f1/20/ba/f120ba0160225cf18a564a67e3bb22c6.jpg",
     "https://i.pinimg.com/564x/df/66/0e/df660ef6ec3351b9c8ef06606661893e.jpg"
   ];
-  List newarrivals = [
-    "assets/New Works by Studio Cecilia Xinyu Zhang.jpg",
-    "assets/40446cd0-7055-4954-89fa-e2bb3c0ecb5b.jpg",
-    "assets/New Works by Studio Cecilia Xinyu Zhang.jpg",
-    "assets/New Works by Studio Cecilia Xinyu Zhang.jpg",
-    "assets/New Works by Studio Cecilia Xinyu Zhang.jpg",
-    "assets/New Works by Studio Cecilia Xinyu Zhang.jpg",
-    "assets/New Works by Studio Cecilia Xinyu Zhang.jpg",
-    "assets/New Works by Studio Cecilia Xinyu Zhang.jpg",
+  // List newarrivals = [
+  //   "assets/New Works by Studio Cecilia Xinyu Zhang.jpg",
+  //   "assets/40446cd0-7055-4954-89fa-e2bb3c0ecb5b.jpg",
+  //   "assets/New Works by Studio Cecilia Xinyu Zhang.jpg",
+  //   "assets/New Works by Studio Cecilia Xinyu Zhang.jpg",
+  //   "assets/New Works by Studio Cecilia Xinyu Zhang.jpg",
+  //   "assets/New Works by Studio Cecilia Xinyu Zhang.jpg",
+  //   "assets/New Works by Studio Cecilia Xinyu Zhang.jpg",
+  //   "assets/New Works by Studio Cecilia Xinyu Zhang.jpg",
+  // ];
+  List Topdealsname=[
+    "Douglas Mont Relaunches French light",
+    "Flame Floor Lamp ",
+    "Modern Table Lamp",
+    "Modern antlantic sofa",
+    "Simple modern chair"
+  ];
+   List topdealssprize = [
+    "€29.00",
+    "€39.00",
+    "€19.00",
+    "€69.00",
+     "€19.00"
+   
+  ];
+  List Toptrendsname = [
+    "Gino Safartty Light",
+    "Sofi Pisano",
+    "New Melbourne",
+    "Avvitament furniture",
   ];
   List newarrivalsname = [
-    "Nancy chair",
-    "Nancy chair",
-    "Nancy chair",
-    "Nancy chair",
-    "Nancy chair",
-    "Nancy chair",
-    "Nancy chair",
-    "Nancy chair",
+    "Gino Safartty Light",
+    "Interactive clocks",
+    "Les meubles luxe chair",
+    "Lighting _ Handcrafed",
   ];
   List newarrivalsprize = [
     "€29.00",
-    "€29.00",
-    "€29.00",
-    "€29.00",
-    "€29.00",
-    "€29.00",
-    "€29.00",
-    "€29.00",
+    "€39.00",
+    "€19.00",
+    "€69.00",
+   
+   
   ];
   List slideimage = [ClassA(), ClassB(), CLassC()];
   List explorename = ["Sofa", "Lamps", "Chair"];
@@ -81,7 +98,7 @@ await Future.forEach(imageurl1.items, (Reference reference) async{
   var url=await reference.getDownloadURL();
 setState(() {
    newarriavls.add(url);
- print("dddddddd $newarrivals");
+ print("dddddddd $newarriavls");
  });
  });
  
@@ -253,7 +270,7 @@ setState(() {
                         Align(
                             alignment: Alignment.topLeft,
                             child: Text(
-                              newarrivalsname[index],
+                              Toptrendsname[index],
                               style: GoogleFonts.robotoSlab(),
                             )),
                         Align(
@@ -270,11 +287,13 @@ setState(() {
           ),
           InkWell(
             onTap: () {
-               Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            Showallscreen(name: "Top Deals")));
+
+              // addditemtostorage();
+              //  Navigator.push(
+              //       context,
+              //       MaterialPageRoute(
+              //           builder: (context) =>
+              //               Showallscreen(name: "Top Deals")));
             },
             child: Showallbutton(text: "Top Deals")),
            
@@ -309,25 +328,29 @@ setState(() {
                               borderRadius: BorderRadius.circular(6),
                               child: Image.network(Topdeals[index],fit: BoxFit.fill,)),
                           ),
-                          Column(
-                            children: [
-                              Align(
-                                alignment: Alignment.topLeft,
-                                child: Padding(
+                          Flexible(
+                            child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                            
+                              children: [
+                                Padding(
                                   padding: const EdgeInsets.only(
-                                      left: 8, right: 8, top: 8),
+                                      left: 8, right: 10, top: 8),
                                   child: Text(
-                                    newarrivalsname[index],
+                                    
+                                    Topdealsname[index],
                                     style: GoogleFonts.robotoSlab(),
                                   ),
                                 ),
-                              ),
-                              Text(
-                                newarrivalsprize[index],
-                                style: GoogleFonts.robotoSlab(
-                                    color: Colors.grey[400]),
-                              ),
-                            ],
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    topdealssprize[index],
+                                    style: GoogleFonts.robotoSlab(
+                                        color: Colors.grey[400]),
+                                  ),
+                                ),
+                              ],
+                            ),
                           )
                         ],
                       ),
@@ -340,4 +363,14 @@ setState(() {
       ),
     );
   }
+  // var newarrivals1=[];
+  //  Future<void> addditemtostorage()async{
+  //     UserCredential userCredential=await FirebaseAuth.instance.signInAnonymously();
+  //     var uid=userCredential.user!.uid;
+  //     await FirebaseFirestore.instance.collection("users").doc(uid).set({
+  //       "image": newarrivals,
+
+  //     });
+
+  // }
 }

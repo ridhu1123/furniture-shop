@@ -1,8 +1,10 @@
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:irohub_project/Sofa.dart';
 import 'package:irohub_project/addtocart.dart';
 import 'package:irohub_project/showallscreen.dart';
+
 import 'package:irohub_project/widget/textandshowall.dart';
 
 class Explorescreen extends StatefulWidget {
@@ -15,21 +17,15 @@ class Explorescreen extends StatefulWidget {
 class _ExplorescreenState extends State<Explorescreen> {
   Map<String, List<String>> folderImageUrls = {};
   List exploreimage = [
-    "https://i.pinimg.com/564x/79/91/58/799158da597625ffa054d48fecdef369.jpg",
-    "https://i.pinimg.com/564x/f1/20/ba/f120ba0160225cf18a564a67e3bb22c6.jpg",
-    "https://i.pinimg.com/564x/df/66/0e/df660ef6ec3351b9c8ef06606661893e.jpg"
+    "https://i.pinimg.com/564x/52/9a/86/529a86b9e08ea448582b0be8ecdf2890.jpg",
+    "https://i.pinimg.com/564x/2f/92/4b/2f924b5f0c9718be6cd22a5d6b1d145b.jpg",
+    "https://i.pinimg.com/564x/73/2c/b5/732cb5ba6d7d18170f0dbfcc24cfc6b1.jpg",
+    "https://i.pinimg.com/564x/47/68/5c/47685c3c334ed95b0f3091f0471ccb60.jpg"
   ];
-  List explorename = ["Sofa", "Lamps", "Chair"];
-  List exploreitems = ["10", "5", "6"];
-  List newarrivals = [
-    "assets/New Works by Studio Cecilia Xinyu Zhang.jpg",
-    "assets/40446cd0-7055-4954-89fa-e2bb3c0ecb5b.jpg",
-    "assets/New Works by Studio Cecilia Xinyu Zhang.jpg",
-    "assets/New Works by Studio Cecilia Xinyu Zhang.jpg",
-    "assets/New Works by Studio Cecilia Xinyu Zhang.jpg",
-    "assets/New Works by Studio Cecilia Xinyu Zhang.jpg",
-    "assets/New Works by Studio Cecilia Xinyu Zhang.jpg",
-    "assets/New Works by Studio Cecilia Xinyu Zhang.jpg",
+  List explorename = ["Sofa", "Lamps", "Chair","Clock"];
+  List exploreitems = ["6", "6", "6","6"];
+  List Bestsellerspri = [
+    
   ];
   List newarrivalsname = [
     "Nancy chair",
@@ -63,11 +59,9 @@ setState(() {
  print("dddddddd $Bestsellers");
  });
  });
-
- 
- 
- 
 }
+
+
 @override
   void initState() {
     // TODO: implement initState
@@ -103,23 +97,28 @@ setState(() {
                         width: 146,
                         child: Column(
                           children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                 boxShadow: [
-                                BoxShadow(
-                                    offset: Offset(3, 3),
-                                    blurRadius: 5,
-                                    color: Color.fromARGB(255, 119, 117, 117))
-                              ],
-                              ),
-                              child: ClipRRect(
-                                
-                                borderRadius: BorderRadius.circular(6),
-                                child: Image.network(
-                                  exploreimage[index],
-                                  height: 158,
-                                  width: double.infinity,
-                                  fit: BoxFit.fill,
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>Sofascreen(explorename: explorename[index],)));
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                   boxShadow: [
+                                  BoxShadow(
+                                      offset: Offset(3, 3),
+                                      blurRadius: 5,
+                                      color: Color.fromARGB(255, 119, 117, 117))
+                                ],
+                                ),
+                                child: ClipRRect(
+                                  
+                                  borderRadius: BorderRadius.circular(6),
+                                  child: Image.network(
+                                    exploreimage[index],
+                                    height: 158,
+                                    width: double.infinity,
+                                    fit: BoxFit.fill,
+                                  ),
                                 ),
                               ),
                             ),

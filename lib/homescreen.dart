@@ -8,7 +8,7 @@ import 'package:irohub_project/cartscreen.dart';
 import 'package:irohub_project/colections.dart';
 
 import 'package:irohub_project/profilepage.dart';
-import 'package:irohub_project/tables.dart';
+
 
 import 'categoryscreen.dart';
 
@@ -242,8 +242,8 @@ class _HomescreenState extends State<Homescreen> {
                 children: [
                   IconButton(
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Sofa()));
+                      // Navigator.push(context,
+                      //     MaterialPageRoute(builder: (context) => Sofa()));
                     },
                     icon: Icon(
                       Icons.search_outlined,

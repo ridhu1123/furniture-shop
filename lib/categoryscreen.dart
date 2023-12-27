@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:irohub_project/Sofa.dart';
 import 'package:irohub_project/categoriessecondscreen.dart';
 
 class categoryscreen extends StatefulWidget {
@@ -11,20 +12,18 @@ class categoryscreen extends StatefulWidget {
 
 class _categoryscreenState extends State<categoryscreen> {
   List catogarisimages=[
-    "https://i.pinimg.com/564x/fc/09/8f/fc098f4f57f603cd8d5bdbcd1bd21277.jpg",
-    "https://i.pinimg.com/564x/de/33/92/de33929f773fd64883dd4e2c2d444099.jpg",
-    "https://i.pinimg.com/564x/cb/d7/c8/cbd7c8b35ef2fb203b49fb20b803eb3f.jpg",
-    "https://i.pinimg.com/564x/cb/f3/d5/cbf3d5c06cd9d599767702d4be82bae9.jpg",
-    "https://i.pinimg.com/736x/1f/dc/c1/1fdcc114792e7db6a6b9160a4c55ab1d.jpg",
+     "https://i.pinimg.com/564x/cb/f3/d5/cbf3d5c06cd9d599767702d4be82bae9.jpg",
     
+    "https://i.pinimg.com/564x/de/33/92/de33929f773fd64883dd4e2c2d444099.jpg",
+
+    "https://i.pinimg.com/564x/fc/09/8f/fc098f4f57f603cd8d5bdbcd1bd21277.jpg",
+   "https://i.pinimg.com/564x/cb/d7/c8/cbd7c8b35ef2fb203b49fb20b803eb3f.jpg",
   ];
   List categoriesname = [
-    "Decoration",
-    "Celling",
-    "Floor",
-    "Furniture",
+    "Sofa",
     "Lamps",
-    
+    "Chair",
+    "Clock",
   ];
   @override
   Widget build(BuildContext context) {
@@ -50,13 +49,13 @@ class _categoryscreenState extends State<categoryscreen> {
       ),
       body: SafeArea(
         child: ListView.separated(
-          separatorBuilder: (context, index) => Divider(),
+          separatorBuilder: (context, index) => Divider(thickness: 0.5,),
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
           itemCount: categoriesname.length,
           itemBuilder: (context, index) {
             return Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.only(top: 28,left: 8,right: 8,bottom: 28),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -104,7 +103,7 @@ class _categoryscreenState extends State<categoryscreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Categoriessecond()));
+                                  builder: (context) => Sofascreen()));
                         },
                         icon: Icon(Icons.arrow_right,size: 40,)),
                   )

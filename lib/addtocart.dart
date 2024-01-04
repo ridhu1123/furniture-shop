@@ -1,10 +1,26 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:five_pointed_star/five_pointed_star.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
 class Addtocart1 extends StatefulWidget {
-  const Addtocart1({super.key});
+  final newarrivals;
+  final proName;
+  final trending;
+  final toptrends;
+  final topdeals;
+  final bestselling;
+  final bestsellers;
+  const Addtocart1(
+      {super.key,
+      this.newarrivals,
+      this.trending,
+      this.proName,
+      this.toptrends,
+      this.topdeals,
+      this.bestselling,
+      this.bestsellers});
 
   @override
   State<Addtocart1> createState() => _Addtocart1State();
@@ -26,32 +42,35 @@ class _Addtocart1State extends State<Addtocart1> {
     Colors.green,
     Colors.grey
   ];
-  List newarrivalsname = [
-    "Nancy chair",
-    "Nancy chair",
-    "Nancy chair",
-    "Nancy chair",
-    "Nancy chair",
-    "Nancy chair",
-    "Nancy chair",
-    "Nancy chair",
-  ];
-  List newarrivalsprize = [
-    "€29.00",
-    "€29.00",
-    "€29.00",
-    "€29.00",
-    "€29.00",
-    "€29.00",
-    "€29.00",
-    "€29.00",
-  ];
+
   bool onclick = false;
   int itemcount = 0;
   int itemcount1 = 0;
 
+  getAllData() async {
+    print('''dfdfdfdfdfdfdfdfdf''');
+    var res = await FirebaseFirestore.instance
+        .collection("products")
+        .doc("new")
+        .collection(widget.proName)
+        .doc("details")
+        .get();
+    print(res.data());
+    print('--------------------------------');
+  }
+
+  @override
+  void initState() {
+    getAllData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    // var templist=[];
+    // if(){
+
+    // }
     return Scaffold(
       body: SafeArea(
         child: CustomScrollView(
@@ -93,7 +112,7 @@ class _Addtocart1State extends State<Addtocart1> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Olivia Shayn Military TV Cabinet",
+                        "${widget.proName}",
                         style: GoogleFonts.robotoSlab(
                             color: Colors.black,
                             fontSize: 20,
@@ -396,7 +415,7 @@ class _Addtocart1State extends State<Addtocart1> {
                         maxHeight: 242,
                         maxWidth: 300,
                         child: ListView.builder(
-                            itemCount: newarrivalsname.length,
+                            itemCount: 4,
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
                               return Padding(
@@ -419,7 +438,7 @@ class _Addtocart1State extends State<Addtocart1> {
                                                 BorderRadius.circular(6)),
                                         width: 160,
                                         height: 190,
-                                        child: Align(
+                                        child: const Align(
                                           alignment: Alignment.topRight,
                                         ),
                                       ),
@@ -427,11 +446,11 @@ class _Addtocart1State extends State<Addtocart1> {
                                     Align(
                                         alignment: Alignment.topLeft,
                                         child: Text(
-                                          newarrivalsname[index],
+                                          " widget.newarrivals[index]",
                                           style: GoogleFonts.robotoSlab(),
                                         )),
                                     Text(
-                                      newarrivalsprize[index],
+                                      " widget.newarrivals[index]",
                                       style: GoogleFonts.robotoSlab(
                                           color: Colors.grey[400]),
                                     )
@@ -463,7 +482,9 @@ class _Addtocart1State extends State<Addtocart1> {
                 //       MaterialPageRoute(builder: (context) => cartscreen()));
                 // }
               },
-              style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(),backgroundColor: Colors.black),
+              style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(),
+                  backgroundColor: Colors.black),
               child: Text(
                 onclick == true ? "GO TO CART" : "ADD TO CART",
                 style: GoogleFonts.robotoSlab(color: Colors.white),

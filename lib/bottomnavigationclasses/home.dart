@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -35,21 +37,14 @@ class _HomeState extends State<Home> {
   //   "assets/New Works by Studio Cecilia Xinyu Zhang.jpg",
   //   "assets/New Works by Studio Cecilia Xinyu Zhang.jpg",
   // ];
-  List Topdealsname=[
+  List Topdealsname = [
     "Douglas Mont Relaunches French light",
     "Flame Floor Lamp ",
     "Modern Table Lamp",
     "Modern antlantic sofa",
     "Simple modern chair"
   ];
-   List topdealssprize = [
-    "€29.00",
-    "€39.00",
-    "€19.00",
-    "€69.00",
-     "€19.00"
-   
-  ];
+  List topdealssprize = ["€29.00", "€39.00", "€19.00", "€69.00", "€19.00"];
   List Toptrendsname = [
     "Gino Safartty Light",
     "Sofi Pisano",
@@ -67,62 +62,108 @@ class _HomeState extends State<Home> {
     "€39.00",
     "€19.00",
     "€69.00",
-   
-   
   ];
   List slideimage = [ClassA(), ClassB(), CLassC()];
   List explorename = ["Sofa", "Lamps", "Chair"];
   List exploreitems = ["10", "5", "6"];
 
-  var newarriavls=[];
-  var Toptrends=[];
-  var Topdeals=[];
-void getdata()async{
- var storage = FirebaseStorage.instance;
- var ref=storage.ref().child("homescreenimages/new arrival");
-     print("hhhhhhhhhhhhhhhhhh $ref");
-var ref1=storage.ref().child("homescreenimages/Top trends");
-var imageurl1=await ref1.listAll();
-await Future.forEach(imageurl1.items, (Reference reference) async{
-  var url1=await reference.getDownloadURL();
-  
-    setState(() {
-   Toptrends.add(url1);
- print("dddddddd $Toptrends");
- });
-  
+  var products = [
+    {
+      "proName": "chair",
+      "image":
+          "https://i.pinimg.com/564x/6a/b7/0b/6ab70b6a8be0d0ce83d040d60fb31d70.jpg",
+      "price": "90"
+    },
+    {
+      "proName": "bench",
+      "image":
+          "https://i.pinimg.com/564x/a0/62/7f/a0627fd70e1dbb483eeb266e5d64e705.jpg",
+      "price": "900"
+    },
+    {
+      "proName": "tv",
+      "image":
+          "https://i.pinimg.com/564x/5a/d4/51/5ad451c14ea927c13e7ac1f818436bbd.jpg",
+      "price": "34"
+    },
+    {
+      "proName": "washing machine",
+      "image":
+          "https://i.pinimg.com/564x/36/67/af/3667af9a3914ce53010ee274f7e3ba31.jpg",
+      "price": "34"
+    }
+  ];
+  getAllData() async {
+    print('''dfdfdfdfdfdfdfdfdf''');
+    var res = await FirebaseFirestore.instance
+        .collection("products")
+        .doc("new")
+        .get()
+        .then((DocumentSnapshot documentSnapshot) {
+      if (documentSnapshot.exists) {
+        print("data exist  ${documentSnapshot.data()}");
+      }
+    });
 
- });
- var imageurl=await ref.listAll();
- await Future.forEach(imageurl.items, (Reference reference) async{
-  var url=await reference.getDownloadURL();
-setState(() {
-   newarriavls.add(url);
- print("dddddddd $newarriavls");
- });
- });
- 
- var ref2=storage.ref().child("homescreenimages/Top deals");
-var imageurl2=await ref2.listAll();
-await Future.forEach(imageurl2.items, (Reference reference) async{
-  var url2=await reference.getDownloadURL();
-setState(() {
-   Topdeals.add(url2);
- print("dddddddd $Topdeals");
- });
- });
- 
-}
-@override
+    print('--------------------------------');
+    setState(() {});
+  }
+
+  postPro() async {
+    for (var i in products)
+      FirebaseFirestore.instance.collection("products").doc("new").set(i);
+  }
+
+  var newarriavls = [];
+  var Toptrends = [];
+  var Topdeals = [];
+  void getdata() async {
+    var storage = FirebaseStorage.instance;
+
+    var ref = storage.ref().child("homescreenimages/new arrival");
+    // print("hhhhhhhhhhhhhhhhhh $ref");
+    var ref1 = storage.ref().child("homescreenimages/Top trends");
+    var imageurl1 = await ref1.listAll();
+    await Future.forEach(imageurl1.items, (Reference reference) async {
+      var url1 = await reference.getDownloadURL();
+
+      setState(() {
+        Toptrends.add(url1);
+        // print("dddddddd $Toptrends");
+      });
+    });
+    var imageurl = await ref.listAll();
+    await Future.forEach(imageurl.items, (Reference reference) async {
+      var url = await reference.getDownloadURL();
+      setState(() {
+        newarriavls.add(url);
+        // print("dddddddd $newarriavls");
+      });
+    });
+
+    var ref2 = storage.ref().child("homescreenimages/Top deals");
+    var imageurl2 = await ref2.listAll();
+    await Future.forEach(imageurl2.items, (Reference reference) async {
+      var url2 = await reference.getDownloadURL();
+      setState(() {
+        Topdeals.add(url2);
+        // print("dddddddd $Topdeals");
+      });
+    });
+  }
+
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
     getdata();
+    getAllData();
   }
+
   @override
   Widget build(BuildContext context) {
     var size, height, width;
-   
+
     size = MediaQuery.of(context).size;
     height = size.height;
     width = size.width;
@@ -176,18 +217,18 @@ setState(() {
             ),
           ),
           InkWell(
-            onTap: () {
-               Navigator.push(
+              onTap: () {
+                Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
                             Showallscreen(name: "New Arrivals")));
-            },
-            child: Showallbutton(text: "New Arrivals")),
+              },
+              child: Showallbutton(text: "New Arrivals")),
           LimitedBox(
             maxHeight: 242,
             child: ListView.builder(
-                itemCount: newarriavls.length,
+                itemCount: products.length,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
                   return Padding(
@@ -200,7 +241,10 @@ setState(() {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Addtocart1()));
+                                    builder: (context) => Addtocart1(
+                                          proName: products[index]["proName"]
+                                              .toString(),
+                                        )));
                           },
                           child: Container(
                             decoration: BoxDecoration(
@@ -209,18 +253,21 @@ setState(() {
                             width: 160,
                             height: 190,
                             child: ClipRRect(
-                              borderRadius: BorderRadius.circular(6),
-                              child: Image.network(newarriavls[index],fit: BoxFit.fill,)),
+                                borderRadius: BorderRadius.circular(6),
+                                child: Image.network(
+                                  products[index]["image"].toString(),
+                                  fit: BoxFit.fill,
+                                )),
                           ),
                         ),
                         Align(
                             alignment: Alignment.topLeft,
                             child: Text(
-                              newarrivalsname[index],
+                              products[index]["proName"].toString(),
                               style: GoogleFonts.robotoSlab(),
                             )),
                         Text(
-                          newarrivalsprize[index],
+                          products[index]["price"].toString(),
                           style:
                               GoogleFonts.robotoSlab(color: Colors.grey[400]),
                         )
@@ -254,18 +301,22 @@ setState(() {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Addtocart1()));
+                                    builder: (context) => Addtocart1(
+                                          toptrends: Toptrends[index],
+                                        )));
                           },
                           child: Container(
-                            decoration: BoxDecoration(
-                                color: Colors.grey[200],
-                                borderRadius: BorderRadius.circular(6)),
-                            width: 160,
-                            height: 190,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(6),
-                              child: Image.network(Toptrends[index],fit: BoxFit.fill,))
-                          ),
+                              decoration: BoxDecoration(
+                                  color: Colors.grey[200],
+                                  borderRadius: BorderRadius.circular(6)),
+                              width: 160,
+                              height: 190,
+                              child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(6),
+                                  child: Image.network(
+                                    Toptrends[index],
+                                    fit: BoxFit.fill,
+                                  ))),
                         ),
                         Align(
                             alignment: Alignment.topLeft,
@@ -286,21 +337,20 @@ setState(() {
                 }),
           ),
           InkWell(
-            onTap: () {
-
-              // addditemtostorage();
-              //  Navigator.push(
-              //       context,
-              //       MaterialPageRoute(
-              //           builder: (context) =>
-              //               Showallscreen(name: "Top Deals")));
-            },
-            child: Showallbutton(text: "Top Deals")),
-           
+              onTap: () {
+                // addditemtostorage();
+                //  Navigator.push(
+                //       context,
+                //       MaterialPageRoute(
+                //           builder: (context) =>
+                //               Showallscreen(name: "Top Deals")));
+              },
+              child: Showallbutton(text: "Top Deals")),
           LimitedBox(
             maxHeight: 700,
             child: ListView.separated(
-                separatorBuilder: (context, index) => Divider(thickness: 0.3,),
+                separatorBuilder: (context, index) =>
+                    Divider(thickness: 0.5, indent: width / 3.1),
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
@@ -311,7 +361,9 @@ setState(() {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => Addtocart1()));
+                              builder: (context) => Addtocart1(
+                                    topdeals: Topdeals[index],
+                                  )));
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -325,24 +377,26 @@ setState(() {
                             width: 90,
                             height: 90,
                             child: ClipRRect(
-                              borderRadius: BorderRadius.circular(6),
-                              child: Image.network(Topdeals[index],fit: BoxFit.fill,)),
+                                borderRadius: BorderRadius.circular(6),
+                                child: Image.network(
+                                  Topdeals[index],
+                                  fit: BoxFit.fill,
+                                )),
                           ),
                           Flexible(
-                            child: Column(crossAxisAlignment: CrossAxisAlignment.start,
-                            
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.only(
                                       left: 8, right: 10, top: 8),
                                   child: Text(
-                                    
                                     Topdealsname[index],
                                     style: GoogleFonts.robotoSlab(),
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.only(left: 8),
                                   child: Text(
                                     topdealssprize[index],
                                     style: GoogleFonts.robotoSlab(
@@ -358,7 +412,6 @@ setState(() {
                   );
                 }),
           ),
-      
         ],
       ),
     );

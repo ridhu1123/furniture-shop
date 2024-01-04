@@ -122,7 +122,7 @@ setState(() {
                   child: GridView.builder(
                       physics: NeverScrollableScrollPhysics(),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2, mainAxisExtent: 260),
+                          crossAxisCount: 2, mainAxisExtent: 254),
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: const EdgeInsets.only(

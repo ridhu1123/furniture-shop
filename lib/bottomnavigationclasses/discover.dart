@@ -1,8 +1,12 @@
+import 'dart:ffi';
+
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:irohub_project/Filterscreen.dart';
 import 'package:irohub_project/addtocart.dart';
 import 'package:irohub_project/showallscreen.dart';
 import 'package:irohub_project/widget/textandshowall.dart';
@@ -42,25 +46,23 @@ class _DiscoverState extends State<Discover> {
     "assets/fashiontoolsandmotorcycles.jpg"
   ];
 
-  List newarrivalsname = [
+  List Trendingname = [
     "Nancy chair",
-    "Nancy chair",
-    "Nancy chair",
-    "Nancy chair",
-    "Nancy chair",
-    "Nancy chair",
-    "Nancy chair",
-    "Nancy chair",
+    "Sofa chair",
+    "Furinture chair",
+  
   ];
-  List newarrivalsprize = [
+  List Trendingprize = [
     "€29.00",
-    "€29.00",
-    "€29.00",
-    "€29.00",
-    "€29.00",
-    "€29.00",
-    "€29.00",
-    "€29.00",
+    "€39.00",
+    "€49.00",
+
+  ];
+  List Bestsellingname = [
+    "Adrian Pearsall sofa",
+    "Candelaria Contemporary sofa",
+    "Italian Design Three seats sofa",
+  
   ];
   var Trending=[];
   var Bestselling=[];
@@ -84,6 +86,8 @@ class _DiscoverState extends State<Discover> {
       });
     });
   }
+
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -137,7 +141,7 @@ class _DiscoverState extends State<Discover> {
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            Showallscreen(name: "Trending")));
+                            Showallscreen(name:"Trending")));
           },
           child: Showallbutton(text: "Trending")),
         LimitedBox(
@@ -164,25 +168,30 @@ class _DiscoverState extends State<Discover> {
                     child: Image.network(Trending[index],fit: BoxFit.fill,)),
                 ),
               ),
-              Column(
-                children: [
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Padding(
-                      padding:
-                          const EdgeInsets.only(left: 8, right: 8, top: 15),
-                      child: Text(
-                        newarrivalsname[1],
-                        style:
-                            GoogleFonts.robotoSlab(fontWeight: FontWeight.w400),
+              Flexible(
+                child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Padding(
+                        padding:
+                            const EdgeInsets.only(left: 8, top: 15),
+                        child: Text(
+                          Trendingname[index],
+                          style:
+                              GoogleFonts.robotoSlab(fontWeight: FontWeight.w400),
+                        ),
                       ),
                     ),
-                  ),
-                  Text(
-                    newarrivalsprize[1],
-                    style: GoogleFonts.robotoSlab(color: Colors.grey[400]),
-                  ),
-                ],
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        Trendingprize[index],
+                        style: GoogleFonts.robotoSlab(color: Colors.grey[400]),
+                      ),
+                    ),
+                  ],
+                ),
               ),
               SizedBox(
                 width: 55,
@@ -348,55 +357,64 @@ Winter""",
                     child: Image.network(Bestselling[index],fit: BoxFit.fill,)),
                 ),
               ),
-              Column(
-                children: [
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Padding(
-                      padding:
-                          const EdgeInsets.only(left: 8, right: 8, top: 15),
-                      child: Text(
-                        newarrivalsname[1],
-                        style:
-                            GoogleFonts.robotoSlab(fontWeight: FontWeight.w400),
+              Flexible(
+                child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Padding(
+                        padding:
+                            const EdgeInsets.only(left: 8, top: 15),
+                        child: Text(
+                          Bestsellingname[index],
+                          style:
+                              GoogleFonts.robotoSlab(fontWeight: FontWeight.w400),
+                        ),
                       ),
                     ),
-                  ),
-                  Text(
-                    newarrivalsprize[1],
-                    style: GoogleFonts.robotoSlab(color: Colors.grey[400]),
-                  ),
-                ],
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8),
+                      child: Text(
+                        Trendingprize[index],
+                        style: GoogleFonts.robotoSlab(color: Colors.grey[400]),
+                      ),
+                    ),
+                  ],
+                ),
               ),
               SizedBox(
                 width: 55,
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 20),
-                child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  Addtocart1()));
-                    },
-                    style:
-                        ElevatedButton.styleFrom(shape: RoundedRectangleBorder()
-                        ,backgroundColor: Colors.black),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          border: Border(
-                              bottom:
-                                  BorderSide(color: Colors.black, width: 1.0))),
-                      child: Text(
-                        "SHOP NOW",
-                        style: GoogleFonts.robotoSlab(
-                          fontSize: 10,
-                          color: Colors.white,
+                child: Container(
+                  height: 35,
+                  width: 100,
+                  child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    Addtocart1()));
+                      },
+                      style:
+                          ElevatedButton.styleFrom(shape: RoundedRectangleBorder()
+                          ,backgroundColor: Colors.black),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            border: Border(
+                                bottom:
+                                    BorderSide(color: Colors.black, width: 1.0))),
+                        child: Text(
+                          "SHOP NOW",
+                          style: GoogleFonts.robotoSlab(
+                            fontSize: 10,
+                            color: Colors.white,
+                          ),
                         ),
-                      ),
-                    )),
+                      )),
+                ),
               ),
             ],
           ),

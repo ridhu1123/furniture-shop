@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
@@ -8,7 +9,6 @@ import 'package:irohub_project/cartscreen.dart';
 import 'package:irohub_project/colections.dart';
 
 import 'package:irohub_project/profilepage.dart';
-
 
 import 'categoryscreen.dart';
 
@@ -66,6 +66,55 @@ class _HomescreenState extends State<Homescreen> {
     });
   }
 
+  getData() async {
+    var res = await FirebaseFirestore.instance
+        .collection('products')
+        .doc("6ZWMSD5OYrzLRafbg16q")
+        .collection("Gino safaiojg light")
+        .doc("msO5nJawWFu6BcCpJisV")
+        .get();
+    print(res.data());
+  }
+
+  var products = [
+    {
+      "proName": "chair",
+      "image":
+          "https://i.pinimg.com/564x/6a/b7/0b/6ab70b6a8be0d0ce83d040d60fb31d70.jpg",
+      "price": "90"
+    },
+    {
+      "proName": "bench",
+      "image":
+          "https://i.pinimg.com/564x/a0/62/7f/a0627fd70e1dbb483eeb266e5d64e705.jpg",
+      "price": "900"
+    },
+    {
+      "proName": "tv",
+      "image":
+          "https://i.pinimg.com/564x/5a/d4/51/5ad451c14ea927c13e7ac1f818436bbd.jpg",
+      "price": "34"
+    },
+    {
+      "proName": "washing machine",
+      "image":
+          "https://i.pinimg.com/564x/36/67/af/3667af9a3914ce53010ee274f7e3ba31.jpg",
+      "price": "34"
+    }
+  ];
+
+  postPro() async {
+    for (var i in products) {
+      print(i);
+      await FirebaseFirestore.instance
+          .collection("products")
+          .doc("new")
+          .collection(i["proName"] ?? "TEST")
+          .doc("details")
+          .set(i);
+    }
+  }
+
   List screens = [Home(), Explorescreen(), Discover()];
   @override
   Widget build(BuildContext context) {
@@ -121,7 +170,9 @@ class _HomescreenState extends State<Homescreen> {
                   icon: Row(
                     children: [
                       Icon(Icons.home),
-                       SizedBox(width: 10,),
+                      SizedBox(
+                        width: 10,
+                      ),
                       Text(
                         "Home",
                         style: GoogleFonts.robotoSlab(),
@@ -140,7 +191,9 @@ class _HomescreenState extends State<Homescreen> {
                   icon: Row(
                     children: [
                       Icon(Icons.collections_bookmark_outlined),
-                       SizedBox(width: 10,),
+                      SizedBox(
+                        width: 10,
+                      ),
                       Text(
                         "Collections",
                         style: GoogleFonts.robotoSlab(),
@@ -149,6 +202,11 @@ class _HomescreenState extends State<Homescreen> {
                   ),
                 ),
               ),
+              ElevatedButton(
+                  onPressed: () {
+                    postPro();
+                  },
+                  child: Text('clickccc')),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: IconButton(
@@ -156,7 +214,9 @@ class _HomescreenState extends State<Homescreen> {
                   icon: Row(
                     children: [
                       Icon(Icons.deblur),
-                       SizedBox(width: 10,),
+                      SizedBox(
+                        width: 10,
+                      ),
                       Text(
                         "Top Deals",
                         style: GoogleFonts.robotoSlab(),
@@ -177,7 +237,9 @@ class _HomescreenState extends State<Homescreen> {
                   icon: Row(
                     children: [
                       Icon(Icons.category_rounded),
-                       SizedBox(width: 10,),
+                      SizedBox(
+                        width: 10,
+                      ),
                       Text(
                         "Categories",
                         style: GoogleFonts.robotoSlab(),
@@ -193,7 +255,9 @@ class _HomescreenState extends State<Homescreen> {
                   icon: Row(
                     children: [
                       Icon(Icons.settings),
-                       SizedBox(width: 10,),
+                      SizedBox(
+                        width: 10,
+                      ),
                       Text(
                         "Settings",
                         style: GoogleFonts.robotoSlab(),
@@ -209,7 +273,9 @@ class _HomescreenState extends State<Homescreen> {
                   icon: Row(
                     children: [
                       Icon(Icons.logout_sharp),
-                      SizedBox(width: 10,),
+                      SizedBox(
+                        width: 10,
+                      ),
                       Text(
                         "Sign out",
                         style: GoogleFonts.robotoSlab(),

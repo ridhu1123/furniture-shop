@@ -4,17 +4,15 @@ import 'package:irohub_project/checkoutpage.dart';
 import 'package:irohub_project/homescreen.dart';
 
 class cartscreen extends StatefulWidget {
- 
-
-  const cartscreen({super.key});
+  final allitems;
+  const cartscreen({super.key, this.allitems});
 
   @override
   State<cartscreen> createState() => _cartscreenState();
 }
 
 class _cartscreenState extends State<cartscreen> {
-
- Widget cart() {
+  Widget cart() {
     if (cartitems.isEmpty) {
       return Column(
         children: [
@@ -77,9 +75,11 @@ class _cartscreenState extends State<cartscreen> {
             child: ListView.separated(
                 separatorBuilder: (context, index) => Padding(
                       padding: const EdgeInsets.only(left: 60),
-                      child: Divider(thickness: 0.4,),
+                      child: Divider(
+                        thickness: 0.4,
+                      ),
                     ),
-                itemCount: cartitems.length,
+                itemCount: widget.allitems.length,
                 itemBuilder: (context, index) {
                   return Dismissible(
                     key: UniqueKey(),
@@ -90,17 +90,16 @@ class _cartscreenState extends State<cartscreen> {
                       });
                     },
                     background: Container(
-                        width: 90,
-                            height: 110,
-                            color: Colors.red,
+                      width: 90,
+                      height: 110,
+                      color: Colors.red,
                     ),
                     child: Row(
                       children: [
                         Padding(
-                          padding:
-                              const EdgeInsets.only(left: 19, bottom: 25, top: 5),
-                          child:
-                           Container(
+                          padding: const EdgeInsets.only(
+                              left: 19, bottom: 25, top: 5),
+                          child: Container(
                             decoration: BoxDecoration(
                                 color: Colors.grey[200],
                                 borderRadius: BorderRadius.circular(6)),
@@ -108,6 +107,10 @@ class _cartscreenState extends State<cartscreen> {
                             height: 110,
                             child: Stack(
                               children: [
+                                Image.network(
+                                  widget.allitems["image"],
+                                  fit: BoxFit.fill,
+                                ),
                                 Positioned(
                                   left: 10,
                                   top: 5,
@@ -129,9 +132,10 @@ class _cartscreenState extends State<cartscreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(left: 8, bottom: 10),
+                              padding:
+                                  const EdgeInsets.only(left: 8, bottom: 10),
                               child: Text(
-                                "Atelier Ottoman Takumi series",
+                                widget.allitems["name"],
                                 style: GoogleFonts.robotoSlab(
                                     fontWeight: FontWeight.w500),
                               ),
@@ -139,7 +143,7 @@ class _cartscreenState extends State<cartscreen> {
                             Padding(
                               padding: const EdgeInsets.only(left: 8, top: 3),
                               child: Text(
-                                "24.00",
+                                widget.allitems["price"],
                                 style:
                                     GoogleFonts.robotoSlab(color: Colors.black),
                               ),
@@ -229,7 +233,8 @@ class _cartscreenState extends State<cartscreen> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 8,left: 8,right: 8,bottom: 5),
+            padding:
+                const EdgeInsets.only(top: 8, left: 8, right: 8, bottom: 5),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -326,7 +331,9 @@ class _cartscreenState extends State<cartscreen> {
             SizedBox(
               height: 15,
             ),
-            Divider(thickness: 0.5,),
+            Divider(
+              thickness: 0.5,
+            ),
             cart()
           ],
         ),

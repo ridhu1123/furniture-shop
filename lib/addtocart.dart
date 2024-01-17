@@ -48,15 +48,15 @@ class _Addtocart1State extends State<Addtocart1> {
   int itemcount1 = 0;
 
   getAllData() async {
-    print('''dfdfdfdfdfdfdfdfdf''');
+    // print('''dfdfdfdfdfdfdfdfdf''');
     var res = await FirebaseFirestore.instance
         .collection("products")
         .doc("new")
         .collection(widget.proName)
         .doc("details")
         .get();
-    print(res.data());
-    print('--------------------------------');
+    // print(res.data());
+    // print('--------------------------------');
   }
 
   @override
@@ -98,10 +98,10 @@ class _Addtocart1State extends State<Addtocart1> {
               pinned: false,
               floating: false,
               flexibleSpace: FlexibleSpaceBar(
-                  // background: BabylonJSViewer(
-                  //   src: "assets/Untitled.glb",
-                  // ),
-                  ),
+                  background: Image.network(
+                widget.proName["image"],
+                fit: BoxFit.fill,
+              )),
               expandedHeight: 600,
             ),
             SliverList(
@@ -112,7 +112,7 @@ class _Addtocart1State extends State<Addtocart1> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "${widget.proName}",
+                        widget.proName["name"],
                         style: GoogleFonts.robotoSlab(
                             color: Colors.black,
                             fontSize: 20,
@@ -125,7 +125,7 @@ class _Addtocart1State extends State<Addtocart1> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "\$1499.00",
+                            widget.proName["price"],
                             style: GoogleFonts.robotoSlab(
                                 color: Colors.red, fontSize: 20),
                           ),
@@ -272,17 +272,21 @@ class _Addtocart1State extends State<Addtocart1> {
                           itemBuilder: (context, index) {
                             return Row(
                               children: [
-                                Text(
-                                  "${description[index]} :",
-                                  style: GoogleFonts.robotoSlab(
-                                      color: Colors.grey[400]),
+                                Container(
+                                  child: Text(
+                                    "${description[index]} :",
+                                    style: GoogleFonts.robotoSlab(
+                                        color: Colors.grey[400]),
+                                  ),
                                 ),
                                 SizedBox(
                                   width: 80,
                                 ),
-                                Text(
-                                  description1[index],
-                                  style: GoogleFonts.robotoSlab(),
+                                Container(
+                                  child: Text(
+                                    description1[index],
+                                    style: GoogleFonts.robotoSlab(),
+                                  ),
                                 )
                               ],
                             );
@@ -349,7 +353,7 @@ class _Addtocart1State extends State<Addtocart1> {
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            "4.8",
+                                            "4.0",
                                             style: GoogleFonts.robotoSlab(
                                                 fontSize: 22,
                                                 color: Colors.white),
@@ -377,12 +381,10 @@ class _Addtocart1State extends State<Addtocart1> {
                                 height: 5,
                               ),
                               FivePointedStar(
+                                defaultSelectedCount: 4,
                                 selectedColor:
                                     Color.fromARGB(255, 242, 159, 15),
                                 // size: Size.fromWidth(50),
-                                onChange: (count) {
-                                  itemcount = count;
-                                },
                               ),
                               SizedBox(
                                 height: 6,

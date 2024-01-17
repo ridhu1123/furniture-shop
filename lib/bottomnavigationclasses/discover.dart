@@ -8,11 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:irohub_project/Filterscreen.dart';
 import 'package:irohub_project/addtocart.dart';
+import 'package:irohub_project/colections.dart';
 import 'package:irohub_project/showallscreen.dart';
 import 'package:irohub_project/widget/textandshowall.dart';
 
-import '../collection1page.dart';
-
+import '../secondcollection.dart';
 
 class Discover extends StatefulWidget {
   const Discover({super.key});
@@ -28,6 +28,7 @@ class _DiscoverState extends State<Discover> {
     super.initState();
     getdata();
   }
+
   List exploreimage = [
     "https://i.pinimg.com/564x/79/91/58/799158da597625ffa054d48fecdef369.jpg",
     "https://i.pinimg.com/564x/f1/20/ba/f120ba0160225cf18a564a67e3bb22c6.jpg",
@@ -40,54 +41,22 @@ class _DiscoverState extends State<Discover> {
     "assets/SOUTHERN LIGHT.jpg",
     "assets/Wood working projects woodworking plans__woodworking plans furniture.jpg"
   ];
-  List carousilimage=[
+  List carousilimage = [
     "assets/__ World Clock _ Elevenpl.jpg",
     "assets/Realistic Vintage School Wall Clock Sketch Freebie.jpg",
     "assets/fashiontoolsandmotorcycles.jpg"
   ];
-
-  List Trendingname = [
-    "Nancy chair",
-    "Sofa chair",
-    "Furinture chair",
-  
-  ];
-  List Trendingprize = [
-    "€29.00",
-    "€39.00",
-    "€49.00",
-
-  ];
-  List Bestsellingname = [
-    "Adrian Pearsall sofa",
-    "Candelaria Contemporary sofa",
-    "Italian Design Three seats sofa",
-  
-  ];
-  var Trending=[];
-  var Bestselling=[];
-  void getdata()async{
-    var storage=FirebaseStorage.instance;
-    var ref=storage.ref().child("homescreenimages/Trending");
-    var imageurl=await ref.listAll();
-    await Future.forEach(imageurl.items, (Reference reference)async {
-      var url= await reference.getDownloadURL();
-      setState(() {
-        Trending.add(url);
-      });
-    } );
-    var ref1=storage.ref().child("homescreenimages/Best selling");
-    var imageurl1=await ref1.listAll();
-
-    await Future.forEach(imageurl1.items, (Reference reference) async{
-      var url1=await reference.getDownloadURL();
-      setState(() {
-        Bestselling.add(url1);
-      });
-    });
+  var trending = [];
+  var bestselling = [];
+  getdata() async {
+    var res = await FirebaseFirestore.instance
+        .collection("discoveritems")
+        .doc("allitems")
+        .get();
+    trending.addAll(res.data()?["trending"]);
+    bestselling.addAll(res.data()?["bestselling"]);
   }
 
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,133 +72,144 @@ class _DiscoverState extends State<Discover> {
         SizedBox(
           height: 10,
         ),
-         CarouselSlider.builder(
-                      itemCount: carousilimage
-                      .length,
-                      itemBuilder: (context, index, realIndex) {
-                        return Container(
-                          margin: EdgeInsets.all(6),
-                          decoration: BoxDecoration(
-                             boxShadow: [
-                                BoxShadow(
-                                    offset: Offset(3, 2),
-                                    blurRadius:4,
-                                    color: Color.fromARGB(255, 119, 117, 117))
-                              ],
-                            borderRadius: BorderRadius.circular(8.0),
-                            image: DecorationImage(
-                              image: AssetImage(carousilimage[index]),
-                              fit: BoxFit.cover,
-                            ),
+        CarouselSlider.builder(
+          itemCount: carousilimage.length,
+          itemBuilder: (context, index, realIndex) {
+            return Container(
+              margin: EdgeInsets.all(6),
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                      offset: Offset(3, 2),
+                      blurRadius: 4,
+                      color: Color.fromARGB(255, 119, 117, 117))
+                ],
+                borderRadius: BorderRadius.circular(8.0),
+                image: DecorationImage(
+                  image: AssetImage(carousilimage[index]),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            );
+          },
+          options: CarouselOptions(
+            height: 180.0,
+            enlargeCenterPage: true,
+            autoPlay: true,
+            aspectRatio: 16 / 9,
+            autoPlayCurve: Curves.fastOutSlowIn,
+            enableInfiniteScroll: true,
+            autoPlayAnimationDuration: Duration(milliseconds: 800),
+            viewportFraction: 0.8,
+          ),
+        ),
+        InkWell(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => Showallscreen(name: "Trending",items: trending,)));
+            },
+            child: Showallbutton(text: "Trending")),
+        FutureBuilder(
+            future: getdata(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                return LimitedBox(
+                  maxHeight: 322,
+                  child: ListView.builder(
+                      itemCount: 3,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              InkWell(
+                                onTap: () {},
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.grey[200],
+                                      borderRadius: BorderRadius.circular(6)),
+                                  width: 90,
+                                  height: 90,
+                                  child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(6),
+                                      child: Image.network(
+                                        trending[index]["image"],
+                                        fit: BoxFit.fill,
+                                      )),
+                                ),
+                              ),
+                              Flexible(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Align(
+                                      alignment: Alignment.topLeft,
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 8, top: 15),
+                                        child: Text(
+                                          trending[index]["name"],
+                                          style: GoogleFonts.robotoSlab(
+                                              fontWeight: FontWeight.w400),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        trending[index]["price"],
+                                        style: GoogleFonts.robotoSlab(
+                                            color: Colors.grey[400]),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                width: 55,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 20),
+                                child: ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => Addtocart1(
+                                                    proName: trending[index],
+                                                  )));
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                        shape: RoundedRectangleBorder(),
+                                        backgroundColor: Colors.black),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          border: Border(
+                                              bottom: BorderSide(
+                                                  color: Colors.black,
+                                                  width: 1.0))),
+                                      child: Text(
+                                        "SHOP NOW",
+                                        style: GoogleFonts.robotoSlab(
+                                          fontSize: 10,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    )),
+                              ),
+                            ],
                           ),
                         );
-                      },
-                      options: CarouselOptions(
-                        height: 180.0,
-                        enlargeCenterPage: true,
-                        autoPlay: true,
-                        aspectRatio: 16 / 9,
-                        autoPlayCurve: Curves.fastOutSlowIn,
-                        enableInfiniteScroll: true,
-                        autoPlayAnimationDuration: Duration(milliseconds: 800),
-                        viewportFraction: 0.8,
-                      ),
-                    ),
-        InkWell(
-          onTap: () {
-              Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            Showallscreen(name:"Trending")));
-          },
-          child: Showallbutton(text: "Trending")),
+                      }),
+                );
+              }
+              return Container(height: 322);
+            }),
         LimitedBox(
-          maxHeight: 322,
-          child: ListView.builder(
-            itemCount: Trending.length,
-            physics: NeverScrollableScrollPhysics(),
-            itemBuilder: (context,index){
-            return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              InkWell(
-                onTap: () {},
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.circular(6)),
-                  width: 90,
-                  height: 90,
-                  child: ClipRRect(
-                       borderRadius: BorderRadius.circular(6),
-                    child: Image.network(Trending[index],fit: BoxFit.fill,)),
-                ),
-              ),
-              Flexible(
-                child: Column(crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Padding(
-                        padding:
-                            const EdgeInsets.only(left: 8, top: 15),
-                        child: Text(
-                          Trendingname[index],
-                          style:
-                              GoogleFonts.robotoSlab(fontWeight: FontWeight.w400),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        Trendingprize[index],
-                        style: GoogleFonts.robotoSlab(color: Colors.grey[400]),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                width: 55,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 20),
-                child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  Addtocart1()));
-                    },
-                    style:
-                        ElevatedButton.styleFrom(shape: RoundedRectangleBorder()
-                        ,backgroundColor: Colors.black),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          border: Border(
-                              bottom:
-                                  BorderSide(color: Colors.black, width: 1.0))),
-                      child: Text(
-                        "SHOP NOW",
-                        style: GoogleFonts.robotoSlab(
-                          fontSize: 10,
-                          color: Colors.white,
-                        ),
-                      ),
-                    )),
-              ),
-            ],
-          ),
-        );
-          }),
-        )
-        
-       , LimitedBox(
           maxHeight: 266,
           child: ListView.builder(
               itemCount: newarrivals.length,
@@ -256,9 +236,13 @@ class _DiscoverState extends State<Discover> {
                               color: Colors.grey[200]),
                           child: Stack(
                             children: [
-                               ClipRRect(
-                                borderRadius:BorderRadius.circular(15) ,
-                                child: Image.asset(newarrivals[index],fit: BoxFit.fill,width: double.infinity,)),
+                              ClipRRect(
+                                  borderRadius: BorderRadius.circular(15),
+                                  child: Image.asset(
+                                    newarrivals[index],
+                                    fit: BoxFit.fill,
+                                    width: double.infinity,
+                                  )),
                               Positioned(
                                   left: 25,
                                   top: 30,
@@ -301,7 +285,8 @@ Winter""",
                                             "SHOP NOW",
                                             style: GoogleFonts.robotoSlab(
                                               fontSize: 10,
-                                              color: const Color.fromARGB(255, 0, 0, 0),
+                                              color: const Color.fromARGB(
+                                                  255, 0, 0, 0),
                                             ),
                                           ),
                                         ),
@@ -325,102 +310,118 @@ Winter""",
           height: 10,
         ),
         InkWell(
-          onTap: () {
+            onTap: () {
               Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            Showallscreen(name: "Best Selling")));
-          },
-          child: Showallbutton(text: "Best Selling")),
-         LimitedBox(
-          maxHeight: 322,
-          child: ListView.builder(
-            itemCount: Bestselling.length,
-            physics: NeverScrollableScrollPhysics(),
-            itemBuilder: (context,index){
-            return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              InkWell(
-                onTap: () {},
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.circular(6)),
-                  width: 90,
-                  height: 90,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(6),
-                    child: Image.network(Bestselling[index],fit: BoxFit.fill,)),
-                ),
-              ),
-              Flexible(
-                child: Column(crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Padding(
-                        padding:
-                            const EdgeInsets.only(left: 8, top: 15),
-                        child: Text(
-                          Bestsellingname[index],
-                          style:
-                              GoogleFonts.robotoSlab(fontWeight: FontWeight.w400),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8),
-                      child: Text(
-                        Trendingprize[index],
-                        style: GoogleFonts.robotoSlab(color: Colors.grey[400]),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                width: 55,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 20),
-                child: Container(
-                  height: 35,
-                  width: 100,
-                  child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    Addtocart1()));
-                      },
-                      style:
-                          ElevatedButton.styleFrom(shape: RoundedRectangleBorder()
-                          ,backgroundColor: Colors.black),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            border: Border(
-                                bottom:
-                                    BorderSide(color: Colors.black, width: 1.0))),
-                        child: Text(
-                          "SHOP NOW",
-                          style: GoogleFonts.robotoSlab(
-                            fontSize: 10,
-                            color: Colors.white,
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          Showallscreen(name: "Best Selling",items: bestselling,)));
+            },
+            child: Showallbutton(text: "Best Selling")),
+        FutureBuilder(
+            future: getdata(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                return LimitedBox(
+                  maxHeight: 322,
+                  child: ListView.builder(
+                      itemCount: 3,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              InkWell(
+                                onTap: () {},
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.grey[200],
+                                      borderRadius: BorderRadius.circular(6)),
+                                  width: 90,
+                                  height: 90,
+                                  child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(6),
+                                      child: Image.network(
+                                        bestselling[index]["image"],
+                                        fit: BoxFit.fill,
+                                      )),
+                                ),
+                              ),
+                              Flexible(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Align(
+                                      alignment: Alignment.topLeft,
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 8, top: 15),
+                                        child: Text(
+                                          bestselling[index]["name"],
+                                          style: GoogleFonts.robotoSlab(
+                                              fontWeight: FontWeight.w400),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 8),
+                                      child: Text(
+                                        bestselling[index]["price"],
+                                        style: GoogleFonts.robotoSlab(
+                                            color: Colors.grey[400]),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                width: 55,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 20),
+                                child: Container(
+                                  height: 35,
+                                  width: 100,
+                                  child: ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    Addtocart1(
+                                                      proName:
+                                                          bestselling[index],
+                                                    )));
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                          shape: RoundedRectangleBorder(),
+                                          backgroundColor: Colors.black),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            border: Border(
+                                                bottom: BorderSide(
+                                                    color: Colors.black,
+                                                    width: 1.0))),
+                                        child: Text(
+                                          "SHOP NOW",
+                                          style: GoogleFonts.robotoSlab(
+                                            fontSize: 10,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      )),
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                      )),
-                ),
-              ),
-            ],
-          ),
-        );
-          }),
-        ),
+                        );
+                      }),
+                );
+              }
+              return Container(height: 322);
+            }),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -442,7 +443,10 @@ Winter""",
                       color: Colors.grey[200]),
                   child: Stack(
                     children: [
-                      Image.asset("assets/zyro-images1.png",width: 200,),
+                      Image.asset(
+                        "assets/zyro-images1.png",
+                        width: 200,
+                      ),
                       Positioned(
                           right: 25,
                           top: 30,
@@ -469,10 +473,7 @@ Winter""",
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          Secondcollectionpage(
-                                          
-                                          )));
+                                      builder: (context) => Collections()));
                             },
                             child: Row(
                               children: [

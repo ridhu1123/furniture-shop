@@ -1,7 +1,5 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:irohub_project/Sofa.dart';
@@ -19,58 +17,23 @@ class Explorescreen extends StatefulWidget {
 
 class _ExplorescreenState extends State<Explorescreen> {
   Map<String, List<String>> folderImageUrls = {};
-  List exploreimage = [
-    "https://i.pinimg.com/564x/52/9a/86/529a86b9e08ea448582b0be8ecdf2890.jpg",
-    "https://i.pinimg.com/564x/2f/92/4b/2f924b5f0c9718be6cd22a5d6b1d145b.jpg",
-    "https://i.pinimg.com/564x/73/2c/b5/732cb5ba6d7d18170f0dbfcc24cfc6b1.jpg",
-    "https://i.pinimg.com/564x/47/68/5c/47685c3c334ed95b0f3091f0471ccb60.jpg"
-  ];
-  List explorename = ["Sofa", "Lamps", "Chair", "Clock"];
-  List exploreitems = ["6", "6", "6", "6"];
 
-  List Bestsellersname = [
-    "Chinese chair",
-    "Bret baguette",
-    "State of the Art Light",
-    "lamp-thai-style",
-    "Contemporary chair",
-    "Black simple chair",
-  ];
-  List Bestsellersprise = [
-    "€29.00",
-    "€39.00",
-    "€49.00",
-    "€29.00",
-    "€19.00",
-    "€29.00",
-  ];
-  var Bestsellers = [];
-  void getdata() async {
-    var storage = FirebaseStorage.instance;
-    var ref = storage.ref().child("homescreenimages/Best sellers");
-    var imageurl = await ref.listAll();
-    await Future.forEach(imageurl.items, (Reference reference) async {
-      var url = await reference.getDownloadURL();
-      setState(() {
-        Bestsellers.add(url);
-        //
-      });
-    });
-  }
 
-  var items = [];
+  var item = [];
+  var bestsellers = [];
   getcategories() async {
-    items.clear();
+    item.clear();
 
     var res = await FirebaseFirestore.instance
         .collection("products")
         .doc("categories")
         .get();
 
-    items.addAll(res.data()?["items"]);
-    // print("sssssssssss $items");
+    item.addAll(res.data()?["exploreitems"]);
+    bestsellers.addAll(res.data()?["bestsellers"]);
+    print("sssssssssss $item");
     setState(() {});
-    return items;
+    return item;
     // var res1 = await FirebaseFirestore.instance
     //     .collection("products")
     //     .doc("categories")
@@ -83,7 +46,7 @@ class _ExplorescreenState extends State<Explorescreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    getdata();
+
     getcategories();
   }
 
@@ -107,11 +70,11 @@ class _ExplorescreenState extends State<Explorescreen> {
             LimitedBox(
               maxHeight: 225,
               child: ListView.builder(
-                  itemCount: items.length,
+                  itemCount: item.length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
                     print(index);
-                    print(items[index]);
+                    print(item[index]);
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
@@ -120,12 +83,12 @@ class _ExplorescreenState extends State<Explorescreen> {
                           children: [
                             InkWell(
                               onTap: () {
-                                print("222222222${items[index]}");
+                                print("222222222${item[index]}");
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => Sofascreen(
-                                            exploreimage: items[index]
+                                            exploreimage: item[index]
                                                 ["product"])));
                               },
                               child: Container(
@@ -141,7 +104,7 @@ class _ExplorescreenState extends State<Explorescreen> {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(6),
                                   child: Image.network(
-                                    items[index]["image"],
+                                    item[index]["image"],
                                     height: 158,
                                     width: double.infinity,
                                     fit: BoxFit.fill,
@@ -155,7 +118,7 @@ class _ExplorescreenState extends State<Explorescreen> {
                                   padding:
                                       const EdgeInsets.only(top: 8, left: 8),
                                   child: Text(
-                                    items[index]["name"],
+                                    item[index]["name"],
                                     style: GoogleFonts.robotoSlab(),
                                   ),
                                 )),
@@ -164,7 +127,7 @@ class _ExplorescreenState extends State<Explorescreen> {
                                 child: Padding(
                                   padding: const EdgeInsets.only(left: 8),
                                   child: Text(
-                                    items[index]["items"],
+                                    item[index]["item"],
                                     style: GoogleFonts.robotoSlab(
                                         color: Colors.grey[400]),
                                   ),
@@ -180,15 +143,17 @@ class _ExplorescreenState extends State<Explorescreen> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) =>
-                              Showallscreen(name: "Best sellers")));
+                          builder: (context) => Showallscreen(
+                                name: "Best sellers",
+                                items: bestsellers,
+                              )));
                 },
                 child: Showallbutton(text: "Best sellers")),
             Container(
               height: 580,
               child: GridView.builder(
                 // physics: NeverScrollableScrollPhysics(),
-                itemCount: Bestsellers.length,
+                itemCount: bestsellers.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     mainAxisSpacing: 4, crossAxisCount: 2, mainAxisExtent: 250),
                 itemBuilder: (context, index) {
@@ -202,7 +167,9 @@ class _ExplorescreenState extends State<Explorescreen> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => Addtocart1()));
+                                      builder: (context) => Addtocart1(
+                                            proName: bestsellers[index],
+                                          )));
                             },
                             child: Container(
                                 decoration: BoxDecoration(
@@ -213,20 +180,20 @@ class _ExplorescreenState extends State<Explorescreen> {
                                 child: ClipRRect(
                                     borderRadius: BorderRadius.circular(6),
                                     child: Image.network(
-                                      Bestsellers[index],
+                                      bestsellers[index]["image"],
                                       fit: BoxFit.fill,
                                     ))),
                           ),
                           Align(
                               alignment: Alignment.topLeft,
                               child: Text(
-                                Bestsellersname[index],
+                                bestsellers[index]["name"],
                                 style: GoogleFonts.robotoSlab(),
                               )),
                           Align(
                               alignment: Alignment.topLeft,
                               child: Text(
-                                Bestsellersprise[index],
+                                bestsellers[index]["price"],
                                 style: GoogleFonts.robotoSlab(
                                     color: Colors.grey[400]),
                               ))
@@ -240,8 +207,4 @@ class _ExplorescreenState extends State<Explorescreen> {
       ),
     );
   }
-
-
-
-  
 }

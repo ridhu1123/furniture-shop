@@ -1,8 +1,15 @@
+import 'dart:ffi';
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:irohub_project/collection1page.dart';
+import 'package:irohub_project/secondcollection.dart';
+import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
 
 class Collections extends StatefulWidget {
   const Collections({super.key});
@@ -12,46 +19,96 @@ class Collections extends StatefulWidget {
 }
 
 class _CollectionsState extends State<Collections> {
-   @override
+  @override
   void initState() {
     // TODO: implement initState
-    
-     adduser();
-         users=FirebaseFirestore.instance.collection("user");
-    print("aaaaaaaaaaaaaaaaaaaaaa ${users}");
-  }
-  CollectionReference users=FirebaseFirestore.instance.collection("user");
-  List images1 = [
-    "assets/[removal.ai]_5203868e-b78f-4659-a105-c2647c1cc614-7043761_861-1.png",
-    "assets/[removal.ai]_7b6353a1-14a6-4138-98bf-b2e9552230d1-primitive--simple--dolmena-chair-by-russian-manufacturer-polli-_-oen-1.png",
-    "assets/[removal.ai]_5ca82d1a-9eb1-479f-a6e8-8fd2665afd0c-7043766_866.png"
-  ];
 
-  List images = [
-    "assets/[removal.ai]_a0492e82-9141-4c26-91c0-f1cc881945f3-light-lamp1.png",
-    "assets/zyro-image (5).png",
-    "assets/[removal.ai]_33655040-e27e-4330-aa79-6c6eb56b0649-04d5a5dc11dea0cedb32dcee45b7a884.png"
-  ];
-  List shortname = ["Black friday", "New Arrivals", "Cyber Monday"];
-  List names = [
-    """New Arrivals
-Winder""",
-    """Big Sale
-50% Off""",
-    """Sale Up To 
-70% Off"""
-  ];
-  Future<void> adduser()async{
-  await users.add({"title":names,"subtitile":shortname,"image1":images1});
+    getdatafromthirdcollection();
   }
-  late CollectionReference users1;
-Future<List<QueryDocumentSnapshot>> fetchdata()async{
-  QuerySnapshot querySnapshot=await users.get();
-  return querySnapshot.docs;
-}
- 
+
+  var bigsale = [];
+  getdatafromthirdcollection() async {
+    var res = await FirebaseFirestore.instance
+        .collection("collections")
+        .doc("thirdcollections")
+        .get();
+    bigsale.addAll(res.data()?["Bigsale"]);
+    print("hhhhhhhhhhhhhh ${res.data()}");
+    print("3333333333333333 ${bigsale}");
+  }
+  // Future<void> uploadImage(String imageName) async {
+  //   final Directory tempDir = await getTemporaryDirectory();
+  //   final File file = await File('${tempDir.path}/$imageName').create();
+
+  //   await file.writeAsBytes(
+  //       (await rootBundle.load('assets/$imageName')).buffer.asUint8List());
+
+  //   try {
+  //     await FirebaseStorage.instance
+  //         .ref('collection1 images/$imageName')
+  //         .putFile(file);
+  //   } on FirebaseException catch (e) {
+  //     // Handle any errors
+  //     print(e);
+  //   }
+  // }
+  // Future<void> uploadtofirestore() async {
+  //   await FirebaseFirestore.instance
+  //       .collection("collections")
+  //       .doc("allcollections")
+  //       .set({
+  //     "items": [
+  //       {
+  //         "image": images[0],
+  //         "shortname": shortname[0],
+  //         "names": names[0],
+  //       },
+  //       {
+  //         "image": images[1],
+  //         "shortname": shortname[1],
+  //         "names": names[1],
+  //       },
+  //       {
+  //         "image": images[2],
+  //         "shortname": shortname[2],
+  //         "names": names[2],
+  //       },
+  //     ],
+  //     "nextitems": [
+  //       {
+  //         "image": images1[0],
+  //         "shortname": shortname[0],
+  //         "names": names[0],
+  //       },
+  //       {
+  //         "image": images1[1],
+  //         "shortname": shortname[1],
+  //         "names": names[1],
+  //       },
+  //       {
+  //         "image": images1[2],
+  //         "shortname": shortname[2],
+  //         "names": names[2],
+  //       },
+  //     ]
+  //   });
+  // }
+  var collection = [];
+  var collection1 = [];
+  getdatasfromfirestore() async {
+    var res = await FirebaseFirestore.instance
+        .collection("collections")
+        .doc("allcollections")
+        .get();
+    collection.addAll(res.data()?["items"]);
+    collection1.addAll(res.data()?["nextitems"]);
+  }
+
   @override
   Widget build(BuildContext context) {
+    // for (var image in images1) {
+    //   uploadImage(basename(image));
+    // }
     return Scaffold(
       body: ListView(
         children: [
@@ -90,105 +147,117 @@ Future<List<QueryDocumentSnapshot>> fetchdata()async{
             padding: const EdgeInsets.all(8.0),
             child: Divider(),
           ),
-          LimitedBox(
-            maxHeight: 630,
-            child: ListView.builder(
-              itemCount: 3,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                            offset: Offset(4, 6),
-                            blurRadius: 3,
-                            color: Color.fromARGB(255, 213, 211, 211))
-                      ],
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.grey[200],
-                    ),
-                    height: 200,
-                    child: Stack(
-                      children: [
-                        Align(
-                            alignment: Alignment.topRight,
-                            child: Image.asset(
-                              images[index],
-                            )),
-                        Positioned(
-                            top: 25,
-                            left: 10,
-                            child: Text(
-                              shortname[index],
-                              style: GoogleFonts.robotoSlab(
-                                  color: Colors.grey[400]),
-                            )),
-                        Positioned(
-                            top: 45,
-                            left: 10,
-                            child: Text(
-                              names[index],
-                              style: GoogleFonts.robotoSlab(
-                                fontSize: 25,
-                              ),
-                            )),
-                        Positioned(
-                          bottom: 30,
-                          left: 25,
-                          child: TextButton(
-                              onPressed: () {
-                               
-  //                              if (FirebaseAuth.instance.currentUser != null) {
-  // // User is signed in, proceed with Firestore write operation
-
-  //                          await 
-  //                       } else {
-  // // User is not signed in, handle accordingly (e.g., prompt user to sign in)
-  //                      print("User is not signed in");
-  //                     }
-                               
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            Secondcollectionpage.name(
-                                              title: names[index],
-                                              subtitle: shortname[index],
-                                              images1: images1[index],
-                                            )
-                                            ));
-                              },
-                              child: Row(
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        border: Border(
-                                            bottom: BorderSide(
-                                                color: Colors.black,
-                                                width: 1.0))),
+          FutureBuilder(
+              future: getdatasfromfirestore(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  return LimitedBox(
+                    maxHeight: 630,
+                    child: ListView.builder(
+                      itemCount: 3,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                    offset: Offset(4, 6),
+                                    blurRadius: 3,
+                                    color: Color.fromARGB(255, 213, 211, 211))
+                              ],
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.grey[200],
+                            ),
+                            height: 200,
+                            child: Stack(
+                              children: [
+                                Align(
+                                    alignment: Alignment.topRight,
+                                    child: Image.asset(
+                                      collection[index]["image"],
+                                    )),
+                                Positioned(
+                                    top: 25,
+                                    left: 10,
                                     child: Text(
-                                      "SHOP NOW",
+                                      collection[index]["shortname"],
                                       style: GoogleFonts.robotoSlab(
-                                        fontSize: 10,
-                                        color: Colors.black,
+                                          color: Colors.grey[400]),
+                                    )),
+                                Positioned(
+                                    top: 45,
+                                    left: 10,
+                                    child: Text(
+                                      collection[index]["names"],
+                                      style: GoogleFonts.robotoSlab(
+                                        fontSize: 25,
                                       ),
-                                    ),
-                                  ),
-                                  Icon(
-                                    Icons.arrow_right,
-                                    color: Colors.black,
-                                  )
-                                ],
-                              )),
-                        )
-                      ],
+                                    )),
+                                Positioned(
+                                  bottom: 30,
+                                  left: 25,
+                                  child: TextButton(
+                                      onPressed: () {
+                                        //                              if (FirebaseAuth.instance.currentUser != null) {
+                                        // // User is signed in, proceed with Firestore write operation
+
+                                        //                          await
+                                        //                       } else {
+                                        // // User is not signed in, handle accordingly (e.g., prompt user to sign in)
+                                        //                      print("User is not signed in");
+                                        //                     }
+                                        print(
+                                            "coleeeeeeeeeeeeeeeeee ${collection1[index]}");
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    Secondcollectionpage(
+                                                      collection2:
+                                                          bigsale[index],
+                                                      collection1:
+                                                          collection1[index],
+                                                    )));
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                            decoration: BoxDecoration(
+                                                border: Border(
+                                                    bottom: BorderSide(
+                                                        color: Colors.black,
+                                                        width: 1.0))),
+                                            child: Text(
+                                              "SHOP NOW",
+                                              style: GoogleFonts.robotoSlab(
+                                                fontSize: 10,
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                          ),
+                                          Icon(
+                                            Icons.arrow_right,
+                                            color: Colors.black,
+                                          )
+                                        ],
+                                      )),
+                                )
+                              ],
+                            ),
+                          ),
+                        );
+                      },
                     ),
+                  );
+                }
+                return Center(
+                  heightFactor: 16,
+                  child: CircularProgressIndicator(
+                    color: Colors.black,
                   ),
                 );
-              },
-            ),
-          )
+              })
         ],
       ),
     );

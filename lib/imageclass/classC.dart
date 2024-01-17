@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:irohub_project/colections.dart';
-import 'package:irohub_project/collection1page.dart';
-import 'package:irohub_project/sale70%25screen.dart';
 
 class CLassC extends StatelessWidget {
   const CLassC({
@@ -55,9 +53,11 @@ class CLassC extends StatelessWidget {
                             MaterialPageRoute(
                                 builder: (context) => Collections()));
                       },
-                      style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(),
+                      style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(),
                           backgroundColor: Colors.black),
-                      child: Text("ShopNow",maxLines: 1,
+                      child: Text("ShopNow",
+                          maxLines: 1,
                           style: GoogleFonts.aBeeZee(color: Colors.white)))))
         ],
       ),

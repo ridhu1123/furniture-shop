@@ -1,12 +1,11 @@
-// import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:irohub_project/forgetpassword.dart';
 import 'package:irohub_project/homescreen.dart';
-// import 'package:irohub_project/homescreen.dart';
+
 import 'package:irohub_project/signupscreen.dart';
-// import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-// import 'package:motion_toast/motion_toast.dart';
 
 class Loginscreen extends StatefulWidget {
   const Loginscreen({super.key});
@@ -19,6 +18,7 @@ TextEditingController _emailcontroller = TextEditingController();
 TextEditingController _passwordcontroller = TextEditingController();
 
 class _LoginscreenState extends State<Loginscreen> {
+  final FirebaseAuth auth=FirebaseAuth.instance;
   // Future<UserCredential> facebooksignin() async {
   //   final LoginResult loginResult = await FacebookAuth.instance.login();
   //   final OAuthCredential facebookAuthCredential =
@@ -88,7 +88,9 @@ class _LoginscreenState extends State<Loginscreen> {
                   ),
                 );
               },
-              style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(),backgroundColor: Colors.black),
+              style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(),
+                  backgroundColor: Colors.black),
               child: Text(
                 "LOGIN",
                 style: GoogleFonts.aBeeZee(color: Colors.white),
@@ -123,17 +125,20 @@ class _LoginscreenState extends State<Loginscreen> {
                 // } catch (e) {
                 //   MotionToast.error(description: Text("error")).show(context);
                 // }
+                // facebooksignin();
               },
-              style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(),backgroundColor: Colors.white),
+              style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(),
+                  backgroundColor: Colors.white),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    "assets/icons8-facebook-48.png",
-                    height: 20,
+                    "assets/icons8-google-48.png",
+                    height: 17,
                   ),
                   Text(
-                    "LOGIN WITH FACEBOOK",
+                    " LOGIN WITH GOOGLE",
                     style: GoogleFonts.aBeeZee(color: Colors.blue),
                   ),
                 ],

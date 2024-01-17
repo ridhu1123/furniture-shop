@@ -4,7 +4,8 @@ import 'package:irohub_project/Sofa.dart';
 import 'package:irohub_project/categoriessecondscreen.dart';
 
 class categoryscreen extends StatefulWidget {
-  const categoryscreen({super.key});
+  final allitems;
+  const categoryscreen({super.key,required this.allitems});
 
   @override
   State<categoryscreen> createState() => _categoryscreenState();

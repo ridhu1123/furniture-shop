@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:irohub_project/Sofa.dart';
 import 'package:irohub_project/bottomnavigationclasses/discover.dart';
 import 'package:irohub_project/bottomnavigationclasses/explore.dart';
 import 'package:irohub_project/bottomnavigationclasses/home.dart';
@@ -9,6 +10,7 @@ import 'package:irohub_project/cartscreen.dart';
 import 'package:irohub_project/colections.dart';
 
 import 'package:irohub_project/profilepage.dart';
+import 'package:irohub_project/showallscreen.dart';
 
 import 'categoryscreen.dart';
 
@@ -37,7 +39,7 @@ class Homescreen extends StatefulWidget {
 
 class _HomescreenState extends State<Homescreen> {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
+  var topdeals = [];
   List<Color> iconcolor = [Colors.white, Colors.black, Colors.black];
 
   var size, height, width;
@@ -66,56 +68,36 @@ class _HomescreenState extends State<Homescreen> {
     });
   }
 
-  getData() async {
+  getitems() async {
     var res = await FirebaseFirestore.instance
-        .collection('products')
-        .doc("6ZWMSD5OYrzLRafbg16q")
-        .collection("Gino safaiojg light")
-        .doc("msO5nJawWFu6BcCpJisV")
+        .collection("homescreenitems")
+        .doc("allitems")
         .get();
-    print(res.data());
+
+    topdeals.addAll(res.data()?["topdeals"]);
   }
 
-  var products = [
-    {
-      "proName": "chair",
-      "image":
-          "https://i.pinimg.com/564x/6a/b7/0b/6ab70b6a8be0d0ce83d040d60fb31d70.jpg",
-      "price": "90"
-    },
-    {
-      "proName": "bench",
-      "image":
-          "https://i.pinimg.com/564x/a0/62/7f/a0627fd70e1dbb483eeb266e5d64e705.jpg",
-      "price": "900"
-    },
-    {
-      "proName": "tv",
-      "image":
-          "https://i.pinimg.com/564x/5a/d4/51/5ad451c14ea927c13e7ac1f818436bbd.jpg",
-      "price": "34"
-    },
-    {
-      "proName": "washing machine",
-      "image":
-          "https://i.pinimg.com/564x/36/67/af/3667af9a3914ce53010ee274f7e3ba31.jpg",
-      "price": "34"
-    }
-  ];
+  var item = [];
+  getcategories() async {
+    var res = await FirebaseFirestore.instance
+        .collection("products")
+        .doc("categories")
+        .get();
 
-  postPro() async {
-    for (var i in products) {
-      print(i);
-      await FirebaseFirestore.instance
-          .collection("products")
-          .doc("new")
-          .collection(i["proName"] ?? "TEST")
-          .doc("details")
-          .set(i);
-    }
+    item.addAll(res.data()?["exploreitems"]);
+    print("sssssssssss $item");
+    setState(() {});
+    return item;
+    // var res1 = await FirebaseFirestore.instance
+    //     .collection("products")
+    //     .doc("categories")
+    //     .collection(items.toString())
+    //     .get();
+    // print(res1.docs);
   }
 
   List screens = [Home(), Explorescreen(), Discover()];
+
   @override
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
@@ -166,7 +148,9 @@ class _HomescreenState extends State<Homescreen> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                   icon: Row(
                     children: [
                       Icon(Icons.home),
@@ -202,15 +186,19 @@ class _HomescreenState extends State<Homescreen> {
                   ),
                 ),
               ),
-              ElevatedButton(
-                  onPressed: () {
-                    postPro();
-                  },
-                  child: Text('clickccc')),
+
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Showallscreen(
+                                  name: "Top Trends",
+                                  items: topdeals,
+                                )));
+                  },
                   icon: Row(
                     children: [
                       Icon(Icons.deblur),
@@ -225,29 +213,32 @@ class _HomescreenState extends State<Homescreen> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => categoryscreen()));
-                  },
-                  icon: Row(
-                    children: [
-                      Icon(Icons.category_rounded),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        "Categories",
-                        style: GoogleFonts.robotoSlab(),
-                      )
-                    ],
-                  ),
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.all(8.0),
+              //   child: IconButton(
+              //     onPressed: () {
+              //       print("00000000000000000 ${item}");
+              //       Navigator.push(
+              //           context,
+              //           MaterialPageRoute(
+              //               builder: (context) => Sofascreen(
+              //                     exploreimage: item,
+              //                   )));
+              //     },
+              //     icon: Row(
+              //       children: [
+              //         Icon(Icons.category_rounded),
+              //         SizedBox(
+              //           width: 10,
+              //         ),
+              //         Text(
+              //           "Categories",
+              //           style: GoogleFonts.robotoSlab(),
+              //         )
+              //       ],
+              //     ),
+              //   ),
+              // ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: IconButton(
@@ -300,6 +291,7 @@ class _HomescreenState extends State<Homescreen> {
               leading: IconButton(
                 onPressed: () {
                   _openDrawer();
+                  getitems();
                 },
                 icon: Icon(Icons.menu, color: Colors.black),
               ),
@@ -341,7 +333,7 @@ class _HomescreenState extends State<Homescreen> {
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
           BottomNavigationBarItem(icon: Icon(Icons.explore), label: ""),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "")
+          BottomNavigationBarItem(icon: Icon(Icons.public_rounded), label: "")
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.black,

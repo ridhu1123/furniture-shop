@@ -1,6 +1,9 @@
 // import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:irohub_project/authentiation/signup/signupcontroller.dart';
+import 'package:irohub_project/utils/validators/validation.dart';
 
 // import 'loginscreen.dart';
 
@@ -11,10 +14,7 @@ class Signupscreen extends StatefulWidget {
   State<Signupscreen> createState() => _SignupscreenState();
 }
 
-TextEditingController _fullnamecontroller = TextEditingController();
-TextEditingController _emailcontroller = TextEditingController();
-TextEditingController  _passwordcontroller= TextEditingController();
-TextEditingController _phonecontroller = TextEditingController();
+
 
 
 
@@ -27,8 +27,10 @@ TextEditingController _phonecontroller = TextEditingController();
 class _SignupscreenState extends State<Signupscreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: ListView(children: [
+    final controller=Get.put(SignupController());
+    return Form(
+      key: controller.signupFormKey,
+        child: ListView(children: [
       Align(
         alignment: Alignment.topLeft,
         child: IconButton(
@@ -48,10 +50,11 @@ class _SignupscreenState extends State<Signupscreen> {
       Padding(
         padding: const EdgeInsets.only(left: 25, right: 25, bottom: 13),
         child: TextFormField(
-          controller: _fullnamecontroller,
+          validator: (value) => TValidator.validateEmptyText("Name",value),
+          controller: controller.namecontroller,
           decoration: InputDecoration(
             border: UnderlineInputBorder(),
-            labelText: "Fullname",
+            labelText: "Name",
             labelStyle:
                 TextStyle(fontWeight: FontWeight.w400, color: Colors.grey[400]),
           ),
@@ -60,7 +63,8 @@ class _SignupscreenState extends State<Signupscreen> {
       Padding(
         padding: const EdgeInsets.only(left: 25, right: 25, bottom: 13),
         child: TextFormField(
-          controller: _emailcontroller,
+           validator: (value) => TValidator.validateEmptyText("email",value),
+          controller: controller.emailcontroller,
           decoration: InputDecoration(
             border: UnderlineInputBorder(),
             labelText: "email",
@@ -71,20 +75,28 @@ class _SignupscreenState extends State<Signupscreen> {
       ),
       Padding(
         padding: const EdgeInsets.only(left: 25, right: 25, bottom: 13),
-        child: TextFormField(
-          controller: _passwordcontroller,
-          decoration: InputDecoration(
-            border: UnderlineInputBorder(),
-            labelText: "password",
-            labelStyle:
-                TextStyle(fontWeight: FontWeight.w400, color: Colors.grey[400]),
+        child: Obx(
+        () => TextFormField(
+            obscureText: controller.hidePassword.value,
+             validator: (value) => TValidator.validateEmptyText("password",value),
+            controller: controller.passwordcontroller,
+            decoration: InputDecoration(
+              suffixIcon:IconButton(onPressed: ()=>
+                controller.hidePassword.value= !controller.hidePassword.value,
+               icon: Icon(controller.hidePassword.value? Icons.visibility:Icons.visibility_off)) ,
+              border: UnderlineInputBorder(),
+              labelText: "password",
+              labelStyle:
+                  TextStyle(fontWeight: FontWeight.w400, color: Colors.grey[400]),
+            ),
           ),
         ),
       ),
       Padding(
         padding: const EdgeInsets.only(left: 25, right: 25, bottom: 13),
         child: TextFormField(
-          controller: _phonecontroller,
+           validator: (value) => TValidator.validateEmptyText("phonenumber",value),
+          controller: controller.phonenumbercontroller,
           decoration: InputDecoration(
             border: UnderlineInputBorder(),
             labelText: "phonenumber",
@@ -101,6 +113,7 @@ class _SignupscreenState extends State<Signupscreen> {
         padding: const EdgeInsets.all(17.0),
         child: ElevatedButton(
           onPressed: () {
+            controller.Signup();
 // createuser();
             // Navigator.push(
             //   context,

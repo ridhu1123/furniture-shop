@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:irohub_project/Firstscreen.dart';
 
+void main(List<String> args) async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
 
-void main(List<String> args) async{
- WidgetsFlutterBinding.ensureInitialized();
- await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -18,9 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-
       home: Splashscreen(),
-      
       debugShowCheckedModeBanner: false,
     );
   }
@@ -85,5 +83,5 @@ class _SplashscreenState extends State<Splashscreen> {
             ],
           ),
         ));
-   }
+  }
 }

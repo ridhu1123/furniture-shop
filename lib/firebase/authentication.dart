@@ -11,7 +11,17 @@ Future<UserCredential> registerWithEmailAndPassword(String email,String password
   try {
     return await auth.createUserWithEmailAndPassword(email: email, password: password);
   } catch (e) {
-    throw "Somthing went wrong";
+    throw "Somthing went wrong $e";
   }
+  
 }
+// Future<UserCredential> signInWithEmailAndPassword(String email,String password)async{
+//   try {
+//     return await auth.signInWithCredential(credential)
+//   } catch (e) {
+//     throw "Somthing went wrong $e";
+//   }
+  
+// }
+
 }

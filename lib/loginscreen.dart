@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:irohub_project/forgetpassword.dart';
 import 'package:irohub_project/homescreen.dart';
@@ -18,7 +19,8 @@ TextEditingController _emailcontroller = TextEditingController();
 TextEditingController _passwordcontroller = TextEditingController();
 
 class _LoginscreenState extends State<Loginscreen> {
-  final FirebaseAuth auth=FirebaseAuth.instance;
+  static Loginscreen get instance => Get.find();
+  final FirebaseAuth auth = FirebaseAuth.instance;
   // Future<UserCredential> facebooksignin() async {
   //   final LoginResult loginResult = await FacebookAuth.instance.login();
   //   final OAuthCredential facebookAuthCredential =

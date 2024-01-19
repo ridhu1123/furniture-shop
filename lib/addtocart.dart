@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:five_pointed_star/five_pointed_star.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -142,13 +141,13 @@ class _Addtocart1State extends State<Addtocart1> {
                           )
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
-                      Divider(
+                      const Divider(
                         thickness: 1,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Text(
@@ -164,7 +163,7 @@ class _Addtocart1State extends State<Addtocart1> {
                             itemCount: colors.length,
                             itemBuilder: (context, index) {
                               return Padding(
-                                padding: EdgeInsets.all(8),
+                                padding:const EdgeInsets.all(8),
                                 child: InkWell(
                                   onTap: () {
                                     setState(() {
@@ -179,10 +178,10 @@ class _Addtocart1State extends State<Addtocart1> {
                               );
                             }),
                       ),
-                      Divider(
+                    const  Divider(
                         thickness: 1,
                       ),
-                      SizedBox(
+                    const  SizedBox(
                         height: 5,
                       ),
                       Row(
@@ -203,7 +202,7 @@ class _Addtocart1State extends State<Addtocart1> {
                                     "Show all",
                                     style: GoogleFonts.robotoSlab(fontSize: 12),
                                   ),
-                                  Icon(Icons.arrow_right)
+                                const  Icon(Icons.arrow_right)
                                 ],
                               ))
                         ],

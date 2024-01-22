@@ -2,17 +2,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
-import 'package:irohub_project/Sofa.dart';
+import 'package:irohub_project/screens/Sofa.dart';
 import 'package:irohub_project/bottomnavigationclasses/discover.dart';
 import 'package:irohub_project/bottomnavigationclasses/explore.dart';
 import 'package:irohub_project/bottomnavigationclasses/home.dart';
-import 'package:irohub_project/cartscreen.dart';
-import 'package:irohub_project/colections.dart';
+import 'package:irohub_project/screens/cartscreen.dart';
+import 'package:irohub_project/screens/colections.dart';
 
-import 'package:irohub_project/profilepage.dart';
-import 'package:irohub_project/showallscreen.dart';
+import 'package:irohub_project/screens/profilepage.dart';
+import 'package:irohub_project/screens/showallscreen.dart';
 
-import 'categoryscreen.dart';
+
 
 void main(List<String> args) {
   runApp(MyApp());

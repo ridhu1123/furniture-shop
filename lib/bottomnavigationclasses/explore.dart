@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:irohub_project/Sofa.dart';
-import 'package:irohub_project/addtocart.dart';
-import 'package:irohub_project/showallscreen.dart';
+import 'package:irohub_project/screens/Sofa.dart';
+import 'package:irohub_project/screens/addtocart.dart';
+import 'package:irohub_project/screens/showallscreen.dart';
 
 import 'package:irohub_project/widget/textandshowall.dart';
 

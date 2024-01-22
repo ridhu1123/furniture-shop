@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:irohub_project/colections.dart';
-import 'package:irohub_project/thirdcollection.dart';
+import 'package:irohub_project/screens/colections.dart';
+import 'package:irohub_project/screens/thirdcollection.dart';
 
 class Secondcollectionpage extends StatefulWidget {
   final collection1;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:irohub_project/checkoutpage.dart';
-import 'package:irohub_project/homescreen.dart';
+import 'package:irohub_project/screens/checkoutpage.dart';
+import 'package:irohub_project/screens/homescreen.dart';
 
 class cartscreen extends StatefulWidget {
   final allitems;

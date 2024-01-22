@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:irohub_project/thankupage.dart';
+import 'package:irohub_project/screens/thankupage.dart';
 
 class Checkoutscreen extends StatefulWidget {
   const Checkoutscreen({super.key});

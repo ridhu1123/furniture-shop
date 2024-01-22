@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:irohub_project/colections.dart';
+import 'package:irohub_project/screens/colections.dart';
 
 class CLassC extends StatelessWidget {
   const CLassC({

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:irohub_project/loginscreen.dart';
-import 'package:irohub_project/signupscreen.dart';
+import 'package:irohub_project/screens/loginscreen.dart';
+import 'package:irohub_project/screens/signupscreen.dart';
 
 class Firstscreen extends StatefulWidget {
   const Firstscreen({super.key});

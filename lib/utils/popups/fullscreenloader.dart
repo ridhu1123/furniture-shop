@@ -4,7 +4,7 @@ import 'package:irohub_project/widget/loaders/animation_loader.dart';
 import 'package:path/path.dart';
 
 class TFullScreenLoader {
-  static void openLoadingDialog(String text, String animation) {
+  static void openLoadingDialog(String animation) {
     showDialog(
       context: Get.overlayContext!,
       builder: (_) => PopScope(
@@ -12,12 +12,13 @@ class TFullScreenLoader {
           child: Container(
             width: double.infinity,
             height: double.infinity,
+            color: Colors.white,
             child: Column(
               children: [
                 SizedBox(
                   height: 250,
                 ),
-                TAnimationLoader(text: text, animation: animation)
+                TAnimationLoader(animation: animation)
               ],
             ),
           )),

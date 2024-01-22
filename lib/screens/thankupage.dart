@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:irohub_project/googlemap.dart';
-import 'package:irohub_project/homescreen.dart';
+import 'package:irohub_project/screens/homescreen.dart';
 
 class Thankyou extends StatelessWidget {
   const Thankyou({super.key});
@@ -15,9 +15,9 @@ class Thankyou extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.network(
-                "https://i.pinimg.com/564x/e0/03/67/e00367c886229da4cbc9b241e9b9b990.jpg",
-                height: 180,
+              Image.asset(
+            "assets/Animation - 1705691768837.json"
+                ,height: MediaQuery.of(context).size.height*0.5,
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),

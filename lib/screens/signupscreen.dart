@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:irohub_project/authentiation/signup/signupcontroller.dart';
-import 'package:irohub_project/loginscreen.dart';
+import 'package:irohub_project/screens/loginscreen.dart';
 import 'package:irohub_project/utils/validators/validation.dart';
 
 // import 'loginscreen.dart';
@@ -123,13 +123,8 @@ class _SignupscreenState extends State<Signupscreen> {
                   padding: const EdgeInsets.all(17.0),
                   child: ElevatedButton(
                     onPressed: () {
-                      if (mounted) {
-                        controller.Signup();
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Loginscreen()));
-                      }
+                      controller.Signup();
+
                       // createuser();
                       // Navigator.push(
                       //   context,

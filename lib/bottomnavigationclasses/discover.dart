@@ -6,13 +6,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:irohub_project/Filterscreen.dart';
-import 'package:irohub_project/addtocart.dart';
-import 'package:irohub_project/colections.dart';
-import 'package:irohub_project/showallscreen.dart';
+import 'package:irohub_project/screens/Filterscreen.dart';
+import 'package:irohub_project/screens/addtocart.dart';
+import 'package:irohub_project/screens/colections.dart';
+import 'package:irohub_project/screens/showallscreen.dart';
 import 'package:irohub_project/widget/textandshowall.dart';
 
-import '../secondcollection.dart';
+import '../screens/secondcollection.dart';
 
 class Discover extends StatefulWidget {
   const Discover({super.key});

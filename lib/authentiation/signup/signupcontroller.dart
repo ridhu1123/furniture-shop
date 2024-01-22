@@ -4,7 +4,7 @@ import 'package:irohub_project/data/user/user_repository.dart';
 import 'package:irohub_project/data/user/usermodel.dart';
 import 'package:irohub_project/firebase/authentication.dart';
 
-import 'package:irohub_project/loginscreen.dart';
+import 'package:irohub_project/screens/loginscreen.dart';
 import 'package:irohub_project/utils/popups/fullscreenloader.dart';
 import 'package:irohub_project/widget/loaders/snakbar.dart';
 
@@ -17,12 +17,19 @@ class SignupController extends GetxController {
   final phonenumbercontroller = TextEditingController();
   GlobalKey<FormState> signupFormKey = GlobalKey<FormState>();
 
+  void clearTextEditingController(){
+    passwordcontroller.clear();
+    namecontroller.clear();
+    emailcontroller.clear();
+    phonenumbercontroller.clear();
+  }
+
   void Signup() async {
     try {
-      // TFullScreenLoader.openLoadingDialog("we are processing your information",
-      //     "assets/Animation - 1705523897423.json");
+      TFullScreenLoader.openLoadingDialog(
+          "assets/Animation - 1705692235217.json");
       if (!signupFormKey.currentState!.validate()) {
-        // TFullScreenLoader.stopLoading();
+        TFullScreenLoader.stopLoading();
         return;
       }
       Get.put(AuthenticationRepository());
@@ -36,12 +43,15 @@ class SignupController extends GetxController {
           phonenumber: phonenumbercontroller.text.trim());
       final userRepository = Get.put(UserRepository());
       await userRepository.saveUserRecord(newuser);
-      // SnackBarLoader.successSnackbar(
-      //     title: "Congratulaton", message: "Your account has been created");
-      
+      SnackBarLoader.successSnackbar(
+          title: "Congratulaton", message: "Your account has been created");
+          clearTextEditingController();
+          Get.off(Loginscreen());
     } catch (e) {
       SnackBarLoader.errorSnackbar(title: "Oh Snap!", message: e.toString());
       print(e);
-    } finally {}
+    } finally {
+      // TFullScreenLoader.stopLoading();
+    }
   }
 }

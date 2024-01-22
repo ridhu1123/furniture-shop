@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:irohub_project/Filterscreen.dart';
+import 'package:irohub_project/screens/Filterscreen.dart';
 
 class Sofascreen extends StatefulWidget {
   final exploreimage;
@@ -15,14 +15,14 @@ class Sofascreen extends StatefulWidget {
 }
 
 class _SofascreenState extends State<Sofascreen> {
-  List Sofanames = [
-    "Mid-Century Sofas",
-    "Chesterfield Sofas",
-    "Loveseat Sofas",
-    "Sleeper Sofas",
-    "Relax Sofas",
-    "Chaise Lounge"
-  ];
+  // List Sofanames = [
+  //   "Mid-Century Sofas",
+  //   "Chesterfield Sofas",
+  //   "Loveseat Sofas",
+  //   "Sleeper Sofas",
+  //   "Relax Sofas",
+  //   "Chaise Lounge"
+  // ];
   List Lampname = [""];
   //   List Lampimages = [
   //   "https://i.pinimg.com/564x/5a/d4/51/5ad451c14ea927c13e7ac1f818436bbd.jpg",

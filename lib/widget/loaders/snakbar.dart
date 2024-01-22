@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SnackBarLoader {
+static hideSnackBar()=>ScaffoldMessenger.of(Get.context!).hideCurrentSnackBar();
+
   static warningSnackbar({required title, message = ""}) {
     Get.snackbar(title, message,
         isDismissible: true,

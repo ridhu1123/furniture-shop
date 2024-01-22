@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:irohub_project/addtocart.dart';
+import 'package:irohub_project/screens/addtocart.dart';
 
 class Showallscreen extends StatefulWidget {
   String name;

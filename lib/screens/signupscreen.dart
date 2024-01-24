@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:irohub_project/authentiation/signup/signupcontroller.dart';
+import 'package:irohub_project/features/authentiation/signup/signupcontroller.dart';
 import 'package:irohub_project/screens/loginscreen.dart';
 import 'package:irohub_project/utils/validators/validation.dart';
 
@@ -153,7 +153,7 @@ class _SignupscreenState extends State<Signupscreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => Signupscreen(),
+                  builder: (context) => Loginscreen(),
                 ),
               );
             },

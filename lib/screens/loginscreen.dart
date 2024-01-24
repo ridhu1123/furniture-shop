@@ -1,16 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:irohub_project/authentiation/login/logincontroller.dart';
-import 'package:irohub_project/authentiation/signup/signupcontroller.dart';
-import 'package:irohub_project/firebase/authentication.dart';
+import 'package:irohub_project/features/authentiation/login/logincontroller.dart';
+import 'package:irohub_project/features/authentiation/usercontroller/usercontroller.dart';
 import 'package:irohub_project/screens/forgetpassword.dart';
-import 'package:irohub_project/screens/homescreen.dart';
-
 import 'package:irohub_project/screens/signupscreen.dart';
 import 'package:irohub_project/utils/validators/validation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Loginscreen extends StatefulWidget {
   const Loginscreen({super.key});
@@ -31,8 +28,8 @@ class _LoginscreenState extends State<Loginscreen> {
 
   @override
   Widget build(BuildContext context) {
-    final controller1 = Get.put(SignupController());
     final controller = Get.put(LoginController());
+    final userController = Get.put(Usercontroller());
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -104,7 +101,11 @@ class _LoginscreenState extends State<Loginscreen> {
                     Padding(
                       padding: const EdgeInsets.all(17.0),
                       child: ElevatedButton(
-                        onPressed: () {
+                        onPressed: () async {
+                          SharedPreferences prefs =
+                              await SharedPreferences.getInstance();
+                          prefs.setString(
+                              "email", controller.emailcontroller.text);
                           controller.signIn();
                         },
                         style: ElevatedButton.styleFrom(
@@ -135,6 +136,10 @@ class _LoginscreenState extends State<Loginscreen> {
                       padding: const EdgeInsets.all(17.0),
                       child: ElevatedButton(
                         onPressed: () async {
+                          SharedPreferences prefs =
+                              await SharedPreferences.getInstance();
+                          prefs.setString("email", controller.text1.toString());
+                          controller.googleSignIn();
                           // try {
                           //   facebooksignin();
                           //   if (context.mounted) {
@@ -169,12 +174,12 @@ class _LoginscreenState extends State<Loginscreen> {
                     TextButton(
                       onPressed: () {
                         // controller1.Signup();
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => Signupscreen(),
-                        //   ),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Signupscreen(),
+                          ),
+                        );
                       },
                       child: Text(
                         "Don't have an account? Sign Up",

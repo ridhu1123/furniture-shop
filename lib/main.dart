@@ -1,33 +1,31 @@
 import 'dart:async';
-
-import 'package:firebase_core/firebase_core.dart'; 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:irohub_project/firebase/authentication.dart';
 import 'package:irohub_project/screens/Firstscreen.dart';
+import 'package:irohub_project/screens/homescreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
   // Get.put(AuthenticationRepository());
+
   await Firebase.initializeApp();
-  await GetStorage.init();
+  // await GetStorage.init();
 
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Get.put(AuthenticationRepository());
     return GetMaterialApp(
       home: Splashscreen(),
       debugShowCheckedModeBanner: false,
       // initialBinding:GenaralBinding() ,
-      // initialRoute: ,
     );
   }
 }
@@ -40,14 +38,24 @@ class Splashscreen extends StatefulWidget {
 }
 
 class _SplashscreenState extends State<Splashscreen> {
+  var finalemial;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer(Duration(seconds: 5), () {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => Firstscreen()));
+    getVaidationData().whenComplete(() async {
+      Timer(Duration(seconds: 2),
+          () => Get.offAll(finalemial == null ? Firstscreen() : Homescreen()));
     });
+  }
+
+  Future getVaidationData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    var obtainemial = prefs.getString("email");
+    setState(() {
+      finalemial = obtainemial;
+    });
+    print(finalemial);
   }
 
   @override

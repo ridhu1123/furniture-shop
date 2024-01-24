@@ -13,4 +13,6 @@ class UserRepository extends GetxController {
       throw "Somthing went wrong $e";
     }
   }
+
+  
 }

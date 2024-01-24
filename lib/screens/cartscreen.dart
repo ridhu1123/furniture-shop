@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:irohub_project/screens/checkoutpage.dart';
 import 'package:irohub_project/screens/homescreen.dart';
+import 'package:lottie/lottie.dart';
 
 class cartscreen extends StatefulWidget {
   final allitems;
@@ -19,10 +20,10 @@ class _cartscreenState extends State<cartscreen> {
           Padding(
             padding: const EdgeInsets.only(top: 30),
             child: Container(
-              child: Image.asset(
-                "assets/[removal.ai]_c877d67d-e347-4ea4-94db-cd0f1f3407c3-shopping-cart-shopping-basket-website-icon-hd-png-download-transparent-png-image-pngitem.png",
-                height: 190,
-                color: Colors.grey[300],
+              child: Lottie.asset(
+                "assets/Animation - 1705691997361.json",
+                height: MediaQuery.of(context).size.height * 0.4,
+                width: MediaQuery.of(context).size.width * 1.3,
               ),
             ),
           ),
@@ -42,29 +43,29 @@ class _cartscreenState extends State<cartscreen> {
           Align(
             alignment: Alignment.center,
             child: Text(
-              "Fortnately, there's an easy solution",
+              """Fortnately, there's an easy solution GO...""",
               style: GoogleFonts.robotoSlab(fontWeight: FontWeight.w500),
             ),
           ),
-          SizedBox(height: 20),
-          Align(
-            alignment: Alignment.center,
-            child: Container(
-              height: 40,
-              width: 150,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Homescreen()));
-                },
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
-                child: Text(
-                  "Go Shopping",
-                  style: GoogleFonts.robotoSlab(color: Colors.white),
-                ),
-              ),
-            ),
-          ),
+          // SizedBox(height: 20),
+          // Align(
+          //   alignment: Alignment.center,
+          //   child: Container(
+          //     height: 40,
+          //     width: 150,
+          //     child: ElevatedButton(
+          //       onPressed: () {
+          //         Navigator.push(context,
+          //             MaterialPageRoute(builder: (context) => Homescreen()));
+          //       },
+          //       style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
+          //       child: Text(
+          //         "Go Shopping",
+          //         style: GoogleFonts.robotoSlab(color: Colors.white),
+          //       ),
+          //     ),
+          //   ),
+          // ),
         ],
       );
     } else {
@@ -79,7 +80,7 @@ class _cartscreenState extends State<cartscreen> {
                         thickness: 0.4,
                       ),
                     ),
-                itemCount: widget.allitems.length,
+                itemCount: cartitems.length,
                 itemBuilder: (context, index) {
                   return Dismissible(
                     key: UniqueKey(),
@@ -107,10 +108,10 @@ class _cartscreenState extends State<cartscreen> {
                             height: 110,
                             child: Stack(
                               children: [
-                                Image.network(
-                                  widget.allitems["image"],
-                                  fit: BoxFit.fill,
-                                ),
+                                // Image.network(
+                                //   widget.allitems["image"],
+                                //   fit: BoxFit.fill,
+                                // ),
                                 Positioned(
                                   left: 10,
                                   top: 5,
@@ -135,7 +136,8 @@ class _cartscreenState extends State<cartscreen> {
                               padding:
                                   const EdgeInsets.only(left: 8, bottom: 10),
                               child: Text(
-                                widget.allitems["name"],
+                                "",
+                                // widget.allitems["name"],
                                 style: GoogleFonts.robotoSlab(
                                     fontWeight: FontWeight.w500),
                               ),
@@ -143,7 +145,8 @@ class _cartscreenState extends State<cartscreen> {
                             Padding(
                               padding: const EdgeInsets.only(left: 8, top: 3),
                               child: Text(
-                                widget.allitems["price"],
+                                "",
+                                // widget.allitems["price"],
                                 style:
                                     GoogleFonts.robotoSlab(color: Colors.black),
                               ),
@@ -275,24 +278,32 @@ class _cartscreenState extends State<cartscreen> {
     }
   }
 
-  List cartitems = ["1", "4", "5", "8"];
+  List cartitems = ["1"];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: InkWell(
         onTap: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => Checkoutscreen()));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      cartitems.isEmpty ? Homescreen() : Checkoutscreen()));
         },
         child: Container(
           color: Colors.black,
           height: 70,
           width: double.infinity,
           child: Center(
-            child: Text(
-              "CHECKOUT",
-              style: GoogleFonts.robotoSlab(color: Colors.white),
-            ),
+            child: cartitems.isEmpty
+                ? Text(
+                    "GO SHOPPING",
+                    style: GoogleFonts.robotoSlab(color: Colors.white),
+                  )
+                : Text(
+                    "CHECKOUT",
+                    style: GoogleFonts.robotoSlab(color: Colors.white),
+                  ),
           ),
         ),
       ),

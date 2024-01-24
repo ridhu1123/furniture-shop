@@ -4,22 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Addtocart1 extends StatefulWidget {
-  final newarrivals;
   final proName;
-  final trending;
-  final toptrends;
-  final topdeals;
-  final bestselling;
-  final bestsellers;
-  const Addtocart1(
-      {super.key,
-      this.newarrivals,
-      this.trending,
-      this.proName,
-      this.toptrends,
-      this.topdeals,
-      this.bestselling,
-      this.bestsellers});
+  const Addtocart1({
+    super.key,
+    this.proName,
+  });
 
   @override
   State<Addtocart1> createState() => _Addtocart1State();
@@ -46,21 +35,21 @@ class _Addtocart1State extends State<Addtocart1> {
   int itemcount = 0;
   int itemcount1 = 0;
 
-  getAllData() async {
-    // print('''dfdfdfdfdfdfdfdfdf''');
-    var res = await FirebaseFirestore.instance
-        .collection("products")
-        .doc("new")
-        .collection(widget.proName)
-        .doc("details")
-        .get();
-    // print(res.data());
-    // print('--------------------------------');
-  }
+  // getAllData() async {
+  //   // print('''dfdfdfdfdfdfdfdfdf''');
+  //   var res = await FirebaseFirestore.instance
+  //       .collection("products")
+  //       .doc("new")
+  //       .collection(widget.proName)
+  //       .doc("details")
+  //       .get();
+  //   // print(res.data());
+  //   // print('--------------------------------');
+  // }
 
   @override
   void initState() {
-    getAllData();
+    // getAllData();
     super.initState();
   }
 
@@ -163,7 +152,7 @@ class _Addtocart1State extends State<Addtocart1> {
                             itemCount: colors.length,
                             itemBuilder: (context, index) {
                               return Padding(
-                                padding:const EdgeInsets.all(8),
+                                padding: const EdgeInsets.all(8),
                                 child: InkWell(
                                   onTap: () {
                                     setState(() {
@@ -178,10 +167,10 @@ class _Addtocart1State extends State<Addtocart1> {
                               );
                             }),
                       ),
-                    const  Divider(
+                      const Divider(
                         thickness: 1,
                       ),
-                    const  SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       Row(
@@ -192,19 +181,19 @@ class _Addtocart1State extends State<Addtocart1> {
                             style: GoogleFonts.robotoSlab(
                                 fontWeight: FontWeight.w600, fontSize: 18),
                           ),
-                          TextButton(
-                              onPressed: () {},
-                              style: TextButton.styleFrom(
-                                  foregroundColor: Colors.black),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    "Show all",
-                                    style: GoogleFonts.robotoSlab(fontSize: 12),
-                                  ),
-                                const  Icon(Icons.arrow_right)
-                                ],
-                              ))
+                          // TextButton(
+                          //     onPressed: () {},
+                          //     style: TextButton.styleFrom(
+                          //         foregroundColor: Colors.black),
+                          //     child: Row(
+                          //       children: [
+                          //         Text(
+                          //           "Show all",
+                          //           style: GoogleFonts.robotoSlab(fontSize: 12),
+                          //         ),
+                          //       const  Icon(Icons.arrow_right)
+                          //   ],
+                          // ))
                         ],
                       ),
                       LimitedBox(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:irohub_project/data/user/user_repository.dart';
 import 'package:irohub_project/data/user/usermodel.dart';
-import 'package:irohub_project/firebase/authentication.dart';
+import 'package:irohub_project/firebase/authenticationRep.dart';
 
 import 'package:irohub_project/screens/loginscreen.dart';
 import 'package:irohub_project/utils/popups/fullscreenloader.dart';
@@ -17,12 +17,12 @@ class SignupController extends GetxController {
   final phonenumbercontroller = TextEditingController();
   GlobalKey<FormState> signupFormKey = GlobalKey<FormState>();
 
-  void clearTextEditingController(){
-    passwordcontroller.clear();
-    namecontroller.clear();
-    emailcontroller.clear();
-    phonenumbercontroller.clear();
-  }
+  // void clearTextEditingController(){
+  //   passwordcontroller.clear();
+  //   namecontroller.clear();
+  //   emailcontroller.clear();
+  //   phonenumbercontroller.clear();
+  // }
 
   void Signup() async {
     try {
@@ -45,8 +45,8 @@ class SignupController extends GetxController {
       await userRepository.saveUserRecord(newuser);
       SnackBarLoader.successSnackbar(
           title: "Congratulaton", message: "Your account has been created");
-          clearTextEditingController();
-          Get.off(Loginscreen());
+      // clearTextEditingController();
+      Get.off(Loginscreen());
     } catch (e) {
       SnackBarLoader.errorSnackbar(title: "Oh Snap!", message: e.toString());
       print(e);

@@ -1,18 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:irohub_project/screens/Sofa.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:irohub_project/bottomnavigationclasses/discover.dart';
 import 'package:irohub_project/bottomnavigationclasses/explore.dart';
 import 'package:irohub_project/bottomnavigationclasses/home.dart';
 import 'package:irohub_project/screens/cartscreen.dart';
 import 'package:irohub_project/screens/colections.dart';
+import 'package:irohub_project/screens/loginscreen.dart';
 
 import 'package:irohub_project/screens/profilepage.dart';
 import 'package:irohub_project/screens/showallscreen.dart';
-
-
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main(List<String> args) {
   runApp(MyApp());
@@ -97,7 +98,7 @@ class _HomescreenState extends State<Homescreen> {
   }
 
   List screens = [Home(), Explorescreen(), Discover()];
-
+  var finalprefs;
   @override
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
@@ -260,7 +261,23 @@ class _HomescreenState extends State<Homescreen> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: IconButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    final SharedPreferences prefs =
+                        await SharedPreferences.getInstance();
+                    setState(() {
+                      finalprefs = prefs;
+                    });
+
+                    try {
+                      await GoogleSignIn().signOut();
+                      await FirebaseAuth.instance.signOut();
+                      prefs.remove("email");
+                      Get.offAll(() => Loginscreen());
+                      print(prefs);
+                    } catch (e) {
+                      print("somthing went wrong $e");
+                    }
+                  },
                   icon: Row(
                     children: [
                       Icon(Icons.logout_sharp),

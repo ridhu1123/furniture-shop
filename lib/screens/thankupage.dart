@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:irohub_project/googlemap.dart';
 import 'package:irohub_project/screens/homescreen.dart';
+import 'package:lottie/lottie.dart';
 
 class Thankyou extends StatelessWidget {
   const Thankyou({super.key});
@@ -15,9 +16,10 @@ class Thankyou extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(
-            "assets/Animation - 1705691768837.json"
-                ,height: MediaQuery.of(context).size.height*0.5,
+              Lottie.asset(
+                "assets/Animation - 1705691768837.json",
+                repeat: false,
+                height: MediaQuery.of(context).size.height * 0.5,
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -63,8 +65,9 @@ Please check the delivery status at""",
                     Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (context) => Homescreen()));
                   },
-                  style:
-                      ElevatedButton.styleFrom(shape: RoundedRectangleBorder(),backgroundColor: Colors.black),
+                  style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(),
+                      backgroundColor: Colors.black),
                   child: Text(
                     "Continue shopping",
                     style: GoogleFonts.robotoSlab(color: Colors.white),

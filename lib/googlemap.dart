@@ -16,39 +16,67 @@ class _SofascreenState extends State<googlemap> {
       Completer<GoogleMapController>();
   Location _locationcontroller = new Location();
   static const LatLng _pgoogleplex = LatLng(37.42223, -122.0848);
-  static const LatLng _noWayhome = LatLng(37.3346, -122.0090);
+  static const LatLng _noWayhome = LatLng(11.740460, 75.634930);
   LatLng? _current = null;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    getlocationupdates();
+    // getlocationupdates();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GoogleMap(
-        onMapCreated: ((GoogleMapController controller) =>
-            _mapcontroller.complete(controller)),
-        initialCameraPosition: CameraPosition(target: _pgoogleplex, zoom: 13),
-        markers: {
-          Marker(
-              markerId: MarkerId("_currentLocation"),
-              
-              icon: BitmapDescriptor.defaultMarker,
-              position: _current!),
-          Marker(
-              markerId: MarkerId("_sorcelocation"),
-              icon: BitmapDescriptor.defaultMarker,
-              position: _pgoogleplex),
-          Marker(
-              markerId: MarkerId("_destionation"),
-              icon: BitmapDescriptor.defaultMarker,
-              position: _noWayhome),
-        },
-      ),
-    );
+        body: FutureBuilder(
+      future: getlocationupdates(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          CircularProgressIndicator();
+          // Image.asset("assets/Animation - 1705691768837.json",width: MediaQuery.of(context).size.height*0.8);
+        }
+        return GoogleMap(
+          onMapCreated: ((GoogleMapController controller) =>
+              _mapcontroller.complete(controller)),
+          initialCameraPosition: CameraPosition(target: _pgoogleplex, zoom: 13),
+          markers: {
+            Marker(
+                markerId: MarkerId("_currentLocation"),
+                icon: BitmapDescriptor.defaultMarker,
+                position: _current!),
+            Marker(
+                markerId: MarkerId("_sorcelocation"),
+                icon: BitmapDescriptor.defaultMarker,
+                position: _pgoogleplex),
+            Marker(
+                markerId: MarkerId("_destionation"),
+                icon: BitmapDescriptor.defaultMarker,
+                position: _noWayhome),
+          },
+        );
+      },
+    )
+        //  GoogleMap(
+        //   onMapCreated: ((GoogleMapController controller) =>
+        //       _mapcontroller.complete(controller)),
+        //   initialCameraPosition: CameraPosition(target: _pgoogleplex, zoom: 13),
+        //   markers: {
+        //     Marker(
+        //         markerId: MarkerId("_currentLocation"),
+
+        //         icon: BitmapDescriptor.defaultMarker,
+        //         position: _current!),
+        //     Marker(
+        //         markerId: MarkerId("_sorcelocation"),
+        //         icon: BitmapDescriptor.defaultMarker,
+        //         position: _pgoogleplex),
+        //     Marker(
+        //         markerId: MarkerId("_destionation"),
+        //         icon: BitmapDescriptor.defaultMarker,
+        //         position: _noWayhome),
+        //   },
+        // ),
+        );
   }
 
   Future<void> _cameraTopostion(LatLng pos) async {

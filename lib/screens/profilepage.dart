@@ -1,13 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
 
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:irohub_project/screens/cartscreen.dart';
 import 'package:irohub_project/screens/giftcardscreen.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Profilepage extends StatefulWidget {
   const Profilepage({super.key});
@@ -28,13 +28,14 @@ class _ProfilepageState extends State<Profilepage> {
       if (camerapicked != null) {
         _image1 = camerapicked.path;
         _image = File(camerapicked.path);
-        print(json.encode(_image1));  
+        print(json.encode(_image1));
         print("filepath.............");
       } else {
         print("no image found");
       }
     });
   }
+
   getimage() async {
     final pickedimage =
         await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -42,12 +43,19 @@ class _ProfilepageState extends State<Profilepage> {
       if (pickedimage != null) {
         _image1 = pickedimage.path;
         _image = File(pickedimage.path);
-      
       } else {
         print("no image found");
       }
     });
   }
+
+  var prefimage;
+  getpreferenceimage() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.getString("image");
+    prefimage = prefs;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -126,8 +134,12 @@ class _ProfilepageState extends State<Profilepage> {
                                         color: const Color.fromARGB(
                                             255, 219, 218, 218))),
                                 child: IconButton(
-                                    onPressed: () {
+                                    onPressed: () async {
+                                      final SharedPreferences prefs =
+                                          await SharedPreferences.getInstance();
+                                      prefs.setString("image", image);
                                       getcameraimage();
+                                      print("rrrrrrrrr $image");
                                     },
                                     icon: Icon(
                                       Icons.camera_alt_rounded,
@@ -146,6 +158,10 @@ class _ProfilepageState extends State<Profilepage> {
                                             255, 219, 218, 218))),
                                 child: IconButton(
                                     onPressed: () async {
+                                      final SharedPreferences prefs =
+                                          await SharedPreferences.getInstance();
+                                      prefs.setString("image", image);
+
                                       var status =
                                           await Permission.storage.request();
                                       if (status == PermissionStatus.granted) {
@@ -170,7 +186,11 @@ class _ProfilepageState extends State<Profilepage> {
                                         color: const Color.fromARGB(
                                             255, 219, 218, 218))),
                                 child: IconButton(
-                                    onPressed: () {},
+                                    onPressed: () async {
+                                      final SharedPreferences prefs =
+                                          await SharedPreferences.getInstance();
+                                      prefs.remove("image");
+                                    },
                                     icon: Icon(
                                       Icons.delete,
                                       color: Colors.green,

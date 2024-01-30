@@ -264,6 +264,8 @@ class _HomescreenState extends State<Homescreen> {
                   onPressed: () async {
                     final SharedPreferences prefs =
                         await SharedPreferences.getInstance();
+                    final SharedPreferences prefs1 =
+                        await SharedPreferences.getInstance();
                     setState(() {
                       finalprefs = prefs;
                     });
@@ -272,8 +274,10 @@ class _HomescreenState extends State<Homescreen> {
                       await GoogleSignIn().signOut();
                       await FirebaseAuth.instance.signOut();
                       prefs.remove("email");
+                      prefs1.remove("id");
                       Get.offAll(() => Loginscreen());
                       print(prefs);
+                      print("sss $prefs1");
                     } catch (e) {
                       print("somthing went wrong $e");
                     }

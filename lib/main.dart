@@ -3,15 +3,24 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:irohub_project/constants/sharedpreference.dart';
+import 'package:irohub_project/data/user/user_repository.dart';
+import 'package:irohub_project/features/authentiation/login/logincontroller.dart';
+import 'package:irohub_project/features/authentiation/signup/signupcontroller.dart';
+import 'package:irohub_project/firebase/firebase_options.dart';
 import 'package:irohub_project/screens/Firstscreen.dart';
 import 'package:irohub_project/screens/homescreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
-  // Get.put(AuthenticationRepository());
-
-  await Firebase.initializeApp();
+  // shared_preferences_id;
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
+      .then((FirebaseApp value) {
+    Get.put(UserRepository());
+    Get.put(LoginController());
+    Get.put(SignupController());
+  });
   // await GetStorage.init();
 
   runApp(MyApp());
@@ -43,10 +52,18 @@ class _SplashscreenState extends State<Splashscreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    getSharedPreferenceData();
     getVaidationData().whenComplete(() async {
       Timer(Duration(seconds: 2),
           () => Get.offAll(finalemial == null ? Firstscreen() : Homescreen()));
     });
+  }
+
+  getSharedPreferenceData() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    var uid = preferences.getString("id");
+    shared_preferences_id = uid;
+    print('id is $shared_preferences_id');
   }
 
   Future getVaidationData() async {

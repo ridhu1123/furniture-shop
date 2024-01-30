@@ -1,7 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:five_pointed_star/five_pointed_star.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:irohub_project/data/user/user_repository.dart';
+import 'package:irohub_project/data/user/usermodel.dart';
+import 'package:irohub_project/features/shop/controllers/cartcontroller.dart';
+import 'package:irohub_project/features/shop/models/cart_item_model.dart';
+import 'package:irohub_project/firebase/authenticationRep.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Addtocart1 extends StatefulWidget {
   final proName;
@@ -15,6 +22,11 @@ class Addtocart1 extends StatefulWidget {
 }
 
 class _Addtocart1State extends State<Addtocart1> {
+  final namecontroller = TextEditingController();
+  final passwordcontroller = TextEditingController();
+  final emailcontroller = TextEditingController();
+  // final controller = Get.put(Cartcontroller());
+
   List description = ["Sku", "Categories", "Tags", "Dimension"];
   List description1 = [
     "545",
@@ -51,6 +63,33 @@ class _Addtocart1State extends State<Addtocart1> {
   void initState() {
     // getAllData();
     super.initState();
+  }
+
+  var id;
+  Future<void> storeCartItems() async {
+    try {
+      // Get.put(AuthenticationRepository());
+      // final userCredential = await AuthenticationRepository.instance
+      //     .registerWithEmailAndPassword(
+      //         emailcontroller.text.trim(), passwordcontroller.text.trim());
+
+      final newuser = UserModel(
+          productname: widget.proName["name"],
+          image: widget.proName["image"],
+          price: "${widget.proName["price"]}"
+          // productId: userCredential.user!.uid,
+          // productname: widget.proName["name"],
+          // image: widget.proName["image"],
+          // price: "${widget.proName["price"]}",
+          // id: userCredential.user!.uid
+          );
+
+      final userRepository = Get.put(UserRepository());
+      await userRepository.saveCartRecord(newuser);
+      // print("ddddddddddddd ${userRepository}");
+    } catch (e) {
+      print("fuck....$e");
+    }
   }
 
   @override
@@ -463,10 +502,16 @@ class _Addtocart1State extends State<Addtocart1> {
           height: 50,
           width: double.infinity,
           child: ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  onclick = true;
-                });
+              onPressed: () async {
+                // setState(() {
+                //   onclick = true;
+                // });
+                // SharedPreferences preferences =
+                //     await SharedPreferences.getInstance();
+                // var uid = preferences.getString("id");
+                // id = uid;
+                // print('id is $id');
+                storeCartItems();
                 // if (onclick = true) {
                 //   Navigator.push(context,
                 //       MaterialPageRoute(builder: (context) => cartscreen()));
@@ -476,7 +521,8 @@ class _Addtocart1State extends State<Addtocart1> {
                   shape: RoundedRectangleBorder(),
                   backgroundColor: Colors.black),
               child: Text(
-                onclick == true ? "GO TO CART" : "ADD TO CART",
+                // onclick == true ? "GO TO CART" :
+                "ADD TO CART",
                 style: GoogleFonts.robotoSlab(color: Colors.white),
               )),
         ),

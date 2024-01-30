@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:irohub_project/constants/sharedpreference.dart';
 import 'package:irohub_project/data/user/user_repository.dart';
 import 'package:irohub_project/data/user/usermodel.dart';
 import 'package:irohub_project/firebase/authenticationRep.dart';
@@ -7,6 +8,7 @@ import 'package:irohub_project/firebase/authenticationRep.dart';
 import 'package:irohub_project/screens/loginscreen.dart';
 import 'package:irohub_project/utils/popups/fullscreenloader.dart';
 import 'package:irohub_project/widget/loaders/snakbar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignupController extends GetxController {
   final hidePassword = true.obs;
@@ -36,11 +38,18 @@ class SignupController extends GetxController {
       final userCredential = await AuthenticationRepository.instance
           .registerWithEmailAndPassword(
               emailcontroller.text.trim(), passwordcontroller.text.trim());
+       SharedPreferences preferences=await SharedPreferences.getInstance();
+       preferences.setString("id", userCredential.user!.uid);
+      shared_preferences_id = userCredential.user!.uid;
+      //  print("uidddddddddddddddd $preferences")
       final newuser = UserModel(
-          id: userCredential.user!.uid,
-          name: namecontroller.text.trim(),
-          email: emailcontroller.text.trim(),
-          phonenumber: phonenumbercontroller.text.trim());
+        id: userCredential.user!.uid,
+        name: namecontroller.text.trim(),
+        email: emailcontroller.text.trim(),
+        phonenumber: phonenumbercontroller.text.trim(),
+        // cart: []
+      );
+
       final userRepository = Get.put(UserRepository());
       await userRepository.saveUserRecord(newuser);
       SnackBarLoader.successSnackbar(

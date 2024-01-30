@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:irohub_project/constants/sharedpreference.dart';
 import 'package:irohub_project/features/authentiation/login/logincontroller.dart';
 import 'package:irohub_project/features/authentiation/usercontroller/usercontroller.dart';
 import 'package:irohub_project/screens/forgetpassword.dart';
@@ -24,6 +25,12 @@ class _LoginscreenState extends State<Loginscreen> {
   //   final OAuthCredential facebookAuthCredential =
   //       FacebookAuthProvider.credential(loginResult.accessToken!.token);
   //   return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+  // }
+  // getSharedPreferenceData() async {
+  //   SharedPreferences preferences = await SharedPreferences.getInstance();
+  //   var uid = preferences.getString("id");
+  //   shared_preferences_id = uid;
+  //   print('id is $shared_preferences_id');
   // }
 
   @override
@@ -107,6 +114,8 @@ class _LoginscreenState extends State<Loginscreen> {
                           prefs.setString(
                               "email", controller.emailcontroller.text);
                           controller.signIn();
+                          // getSharedPreferenceData();
+                          // print("fuck you $shared_preferences_id");
                         },
                         style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(),
@@ -139,7 +148,9 @@ class _LoginscreenState extends State<Loginscreen> {
                           SharedPreferences prefs =
                               await SharedPreferences.getInstance();
                           prefs.setString("email", controller.text1.toString());
+
                           controller.googleSignIn();
+
                           // try {
                           //   facebooksignin();
                           //   if (context.mounted) {

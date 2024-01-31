@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:irohub_project/constants/sharedpreference.dart';
 import 'package:irohub_project/features/authentiation/signup/signupcontroller.dart';
 import 'package:irohub_project/features/authentiation/usercontroller/usercontroller.dart';
 import 'package:irohub_project/firebase/authenticationRep.dart';
 import 'package:irohub_project/screens/homescreen.dart';
 import 'package:irohub_project/utils/popups/fullscreenloader.dart';
 import 'package:irohub_project/widget/loaders/snakbar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginController {
   void clearTextEditingController() {
@@ -14,8 +16,9 @@ class LoginController {
 
     emailcontroller.clear();
   }
+
   final String text1 = "name";
-final userController = Get.put(Usercontroller());
+  final userController = Get.put(Usercontroller());
   final controller = Get.put(SignupController());
   final hidePassword = true.obs;
   final localstorage = GetStorage();
@@ -34,6 +37,9 @@ final userController = Get.put(Usercontroller());
       final userCredentials = await AuthenticationRepository.instance
           .signInWithEmailAndPassword(
               emailcontroller.text.trim(), passwordcontroller.text.trim());
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      preferences.setString("id", userCredentials.user!.uid);
+      shared_preferences_id = userCredentials.user!.uid;
       // TFullScreenLoader.stopLoading();
       // AuthenticationRepository.instance.screenRedirect();
 
@@ -46,7 +52,6 @@ final userController = Get.put(Usercontroller());
   // google signIn
   void googleSignIn() async {
     try {
-
       // Start loading
       TFullScreenLoader.openLoadingDialog(
           "assets/Animation - 1705692235217.json");
@@ -59,18 +64,20 @@ final userController = Get.put(Usercontroller());
       // User Authenticaion
       final userCredentials =
           await AuthenticationRepository.instance.signInwithGoogle();
-
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      preferences.setString("id", userCredentials!.user!.uid);
+      shared_preferences_id = userCredentials.user!.uid;
       // save user records
       await userController.saveUserRecordFromGoogle(userCredentials);
-      
+
       // Remove loader
       TFullScreenLoader.stopLoading();
-      
+
       // TFullScreenLoader.stopLoading();
       // AuthenticationRepository.instance.screenRedirect();
 
       // localstorage.write("userId", value.)
-      
+
       // Navigation
       Get.to(() => Homescreen());
     } catch (e) {

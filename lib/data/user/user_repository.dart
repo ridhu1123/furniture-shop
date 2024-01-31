@@ -13,7 +13,7 @@ class UserRepository extends GetxController {
 
   var id;
 
-  List<Map<String, dynamic>> allDocument = <Map<String, dynamic>>[].obs;
+  List<Map<String, dynamic>> allDocument = [];
   var userid;
   static UserRepository get instance => Get.find();
   final FirebaseFirestore _db = FirebaseFirestore.instance;

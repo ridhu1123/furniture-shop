@@ -7,6 +7,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:irohub_project/screens/cartscreen.dart';
 import 'package:irohub_project/screens/secondcollection.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
@@ -130,7 +131,10 @@ class _CollectionsState extends State<Collections> {
                   icon: Icon(Icons.search, color: Colors.black),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => cartscreen()));
+                  },
                   icon: Icon(Icons.shopify_outlined, color: Colors.black),
                 )
               ],

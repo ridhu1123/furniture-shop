@@ -113,7 +113,10 @@ class _LoginscreenState extends State<Loginscreen> {
                               await SharedPreferences.getInstance();
                           prefs.setString(
                               "email", controller.emailcontroller.text);
+                          // prefs.setString("id", shared_preferences_id);
+
                           controller.signIn();
+                          print("value is $shared_preferences_id");
                           // getSharedPreferenceData();
                           // print("fuck you $shared_preferences_id");
                         },
@@ -148,7 +151,7 @@ class _LoginscreenState extends State<Loginscreen> {
                           SharedPreferences prefs =
                               await SharedPreferences.getInstance();
                           prefs.setString("email", controller.text1.toString());
-
+                          // prefs.setString("id", shared_preferences_id);
                           controller.googleSignIn();
 
                           // try {

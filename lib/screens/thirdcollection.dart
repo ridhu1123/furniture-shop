@@ -1,6 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:irohub_project/data/user/user_repository.dart';
+import 'package:irohub_project/data/user/usermodel.dart';
 import 'package:irohub_project/screens/addtocart.dart';
 import 'package:irohub_project/screens/showallscreen.dart';
 import 'package:irohub_project/widget/textandshowall.dart';
@@ -34,6 +37,29 @@ class _CybermondayState extends State<thirdcollection> {
     thirdcollection.add(res.data());
     print("hhhhhhhhhhhhhh ${res.data()}");
     print("mmmmmmmmmmmm ${thirdcollection}");
+  }
+
+  Future<void> storeCartItems(String name, String image, String price) async {
+    try {
+      // Get.put(AuthenticationRepository());
+      // final userCredential = await AuthenticationRepository.instance
+      //     .registerWithEmailAndPassword(
+      //         emailcontroller.text.trim(), passwordcontroller.text.trim());
+
+      final newuser = UserModel(productname: name, image: image, price: price
+          // productId: userCredential.user!.uid,
+          // productname: widget.proName["name"],
+          // image: widget.proName["image"],
+          // price: "${widget.proName["price"]}",
+          // id: userCredential.user!.uid
+          );
+
+      final userRepository = Get.put(UserRepository());
+      await userRepository.saveCartRecord(newuser);
+      // print("ddddddddddddd ${userRepository}");
+    } catch (e) {
+      print("fuck....$e");
+    }
   }
 
   @override
@@ -194,7 +220,13 @@ class _CybermondayState extends State<thirdcollection> {
                           ),
                           IconButton(
                               color: Colors.black,
-                              onPressed: () {},
+                              onPressed: () {
+                                storeCartItems(
+                                    widget.collection2["chair"][index]["name"],
+                                    widget.collection2["chair"][index]["image"],
+                                    widget.collection2["chair"][index]
+                                        ["price"]);
+                              },
                               icon: Icon(
                                 Icons.shopping_bag,
                                 color: Color.fromARGB(255, 241, 71, 59),
@@ -277,7 +309,12 @@ class _CybermondayState extends State<thirdcollection> {
                           ),
                           IconButton(
                               color: Colors.black,
-                              onPressed: () {},
+                              onPressed: () {
+                                storeCartItems(
+                                    widget.collection2["lamp"][index]["name"],
+                                    widget.collection2["lamp"][index]["image"],
+                                    widget.collection2["lamp"][index]["price"]);
+                              },
                               icon: Icon(
                                 Icons.shopping_bag,
                                 color: Color.fromARGB(255, 241, 71, 59),
@@ -359,7 +396,12 @@ class _CybermondayState extends State<thirdcollection> {
                           ),
                           IconButton(
                               color: Colors.black,
-                              onPressed: () {},
+                              onPressed: () {
+                                storeCartItems(
+                                    widget.collection2["sofa"][index]["name"],
+                                    widget.collection2["sofa"][index]["image"],
+                                    widget.collection2["sofa"][index]["price"]);
+                              },
                               icon: Icon(
                                 Icons.shopping_bag,
                                 color: Color.fromARGB(255, 241, 71, 59),

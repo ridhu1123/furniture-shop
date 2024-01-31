@@ -113,7 +113,7 @@ class _LoginscreenState extends State<Loginscreen> {
                               await SharedPreferences.getInstance();
                           prefs.setString(
                               "email", controller.emailcontroller.text);
-                          // prefs.setString("id", shared_preferences_id);
+                          prefs.setString("id", shared_preferences_id);
 
                           controller.signIn();
                           print("value is $shared_preferences_id");

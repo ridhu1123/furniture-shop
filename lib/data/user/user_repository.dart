@@ -56,31 +56,26 @@ class UserRepository extends GetxController {
     }
   }
 
-  Future<List<Map<String, dynamic>>> getitems() async {
-    try {
-      // var res = await _db.collection("users").doc(userid).get();
-      // print("cccccccccccccc${res.id}");
-      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-          .collection("users")
-          .doc(shared_preferences_id
-          )
-          .collection("cartedItems")
-          .get();
+ Stream<List<Map<String, dynamic>>> getItemsStream() {
+  try {
+    Stream<QuerySnapshot> querySnapshotStream = FirebaseFirestore.instance
+        .collection("users")
+        .doc(shared_preferences_id)
+        .collection("cartedItems")
+        .snapshots();
+
+    return querySnapshotStream.map((querySnapshot) {
+      List<Map<String, dynamic>> allDocuments = [];
       querySnapshot.docs.forEach((doc) {
         Map<String, dynamic> documentData = doc.data() as Map<String, dynamic>;
-        allDocument.add(documentData);
-        print(allDocument);
+        allDocuments.add(documentData);
       });
-      // var res = await FirebaseFirestore.instance
-      //     .collection("users")
-      //     .doc(userid)
-      //     .collection("cartedItems")
-      //     .doc("oTtw2TnXbDE4AOXTRgu")
-      //     .get();
-      // print("---------------- ${res.data()}");
-    } catch (e) {
-      print("vvvvvvvvvv $e");
-    }
-    return allDocument;
+      return allDocuments;
+    });
+  } catch (e) {
+    // You might want to handle errors appropriately here
+    print("Error fetching items: $e");
+    return Stream.empty(); // Return an empty stream in case of error
   }
+}
 }

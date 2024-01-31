@@ -68,7 +68,7 @@ class _SplashscreenState extends State<Splashscreen> {
 
   Future getVaidationData() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    var obtainemial = prefs.getString("email");
+    var obtainemial = prefs.getString("id");
     setState(() {
       finalemial = obtainemial;
     });

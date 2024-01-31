@@ -78,4 +78,23 @@ class UserRepository extends GetxController {
     return Stream.empty(); // Return an empty stream in case of error
   }
 }
+
+ Future<void> saveCheckOutRecord(UserModel user) async {
+    // String myCart = "myCart";
+    // var res = await _db.collection("users").doc(id).get();
+    String CheckOutDetails = "CheckOutDetails";
+    // String allItems = "allItems";
+    DocumentReference documentReference =
+        _db.collection("users").doc(shared_preferences_id);
+    CollectionReference collectionReference =
+        documentReference.collection(CheckOutDetails);
+    // DocumentReference childocumentReference = collectionReference.doc(allItems);
+    // print("hhhhhhhhhhhh");
+    // print("sssssssssss ${userid}");
+    try {
+      await collectionReference.add(user.toMyCheckOut());
+    } catch (e) {
+      throw "Somthing went wrong $e";
+    }
+  }
 }

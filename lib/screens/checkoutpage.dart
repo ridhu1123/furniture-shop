@@ -1,5 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:irohub_project/data/user/user_repository.dart';
+import 'package:irohub_project/data/user/usermodel.dart';
 import 'package:irohub_project/screens/thankupage.dart';
 
 class Checkoutscreen extends StatefulWidget {
@@ -25,13 +29,24 @@ class _CheckoutscreenState extends State<Checkoutscreen> {
     "assets/icons8-mastercard-48.png"
   ];
   List<Icon> icons = [Icon(Icons.home_rounded), Icon(Icons.apartment)];
+
+  storeCheckOutItems() {
+    try {
+      final user = UserModel(
+          peymentMethods: paymentname.toString(),
+          shippingDetails: "658 Yost Island Apt");
+      final userRepository = Get.put(UserRepository());
+      userRepository.saveCheckOutRecord(user);
+      Get.to(Thankyou());
+    } catch (e) {}
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: InkWell(
         onTap: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => Thankyou()));
+          storeCheckOutItems();
         },
         child: Container(
           color: Colors.black,
@@ -65,7 +80,9 @@ class _CheckoutscreenState extends State<Checkoutscreen> {
                     fontWeight: FontWeight.w500),
               ),
             ),
-            Divider(thickness: 0.5,),
+            Divider(
+              thickness: 0.5,
+            ),
             SizedBox(
               height: 5,
             ),
@@ -367,7 +384,9 @@ class _CheckoutscreenState extends State<Checkoutscreen> {
                   // )
                   ),
             ),
-            Divider(thickness: 0.5,),
+            Divider(
+              thickness: 0.5,
+            ),
             Padding(
               padding: const EdgeInsets.only(left: 8, right: 8, bottom: 5),
               child: Row(

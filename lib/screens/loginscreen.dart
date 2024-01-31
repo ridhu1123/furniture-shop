@@ -64,7 +64,8 @@ class _LoginscreenState extends State<Loginscreen> {
                     Padding(
                       padding: const EdgeInsets.only(left: 25, right: 25),
                       child: TextFormField(
-                        validator: (value) => TValidator.validateEmail(value),
+                        validator: (value) =>
+                            TValidator.validateEmptyText("emaill", value),
                         controller: controller.emailcontroller,
                         decoration: InputDecoration(
                           border: UnderlineInputBorder(),
@@ -111,12 +112,13 @@ class _LoginscreenState extends State<Loginscreen> {
                         onPressed: () async {
                           SharedPreferences prefs =
                               await SharedPreferences.getInstance();
-                          prefs.setString(
-                              "email", controller.emailcontroller.text);
+                          // prefs.setString(
+                          //     "email", controller.emailcontroller.text);
                           prefs.setString("id", shared_preferences_id);
 
                           controller.signIn();
                           print("value is $shared_preferences_id");
+                          // print("email $finalEmail");
                           // getSharedPreferenceData();
                           // print("fuck you $shared_preferences_id");
                         },
@@ -148,9 +150,6 @@ class _LoginscreenState extends State<Loginscreen> {
                       padding: const EdgeInsets.all(17.0),
                       child: ElevatedButton(
                         onPressed: () async {
-                          SharedPreferences prefs =
-                              await SharedPreferences.getInstance();
-                          prefs.setString("email", controller.text1.toString());
                           // prefs.setString("id", shared_preferences_id);
                           controller.googleSignIn();
 

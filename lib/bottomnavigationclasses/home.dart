@@ -2,9 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:irohub_project/data/user/user_repository.dart';
+import 'package:irohub_project/data/user/usermodel.dart';
 import 'package:irohub_project/screens/addtocart.dart';
 import 'package:irohub_project/screens/showallscreen.dart';
+import 'package:irohub_project/widget/loaders/snakbar.dart';
 
 import '../imageclass/classA.dart';
 import '../imageclass/classB.dart';
@@ -38,6 +43,31 @@ class _HomeState extends State<Home> {
     newarriavls.addAll(res.data()?["newarrivals"]);
     topdeals.addAll(res.data()?["topdeals"]);
     toptrends.addAll(res.data()?["toptrends"]);
+  }
+
+  Future<void> storeCartItems(String name, String image, String price) async {
+    try {
+      // Get.put(AuthenticationRepository());
+      // final userCredential = await AuthenticationRepository.instance
+      //     .registerWithEmailAndPassword(
+      //         emailcontroller.text.trim(), passwordcontroller.text.trim());
+
+      final newuser = UserModel(productname: name, image: image, price: price
+          // productId: userCredential.user!.uid,
+          // productname: widget.proName["name"],
+          // image: widget.proName["image"],
+          // price: "${widget.proName["price"]}",
+          // id: userCredential.user!.uid
+          );
+
+      final userRepository = Get.put(UserRepository());
+      await userRepository.saveCartRecord(newuser);
+       SnackBarLoader.successSnackbar(
+          title: "", message: "Item added succesfully");
+      // print("ddddddddddddd ${userRepository}");
+    } catch (e) {
+      print("fuck....$e");
+    }
   }
 
   @override
@@ -274,7 +304,8 @@ class _HomeState extends State<Home> {
                                           )));
                             },
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.only(
+                                  top: 8, bottom: 8, left: 8, right: 8),
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -304,18 +335,36 @@ class _HomeState extends State<Home> {
                                             style: GoogleFonts.robotoSlab(),
                                           ),
                                         ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 8),
-                                          child: Text(
-                                            topdeals[index]["price"],
-                                            style: GoogleFonts.robotoSlab(
-                                                color: Colors.grey[400]),
-                                          ),
+                                        Row(
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 8),
+                                              child: Text(
+                                                topdeals[index]["price"],
+                                                style: GoogleFonts.robotoSlab(
+                                                    color: Colors.grey[400]),
+                                              ),
+                                            ),
+                                            IconButton(
+                                                color: Colors.black,
+                                                onPressed: () {
+                                                  storeCartItems(
+                                                      topdeals[index]["name"],
+                                                      topdeals[index]["image"],
+                                                      topdeals[index]["price"]);
+                                                },
+                                                icon: Icon(
+                                                  Icons.shopping_bag,
+                                                  color: Color.fromARGB(
+                                                      255, 241, 71, 59),
+                                                  size: 18,
+                                                )),
+                                          ],
                                         ),
                                       ],
                                     ),
-                                  )
+                                  ),
                                 ],
                               ),
                             ),

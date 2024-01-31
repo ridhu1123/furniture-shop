@@ -27,7 +27,7 @@ class _cartscreenState extends State<cartscreen> {
     super.initState();
     // getitems();
     // print("111111111111 ${widget.id}");
-    // getItemsStream();
+    getItemsStream();
     getCartItemIds();
     // controller.getitems();
     // print("fuckyouuuuuuuuuuuu ${controller.allDocument}");
@@ -302,103 +302,106 @@ class _cartscreenState extends State<cartscreen> {
                                             ),
                                           ),
                                         ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 8, bottom: 10),
-                                              child: Text(
-                                                items[index]["productname"],
-                                                // controller.allDocument[index]["name"],
-                                                style: GoogleFonts.robotoSlab(
-                                                    fontWeight:
-                                                        FontWeight.w500),
+                                        Flexible(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 8, bottom: 10),
+                                                child: Text(
+                                                  items[index]["productname"],
+                                                  // controller.allDocument[index]["name"],
+                                                  style: GoogleFonts.robotoSlab(
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
                                               ),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 8, top: 3),
-                                              child: Text(
-                                                items[index]["price"],
-                                                // controller.allDocument[index]["price"],
-                                                style: GoogleFonts.robotoSlab(
-                                                    color: Colors.black),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 8, top: 3),
+                                                child: Text(
+                                                  items[index]["price"],
+                                                  // controller.allDocument[index]["price"],
+                                                  style: GoogleFonts.robotoSlab(
+                                                      color: Colors.black),
+                                                ),
                                               ),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 8, top: 8),
-                                              child: Row(
-                                                children: [
-                                                  Container(
-                                                    height: 10,
-                                                    width: 10,
-                                                    decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(20),
-                                                        color: Colors.black),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 5,
-                                                  ),
-                                                  Text(
-                                                    "Black",
-                                                    style:
-                                                        GoogleFonts.robotoSlab(
-                                                            color: Colors
-                                                                .grey[400]),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 8,
-                                                  ),
-                                                  Text(
-                                                    "|",
-                                                    style: TextStyle(
-                                                        color:
-                                                            Colors.grey[400]),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 8,
-                                                  ),
-                                                  Text(
-                                                    "Size :",
-                                                    style:
-                                                        GoogleFonts.robotoSlab(
-                                                            color: Colors.grey),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 5,
-                                                  ),
-                                                  Text(
-                                                    "38",
-                                                    style:
-                                                        GoogleFonts.robotoSlab(
-                                                            color:
-                                                                Colors.black),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 30,
-                                                  ),
-                                                  IconButton(
-                                                      onPressed: () {
-                                                        setState(() {
-                                                          // allDocument
-                                                          //     .removeAt(index);
-                                                          onDeleteButtonTap(
-                                                              "${itemIds[index]}");
-                                                        });
-                                                      },
-                                                      icon: Icon(
-                                                        Icons.delete_rounded,
-                                                        color: Colors.black,
-                                                      ))
-                                                ],
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 8, top: 8),
+                                                child: Row(
+                                                  children: [
+                                                    Container(
+                                                      height: 10,
+                                                      width: 10,
+                                                      decoration: BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(20),
+                                                          color: Colors.black),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 5,
+                                                    ),
+                                                    Text(
+                                                      "Black",
+                                                      style: GoogleFonts
+                                                          .robotoSlab(
+                                                              color: Colors
+                                                                  .grey[400]),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 8,
+                                                    ),
+                                                    Text(
+                                                      "|",
+                                                      style: TextStyle(
+                                                          color:
+                                                              Colors.grey[400]),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 8,
+                                                    ),
+                                                    Text(
+                                                      "Size :",
+                                                      style: GoogleFonts
+                                                          .robotoSlab(
+                                                              color:
+                                                                  Colors.grey),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 5,
+                                                    ),
+                                                    Text(
+                                                      "38",
+                                                      style: GoogleFonts
+                                                          .robotoSlab(
+                                                              color:
+                                                                  Colors.black),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 30,
+                                                    ),
+                                                    IconButton(
+                                                        onPressed: () {
+                                                          setState(() {
+                                                            // allDocument
+                                                            //     .removeAt(index);
+                                                            onDeleteButtonTap(
+                                                                "${itemIds[index]}");
+                                                          });
+                                                        },
+                                                        icon: Icon(
+                                                          Icons.delete_rounded,
+                                                          color: Colors.black,
+                                                        ))
+                                                  ],
+                                                ),
                                               ),
-                                            ),
-                                          ],
+                                            ],
+                                          ),
                                         ),
                                       ],
                                     ),

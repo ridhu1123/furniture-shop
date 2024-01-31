@@ -8,6 +8,7 @@ import 'package:irohub_project/data/user/usermodel.dart';
 import 'package:irohub_project/features/shop/controllers/cartcontroller.dart';
 import 'package:irohub_project/features/shop/models/cart_item_model.dart';
 import 'package:irohub_project/firebase/authenticationRep.dart';
+import 'package:irohub_project/widget/loaders/snakbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Addtocart1 extends StatefulWidget {
@@ -86,6 +87,8 @@ class _Addtocart1State extends State<Addtocart1> {
 
       final userRepository = Get.put(UserRepository());
       await userRepository.saveCartRecord(newuser);
+      SnackBarLoader.successSnackbar(
+          title: "", message: "Item added succesfully");
       // print("ddddddddddddd ${userRepository}");
     } catch (e) {
       print("fuck....$e");

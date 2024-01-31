@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SnackBarLoader {
-static hideSnackBar()=>ScaffoldMessenger.of(Get.context!).hideCurrentSnackBar();
+  static hideSnackBar() =>
+      ScaffoldMessenger.of(Get.context!).hideCurrentSnackBar();
 
   static warningSnackbar({required title, message = ""}) {
     Get.snackbar(title, message,
@@ -18,11 +19,12 @@ static hideSnackBar()=>ScaffoldMessenger.of(Get.context!).hideCurrentSnackBar();
         ));
   }
 
-  static successSnackbar({required title, message="",duration=3}) {
+  static successSnackbar({required title, message = "", duration = 3}) {
     Get.snackbar(title, message,
         isDismissible: true,
         shouldIconPulse: true,
-        colorText: Colors.grey,
+        colorText: Colors.black,
+        
         snackPosition: SnackPosition.BOTTOM,
         duration: Duration(seconds: duration),
         margin: EdgeInsets.all(8),
@@ -32,7 +34,7 @@ static hideSnackBar()=>ScaffoldMessenger.of(Get.context!).hideCurrentSnackBar();
         ));
   }
 
-  static errorSnackbar({required title, message = "",duration=3}) {
+  static errorSnackbar({required title, message = "", duration = 3}) {
     Get.snackbar(title, message,
         isDismissible: true,
         shouldIconPulse: true,

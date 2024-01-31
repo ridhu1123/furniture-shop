@@ -47,7 +47,7 @@ class Splashscreen extends StatefulWidget {
 }
 
 class _SplashscreenState extends State<Splashscreen> {
-  var finalemial;
+  var finalEmail;
   @override
   void initState() {
     // TODO: implement initState
@@ -55,7 +55,7 @@ class _SplashscreenState extends State<Splashscreen> {
     getSharedPreferenceData();
     getVaidationData().whenComplete(() async {
       Timer(Duration(seconds: 2),
-          () => Get.offAll(finalemial == null ? Firstscreen() : Homescreen()));
+          () => Get.offAll(finalEmail == null ? Firstscreen() : Homescreen()));
     });
   }
 
@@ -68,11 +68,11 @@ class _SplashscreenState extends State<Splashscreen> {
 
   Future getVaidationData() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    var obtainemial = prefs.getString("id");
+    var obtainedEmail = prefs.getString("email");
     setState(() {
-      finalemial = obtainemial;
+      finalEmail = obtainedEmail;
     });
-    print(finalemial);
+    print(finalEmail);
   }
 
   @override

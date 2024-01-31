@@ -40,6 +40,8 @@ class LoginController {
       SharedPreferences preferences = await SharedPreferences.getInstance();
       preferences.setString("id", userCredentials.user!.uid);
       shared_preferences_id = userCredentials.user!.uid;
+      //  SharedPreferences preferences = await SharedPreferences.getInstance();
+      preferences.setString("email", emailcontroller.text);
       // TFullScreenLoader.stopLoading();
       // AuthenticationRepository.instance.screenRedirect();
 
@@ -69,7 +71,7 @@ class LoginController {
       shared_preferences_id = userCredentials.user!.uid;
       // save user records
       await userController.saveUserRecordFromGoogle(userCredentials);
-
+        preferences.setString("email", "name");
       // Remove loader
       TFullScreenLoader.stopLoading();
 

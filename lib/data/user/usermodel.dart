@@ -2,6 +2,8 @@ import 'package:irohub_project/constants/appconstants.dart';
 import 'package:irohub_project/features/shop/models/cart_item_model.dart';
 
 class UserModel {
+  String? shippingDetails;
+  String? peymentMethods;
   String? productname;
   String? image;
   String? price;
@@ -18,7 +20,8 @@ class UserModel {
       this.productname,
       this.image,
       this.price,
-      });
+      this.peymentMethods,
+      this.shippingDetails});
 
   Map<String, dynamic> toJson() {
     return {
@@ -29,8 +32,16 @@ class UserModel {
       // "cart": cart
     };
   }
+
   Map<String, dynamic> toMyCart() {
     return {"productname": productname, "image": image, "price": price};
+  }
+
+  Map<String, dynamic> toMyCheckOut() {
+    return {
+      "shippingLocation": shippingDetails,
+      "payementMethod": peymentMethods
+    };
   }
 
   //  UserModel.fromjson(DocumentSnapshot snapshot) {

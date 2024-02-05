@@ -39,7 +39,7 @@ Please check the delivery status at""",
                   child: RichText(
                       text: TextSpan(children: [
                     TextSpan(
-                      text: "ORDER TRACKING ",
+                      text: "VISIT OUR SHOP ",
                       style: GoogleFonts.robotoSlab(
                           color: Colors.black, fontWeight: FontWeight.w600),
                     ),

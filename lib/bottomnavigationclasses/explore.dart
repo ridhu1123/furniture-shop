@@ -18,7 +18,6 @@ class Explorescreen extends StatefulWidget {
 class _ExplorescreenState extends State<Explorescreen> {
   Map<String, List<String>> folderImageUrls = {};
 
-
   var item = [];
   var bestsellers = [];
   getcategories() async {
@@ -31,7 +30,8 @@ class _ExplorescreenState extends State<Explorescreen> {
 
     item.addAll(res.data()?["exploreitems"]);
     bestsellers.addAll(res.data()?["bestsellers"]);
-    print("sssssssssss $item");
+    print("length is   ${bestsellers.length}");
+
     setState(() {});
     return item;
     // var res1 = await FirebaseFirestore.instance
@@ -192,11 +192,17 @@ class _ExplorescreenState extends State<Explorescreen> {
                               )),
                           Align(
                               alignment: Alignment.topLeft,
-                              child: Text(
-                                bestsellers[index]["price"],
-                                style: GoogleFonts.robotoSlab(
-                                    color: Colors.grey[400]),
-                              ))
+                              child: RichText(
+                                  text: TextSpan(children: [
+                                TextSpan(
+                                    text: "₹ ",
+                                    style: TextStyle(color: Colors.grey[600])),
+                                TextSpan(
+                                  text: bestsellers[index]["price"].toString(),
+                                  style: GoogleFonts.robotoSlab(
+                                      color: Colors.grey[400]),
+                                )
+                              ])))
                         ],
                       ));
                 },

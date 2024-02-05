@@ -68,7 +68,8 @@ class _cartscreenState extends State<cartscreen> {
           .collection("cartedItems")
           .get();
       querySnapshot.docs.forEach((doc) {
-        itemIds.add(doc.id); // Add the document ID to the list
+        itemIds.add(doc.id);
+        // Add the document ID to the list
       });
     } catch (e) {
       print("Error getting cart items: $e");
@@ -322,7 +323,8 @@ class _cartscreenState extends State<cartscreen> {
                                                 padding: const EdgeInsets.only(
                                                     left: 8, top: 3),
                                                 child: Text(
-                                                  items[index]["price"],
+                                                  items[index]["price"]
+                                                      .toString(),
                                                   // controller.allDocument[index]["price"],
                                                   style: GoogleFonts.robotoSlab(
                                                       color: Colors.black),
@@ -486,7 +488,7 @@ class _cartscreenState extends State<cartscreen> {
                   //       child: Container(
                   //         child: Lottie.asset(
                   //           "assets/Animation - 1705691997361.json",
-                  //           height: MediaQuery.of(context).size.height * 0.4,
+                  //           aheight: MediaQuery.of(context).size.height * 0.4,
                   //           width: MediaQuery.of(context).size.width * 1.3,
                   //         ),
                   //       ),

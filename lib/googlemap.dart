@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:irohub_project/features/shop/gmapshopdetails/Gmap_bottomSheet.dart';
 import 'package:location/location.dart';
 
 class googlemap extends StatefulWidget {
@@ -12,6 +13,7 @@ class googlemap extends StatefulWidget {
 }
 
 class _SofascreenState extends State<googlemap> {
+  GmapBottomSheet controller = GmapBottomSheet();
   final Completer<GoogleMapController> _mapcontroller =
       Completer<GoogleMapController>();
   Location _locationcontroller = new Location();
@@ -22,60 +24,40 @@ class _SofascreenState extends State<googlemap> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    // getlocationupdates();
+
+    getlocationupdates();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: FutureBuilder(
-      future: getlocationupdates(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          CircularProgressIndicator();
-          // Image.asset("assets/Animation - 1705691768837.json",width: MediaQuery.of(context).size.height*0.8);
-        }
-        return GoogleMap(
-          onMapCreated: ((GoogleMapController controller) =>
-              _mapcontroller.complete(controller)),
-          initialCameraPosition: CameraPosition(target: _pgoogleplex, zoom: 13),
-          markers: {
-            Marker(
-                markerId: MarkerId("_currentLocation"),
-                icon: BitmapDescriptor.defaultMarker,
-                position: _current!),
-            Marker(
-                markerId: MarkerId("_sorcelocation"),
-                icon: BitmapDescriptor.defaultMarker,
-                position: _pgoogleplex),
-            Marker(
-                markerId: MarkerId("_destionation"),
-                icon: BitmapDescriptor.defaultMarker,
-                position: _noWayhome),
-          },
-        );
+        body: GoogleMap(
+      trafficEnabled: true,
+      myLocationEnabled: true,
+      mapToolbarEnabled: true,
+      myLocationButtonEnabled: true,
+
+      onMapCreated: ((GoogleMapController controller) =>
+          _mapcontroller.complete(controller)),
+      initialCameraPosition: CameraPosition(target: _pgoogleplex, zoom: 13),
+      markers: {
+        // Marker(
+        //     markerId: MarkerId("_currentLocation"),
+        //     icon: BitmapDescriptor.defaultMarker,
+        //     position: _current!),
+        Marker(
+            markerId: MarkerId("_sorcelocation"),
+            icon: BitmapDescriptor.defaultMarker,
+            position: _pgoogleplex),
+        Marker(
+            onTap: () {
+              controller.getshopdatas(context);
+            },
+            markerId: MarkerId("_destionation"),
+            icon: BitmapDescriptor.defaultMarker,
+            position: _noWayhome),
       },
     )
-        //  GoogleMap(
-        //   onMapCreated: ((GoogleMapController controller) =>
-        //       _mapcontroller.complete(controller)),
-        //   initialCameraPosition: CameraPosition(target: _pgoogleplex, zoom: 13),
-        //   markers: {
-        //     Marker(
-        //         markerId: MarkerId("_currentLocation"),
-
-        //         icon: BitmapDescriptor.defaultMarker,
-        //         position: _current!),
-        //     Marker(
-        //         markerId: MarkerId("_sorcelocation"),
-        //         icon: BitmapDescriptor.defaultMarker,
-        //         position: _pgoogleplex),
-        //     Marker(
-        //         markerId: MarkerId("_destionation"),
-        //         icon: BitmapDescriptor.defaultMarker,
-        //         position: _noWayhome),
-        //   },
-        // ),
         );
   }
 
@@ -111,6 +93,8 @@ class _SofascreenState extends State<googlemap> {
 
           _cameraTopostion(_current!);
         });
+      } else {
+        print("erorrr");
       }
     });
   }

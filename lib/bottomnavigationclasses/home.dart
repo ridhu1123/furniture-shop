@@ -35,7 +35,8 @@ class _HomeState extends State<Home> {
   var newarriavls = [];
   var topdeals = [];
   var toptrends = [];
-  getitems() async {
+  bool _isDataLoaded = false;
+  Future getitems() async {
     var res = await FirebaseFirestore.instance
         .collection("homescreenitems")
         .doc("allitems")
@@ -43,6 +44,11 @@ class _HomeState extends State<Home> {
     newarriavls.addAll(res.data()?["newarrivals"]);
     topdeals.addAll(res.data()?["topdeals"]);
     toptrends.addAll(res.data()?["toptrends"]);
+
+    print("count   ${newarriavls.length}");
+    print(res.data()?["newarrivals"]);
+    // setState(() {});
+    // return newarriavls;
   }
 
   Future<void> storeCartItems(String name, String image, String price) async {
@@ -62,7 +68,7 @@ class _HomeState extends State<Home> {
 
       final userRepository = Get.put(UserRepository());
       await userRepository.saveCartRecord(newuser);
-       SnackBarLoader.successSnackbar(
+      SnackBarLoader.successSnackbar(
           title: "", message: "Item added succesfully");
       // print("ddddddddddddd ${userRepository}");
     } catch (e) {
@@ -142,7 +148,7 @@ class _HomeState extends State<Home> {
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
                   return LimitedBox(
-                    maxHeight: 244,
+                    maxHeight: 228,
                     child: ListView.builder(
                         itemCount: 4,
                         scrollDirection: Axis.horizontal,
@@ -164,8 +170,8 @@ class _HomeState extends State<Home> {
                                     decoration: BoxDecoration(
                                         color: Colors.grey[200],
                                         borderRadius: BorderRadius.circular(6)),
-                                    width: 160,
-                                    height: 190,
+                                    width: 170,
+                                    height: 170,
                                     child: ClipRRect(
                                         borderRadius: BorderRadius.circular(6),
                                         child: Image.network(
@@ -174,17 +180,28 @@ class _HomeState extends State<Home> {
                                         )),
                                   ),
                                 ),
+                                SizedBox(
+                                  height: 5,
+                                ),
                                 Align(
                                     alignment: Alignment.topLeft,
                                     child: Text(
                                       newarriavls[index]["name"],
                                       style: GoogleFonts.robotoSlab(),
                                     )),
-                                Text(
-                                  newarriavls[index]["price"],
-                                  style: GoogleFonts.robotoSlab(
-                                      color: Colors.grey[400]),
-                                )
+                                RichText(
+                                    text: TextSpan(children: [
+                                  TextSpan(
+                                      text: "₹ ",
+                                      style:
+                                          TextStyle(color: Colors.grey[600])),
+                                  TextSpan(
+                                    text:
+                                        newarriavls[index]["price"].toString(),
+                                    style: GoogleFonts.robotoSlab(
+                                        color: Colors.grey[400]),
+                                  )
+                                ]))
                               ],
                             ),
                           );
@@ -212,7 +229,7 @@ class _HomeState extends State<Home> {
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
                   return LimitedBox(
-                    maxHeight: 244,
+                    maxHeight: 230,
                     child: ListView.builder(
                         itemCount: 4,
                         scrollDirection: Axis.horizontal,
@@ -236,8 +253,8 @@ class _HomeState extends State<Home> {
                                           color: Colors.grey[200],
                                           borderRadius:
                                               BorderRadius.circular(6)),
-                                      width: 160,
-                                      height: 190,
+                                      width: 170,
+                                      height: 170,
                                       child: ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(6),
@@ -245,6 +262,9 @@ class _HomeState extends State<Home> {
                                             toptrends[index]["image"],
                                             fit: BoxFit.fill,
                                           ))),
+                                ),
+                                SizedBox(
+                                  height: 5,
                                 ),
                                 Align(
                                     alignment: Alignment.topLeft,
@@ -254,11 +274,19 @@ class _HomeState extends State<Home> {
                                     )),
                                 Align(
                                     alignment: Alignment.topLeft,
-                                    child: Text(
-                                      toptrends[index]["price"],
-                                      style: GoogleFonts.robotoSlab(
-                                          color: Colors.grey[400]),
-                                    ))
+                                    child: RichText(
+                                        text: TextSpan(children: [
+                                      TextSpan(
+                                          text: "₹ ",
+                                          style: TextStyle(
+                                              color: Colors.grey[600])),
+                                      TextSpan(
+                                        text: toptrends[index]["price"]
+                                            .toString(),
+                                        style: GoogleFonts.robotoSlab(
+                                            color: Colors.grey[400]),
+                                      )
+                                    ])))
                               ],
                             ),
                           );
@@ -338,21 +366,32 @@ class _HomeState extends State<Home> {
                                         Row(
                                           children: [
                                             Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 8),
-                                              child: Text(
-                                                topdeals[index]["price"],
-                                                style: GoogleFonts.robotoSlab(
-                                                    color: Colors.grey[400]),
-                                              ),
-                                            ),
+                                                padding: const EdgeInsets.only(
+                                                    left: 8),
+                                                child: RichText(
+                                                    text: TextSpan(children: [
+                                                  TextSpan(
+                                                      text: "₹ ",
+                                                      style: TextStyle(
+                                                          color: Colors
+                                                              .grey[600])),
+                                                  TextSpan(
+                                                    text: topdeals[index]
+                                                            ["price"]
+                                                        .toString(),
+                                                    style:
+                                                        GoogleFonts.robotoSlab(
+                                                            color: Colors
+                                                                .grey[400]),
+                                                  )
+                                                ]))),
                                             IconButton(
                                                 color: Colors.black,
                                                 onPressed: () {
                                                   storeCartItems(
                                                       topdeals[index]["name"],
                                                       topdeals[index]["image"],
-                                                      topdeals[index]["price"]);
+                                                      "${topdeals[index]["price"]}");
                                                 },
                                                 icon: Icon(
                                                   Icons.shopping_bag,

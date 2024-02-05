@@ -65,7 +65,7 @@ class AuthenticationRepository extends GetxController {
       final credentials = GoogleAuthProvider.credential(
           accessToken: googleAuth?.accessToken,
           idToken: googleAuth?.idToken);
-
+           
       // once signed in return the user credenital
       return await auth.signInWithCredential(credentials);
     } catch (e) {

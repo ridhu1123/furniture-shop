@@ -25,21 +25,6 @@ class _ShowallscreenState extends State<Showallscreen> {
     "https://i.pinimg.com/564x/e4/59/ba/e459ba1bf1de4ea4dc81acee68d8fb30.jpg",
     "https://i.pinimg.com/564x/84/05/c4/8405c4fdc6d8bac92e9aca82fe627b5d.jpg"
   ];
-  // var imageurls = [];
-  // void getdata() async {
-  //   var storage = FirebaseStorage.instance;
-  //   var ref = storage.ref().child("homescreenimages/new arrival");
-
-  //   var imageurl = await ref.listAll();
-  //   await Future.forEach(imageurl.items, (Reference reference) async {
-  //     var url = await reference.getDownloadURL();
-  //     setState(() {
-  //       imageurls.add(url);
-  //       print("hhhhhhhhhhhhhhhhhh $ref");
-  //     });
-  //   });
-  //   print(imageurl);
-  // }
 
   @override
   void initState() {
@@ -47,6 +32,7 @@ class _ShowallscreenState extends State<Showallscreen> {
     super.initState();
     // getdata();
     print("dddddddddddddddd ${widget.items}");
+    
   }
 
   @override
@@ -59,39 +45,39 @@ class _ShowallscreenState extends State<Showallscreen> {
             backgroundColor: Colors.white,
             body: ListView(
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 25),
-                  child: CarouselSlider.builder(
-                    itemCount: 3,
-                    itemBuilder: (context, index, realIndex) {
-                      return Container(
-                        margin: EdgeInsets.all(6),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8.0),
-                          image: DecorationImage(
-                            image: NetworkImage(Carousilimage[index]),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      );
-                    },
-                    options: CarouselOptions(
-                      height: 180.0,
-                      enlargeCenterPage: true,
-                      autoPlay: true,
-                      aspectRatio: 16 / 9,
-                      autoPlayCurve: Curves.fastOutSlowIn,
-                      enableInfiniteScroll: true,
-                      autoPlayAnimationDuration: Duration(milliseconds: 800),
-                      viewportFraction: 0.8,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 30,
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.only(top: 25),
+                //   child: CarouselSlider.builder(
+                //     itemCount: 3,
+                //     itemBuilder: (context, index, realIndex) {
+                //       return Container(
+                //         margin: EdgeInsets.all(6),
+                //         decoration: BoxDecoration(
+                //           borderRadius: BorderRadius.circular(8.0),
+                //           image: DecorationImage(
+                //             image: NetworkImage(Carousilimage[index]),
+                //             fit: BoxFit.cover,
+                //           ),
+                //         ),
+                //       );
+                //     },
+                //     options: CarouselOptions(
+                //       height: 180.0,
+                //       enlargeCenterPage: true,
+                //       autoPlay: true,
+                //       aspectRatio: 16 / 9,
+                //       autoPlayCurve: Curves.fastOutSlowIn,
+                //       enableInfiniteScroll: true,
+                //       autoPlayAnimationDuration: Duration(milliseconds: 800),
+                //       viewportFraction: 0.8,
+                //     ),
+                //   ),
+                // ),
+                // SizedBox(
+                //   height: 30,
+                // ),
                 LimitedBox(
-                  maxHeight: height / 1.6,
+                  maxHeight: height,
                   child: GridView.builder(
                       itemCount: widget.items.length,
                       // physics: NeverScrollableScrollPhysics(),
@@ -167,7 +153,7 @@ class _ShowallscreenState extends State<Showallscreen> {
                               Align(
                                   alignment: Alignment.topLeft,
                                   child: Text(
-                                    widget.items[index]["price"],
+                                    widget.items[index]["price"].toString(),
                                     style: GoogleFonts.robotoSlab(
                                         color: Colors.grey[400]),
                                   ))
@@ -179,20 +165,4 @@ class _ShowallscreenState extends State<Showallscreen> {
               ],
             )));
   }
-
-  // var newarrivals = [];
-  // var toptrends = [];
-  // var topdeals = [];
-  // var bestsellers = [];
-  // var trending = [];
-  // var bestselling = [];
-
-  // Future<void> addditemtostorage() async {
-  //   UserCredential userCredential =
-  //       await FirebaseAuth.instance.signInAnonymously();
-  //   var uid = userCredential.user!.uid;
-  //   await FirebaseFirestore.instance.collection("users").doc(uid).set({
-  //     "image": newarrivals,
-  //   });
-  // }
 }

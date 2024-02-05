@@ -108,7 +108,10 @@ class _DiscoverState extends State<Discover> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => Showallscreen(name: "Trending",items: trending,)));
+                      builder: (context) => Showallscreen(
+                            name: "Trending",
+                            items: trending,
+                          )));
             },
             child: Showallbutton(text: "Trending")),
         FutureBuilder(
@@ -159,13 +162,20 @@ class _DiscoverState extends State<Discover> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        trending[index]["price"],
-                                        style: GoogleFonts.robotoSlab(
-                                            color: Colors.grey[400]),
-                                      ),
-                                    ),
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: RichText(
+                                            text: TextSpan(children: [
+                                          TextSpan(
+                                              text: "₹ ",
+                                              style: TextStyle(
+                                                  color: Colors.grey[600])),
+                                          TextSpan(
+                                            text: trending[index]["price"]
+                                                .toString(),
+                                            style: GoogleFonts.robotoSlab(
+                                                color: Colors.grey[400]),
+                                          )
+                                        ]))),
                                   ],
                                 ),
                               ),
@@ -314,8 +324,10 @@ Winter""",
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) =>
-                          Showallscreen(name: "Best Selling",items: bestselling,)));
+                      builder: (context) => Showallscreen(
+                            name: "Best Selling",
+                            items: bestselling,
+                          )));
             },
             child: Showallbutton(text: "Best Selling")),
         FutureBuilder(
@@ -366,13 +378,22 @@ Winter""",
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.only(left: 8),
-                                      child: Text(
-                                        bestselling[index]["price"],
-                                        style: GoogleFonts.robotoSlab(
-                                            color: Colors.grey[400]),
-                                      ),
-                                    ),
+                                        padding: const EdgeInsets.only(left: 8),
+                                        child: RichText(
+                                            text: TextSpan(children: [
+                                          TextSpan(
+                                              text: "₹ ",
+                                              style: TextStyle(
+                                                  color: Colors.grey[600])),
+                                          TextSpan(
+                                            text: bestselling[index]["price"]
+                                                .toString(),
+                                            style: GoogleFonts.robotoSlab(
+                                                color: Colors.grey[400]),
+                                          )
+                                        ]))
+                                       
+                                        ),
                                   ],
                                 ),
                               ),

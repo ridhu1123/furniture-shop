@@ -13,10 +13,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class Addtocart1 extends StatefulWidget {
   final proName;
-  const Addtocart1({
-    super.key,
-    this.proName,
-  });
+  var similarImages;
+
+  Addtocart1({super.key, this.proName, this.similarImages});
 
   @override
   State<Addtocart1> createState() => _Addtocart1State();
@@ -154,11 +153,17 @@ class _Addtocart1State extends State<Addtocart1> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            widget.proName["price"],
-                            style: GoogleFonts.robotoSlab(
-                                color: Colors.red, fontSize: 20),
-                          ),
+                          RichText(
+                              text: TextSpan(children: [
+                            TextSpan(
+                                text: "₹ ",
+                                style: TextStyle(color: Colors.grey[600])),
+                            TextSpan(
+                              text: widget.proName["price"].toString(),
+                              style: GoogleFonts.robotoSlab(
+                                  color: Colors.red, fontSize: 20),
+                            )
+                          ])),
                           Padding(
                             padding: const EdgeInsets.only(right: 10),
                             child: FivePointedStar(
@@ -241,14 +246,14 @@ class _Addtocart1State extends State<Addtocart1> {
                       LimitedBox(
                         maxHeight: 190,
                         child: ListView.builder(
-                          itemCount: colors.length,
+                          itemCount: widget.proName.length,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
                             return Padding(
                               padding: const EdgeInsets.only(
                                   top: 8, left: 8, right: 8),
-                              child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                              child: Stack(
+                                  // crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     GestureDetector(
                                       onTap: () {
@@ -470,22 +475,32 @@ class _Addtocart1State extends State<Addtocart1> {
                                                 BorderRadius.circular(6)),
                                         width: 160,
                                         height: 190,
-                                        child: const Align(
-                                          alignment: Alignment.topRight,
+                                        child: Image.network(
+                                          widget.proName["image"],
+                                          fit: BoxFit.fill,
+                                          width: double.infinity,
+                                          height: double.infinity,
                                         ),
                                       ),
                                     ),
                                     Align(
                                         alignment: Alignment.topLeft,
                                         child: Text(
-                                          " widget.newarrivals[index]",
+                                          widget.proName["name"],
                                           style: GoogleFonts.robotoSlab(),
                                         )),
-                                    Text(
-                                      " widget.newarrivals[index]",
-                                      style: GoogleFonts.robotoSlab(
-                                          color: Colors.grey[400]),
-                                    )
+                                    RichText(
+                                        text: TextSpan(children: [
+                                      TextSpan(
+                                          text: "₹ ",
+                                          style: TextStyle(
+                                              color: Colors.grey[600])),
+                                      TextSpan(
+                                        text: "${widget.proName["price"]}",
+                                        style: GoogleFonts.robotoSlab(
+                                            color: Colors.grey[400]),
+                                      )
+                                    ]))
                                   ],
                                 ),
                               );

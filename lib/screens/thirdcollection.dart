@@ -212,7 +212,8 @@ class _CybermondayState extends State<thirdcollection> {
                                 ),
                               ),
                               Text(
-                                widget.collection2["chair"][index]["price"],
+                                widget.collection2["chair"][index]["price"]
+                                    .toString(),
                                 style: GoogleFonts.robotoSlab(
                                     color: Colors.grey[400]),
                               ),
@@ -224,8 +225,8 @@ class _CybermondayState extends State<thirdcollection> {
                                 storeCartItems(
                                     widget.collection2["chair"][index]["name"],
                                     widget.collection2["chair"][index]["image"],
-                                    widget.collection2["chair"][index]
-                                        ["price"]);
+                                    widget.collection2["chair"][index]["price"]
+                                        .toString());
                               },
                               icon: Icon(
                                 Icons.shopping_bag,
@@ -301,7 +302,8 @@ class _CybermondayState extends State<thirdcollection> {
                                 ),
                               ),
                               Text(
-                                widget.collection2["lamp"][index]["price"],
+                                widget.collection2["lamp"][index]["price"]
+                                    .toString(),
                                 style: GoogleFonts.robotoSlab(
                                     color: Colors.grey[400]),
                               ),
@@ -313,7 +315,8 @@ class _CybermondayState extends State<thirdcollection> {
                                 storeCartItems(
                                     widget.collection2["lamp"][index]["name"],
                                     widget.collection2["lamp"][index]["image"],
-                                    widget.collection2["lamp"][index]["price"]);
+                                    widget.collection2["lamp"][index]["price"]
+                                        .toString());
                               },
                               icon: Icon(
                                 Icons.shopping_bag,
@@ -388,7 +391,8 @@ class _CybermondayState extends State<thirdcollection> {
                                 ),
                               ),
                               Text(
-                                widget.collection2["sofa"][index]["price"],
+                                widget.collection2["sofa"][index]["price"]
+                                    .toString(),
                                 style: GoogleFonts.robotoSlab(
                                     color: Colors.grey[400]),
                               ),
@@ -400,7 +404,8 @@ class _CybermondayState extends State<thirdcollection> {
                                 storeCartItems(
                                     widget.collection2["sofa"][index]["name"],
                                     widget.collection2["sofa"][index]["image"],
-                                    widget.collection2["sofa"][index]["price"]);
+                                    widget.collection2["sofa"][index]["price"]
+                                        .toString());
                               },
                               icon: Icon(
                                 Icons.shopping_bag,

@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:irohub_project/constants/sharedpreference.dart';
 import 'package:irohub_project/screens/cartscreen.dart';
 import 'package:irohub_project/screens/giftcardscreen.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -24,36 +26,61 @@ class _ProfilepageState extends State<Profilepage> {
   getcameraimage() async {
     final camerapicked =
         await ImagePicker().pickImage(source: ImageSource.camera);
-    setState(() {
-      if (camerapicked != null) {
-        _image1 = camerapicked.path;
-        _image = File(camerapicked.path);
-        print(json.encode(_image1));
-        print("filepath.............");
-      } else {
-        print("no image found");
-      }
-    });
+
+    if (camerapicked != null) {
+      _image1 = camerapicked.path;
+      _image = File(camerapicked.path);
+      final res = await FirebaseFirestore.instance
+          .collection("profile")
+          .doc()
+          .set({"image": _image});
+      final firebaseimage =
+          await FirebaseFirestore.instance.collection("profile").doc().get();
+      print("hlooooo ${firebaseimage.data()}");
+      prefimage = firebaseimage.data() as File;
+      // final SharedPreferences prefs = await SharedPreferences.getInstance();
+      // prefs.setString("image", _image.toString());
+      // prefimage = prefs.getString("image") as File;
+      print(json.encode(_image1));
+      print("filepath.............");
+    } else {
+      print("no image found");
+    }
   }
 
   getimage() async {
+    String profile = "profileimage";
     final pickedimage =
         await ImagePicker().pickImage(source: ImageSource.gallery);
-    setState(() {
-      if (pickedimage != null) {
-        _image1 = pickedimage.path;
-        _image = File(pickedimage.path);
-      } else {
-        print("no image found");
-      }
-    });
+
+    if (pickedimage != null) {
+      _image1 = pickedimage.path;
+      _image = File(pickedimage.path);
+
+      DocumentReference documentReference = FirebaseFirestore.instance
+          .collection("users")
+          .doc(shared_preferences_id);
+      CollectionReference collectionReference =
+          documentReference.collection(profile);
+      await collectionReference.doc().set({"image": _image});
+      // final firebaseimage =
+      //     await FirebaseFirestore.instance.collection("users").doc(shared_preferences_id).get();
+      // print("hlooooo ${.data()}");
+      // prefimage = firebaseimage.data() as File;
+      // final SharedPreferences prefs = await SharedPreferences.getInstance();
+      // prefs.setString("image", _image.toString());
+      // prefimage = prefs.getString("image") ;
+      print("prefimage   $prefimage");
+      print("image   $_image");
+    } else {
+      print("no image found");
+    }
   }
 
-  var prefimage;
+  File? prefimage;
   getpreferenceimage() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.getString("image");
-    prefimage = prefs;
+    prefimage = prefs.getString("image") as File;
   }
 
   @override
@@ -135,9 +162,6 @@ class _ProfilepageState extends State<Profilepage> {
                                             255, 219, 218, 218))),
                                 child: IconButton(
                                     onPressed: () async {
-                                      final SharedPreferences prefs =
-                                          await SharedPreferences.getInstance();
-                                      prefs.setString("image", image);
                                       getcameraimage();
                                       print("rrrrrrrrr $image");
                                     },
@@ -158,10 +182,6 @@ class _ProfilepageState extends State<Profilepage> {
                                             255, 219, 218, 218))),
                                 child: IconButton(
                                     onPressed: () async {
-                                      final SharedPreferences prefs =
-                                          await SharedPreferences.getInstance();
-                                      prefs.setString("image", image);
-
                                       var status =
                                           await Permission.storage.request();
                                       if (status == PermissionStatus.granted) {
@@ -205,10 +225,10 @@ class _ProfilepageState extends State<Profilepage> {
                 },
               );
             },
-            child: _image != null
+            child: prefimage != null
                 ? CircleAvatar(
                     radius: 60,
-                    backgroundImage: FileImage(_image!),
+                    backgroundImage: FileImage(prefimage!),
                   )
                 // Image.file(
                 //     _image!,

@@ -47,18 +47,7 @@ class _SofascreenState extends State<Sofascreen> {
 
   Future<void> storeCartItems(String name, String image, String price) async {
     try {
-      // Get.put(AuthenticationRepository());
-      // final userCredential = await AuthenticationRepository.instance
-      //     .registerWithEmailAndPassword(
-      //         emailcontroller.text.trim(), passwordcontroller.text.trim());
-
-      final newuser = UserModel(productname: name, image: image, price: price
-          // productId: userCredential.user!.uid,
-          // productname: widget.proName["name"],
-          // image: widget.proName["image"],
-          // price: "${widget.proName["price"]}",
-          // id: userCredential.user!.uid
-          );
+      final newuser = UserModel(productname: name, image: image, price: price);
 
       final userRepository = Get.put(UserRepository());
       await userRepository.saveCartRecord(newuser);
@@ -109,19 +98,29 @@ class _SofascreenState extends State<Sofascreen> {
                             )),
                         Align(
                           alignment: Alignment.bottomRight,
-                          child: IconButton(
-                              color: Colors.black,
-                              onPressed: () {
-                                storeCartItems(
-                                    widget.exploreimage[index]["name"],
-                                    widget.exploreimage[index]["image"],
-                                    widget.exploreimage[index]["price"]);
-                              },
-                              icon: Icon(
-                                Icons.shopping_bag,
-                                color: Color.fromARGB(255, 241, 71, 59),
-                                size: 18,
-                              )),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.black45,
+                                  borderRadius: BorderRadius.circular(5)),
+                              height: 30,
+                              width: 30,
+                              child: IconButton(
+                                  color: Colors.black,
+                                  onPressed: () {
+                                    storeCartItems(
+                                        widget.exploreimage[index]["name"],
+                                        widget.exploreimage[index]["image"],
+                                        "${widget.exploreimage[index]["price"]}");
+                                  },
+                                  icon: Icon(
+                                    Icons.shopping_cart,
+                                    color: Colors.white,
+                                    size: 18,
+                                  )),
+                            ),
+                          ),
                         )
                       ],
                     ),
@@ -137,10 +136,16 @@ class _SofascreenState extends State<Sofascreen> {
                     )),
                 Align(
                     alignment: Alignment.topLeft,
-                    child: Text(
-                      widget.exploreimage[index]["price"],
-                      style: GoogleFonts.robotoSlab(color: Colors.grey[400]),
-                    ))
+                    child: RichText(
+                        text: TextSpan(children: [
+                      TextSpan(
+                          text: "₹ ",
+                          style: TextStyle(color: Colors.grey[600])),
+                      TextSpan(
+                        text: widget.exploreimage[index]["price"].toString(),
+                        style: GoogleFonts.robotoSlab(color: Colors.grey[400]),
+                      )
+                    ])))
               ],
             ),
           );

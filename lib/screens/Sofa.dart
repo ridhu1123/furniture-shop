@@ -45,7 +45,7 @@ class _SofascreenState extends State<Sofascreen> {
     return items;
   }
 
-  Future<void> storeCartItems(String name, String image, String price) async {
+  Future<void> storeCartItems(String name, String image, int price) async {
     try {
       final newuser = UserModel(productname: name, image: image, price: price);
 
@@ -112,7 +112,7 @@ class _SofascreenState extends State<Sofascreen> {
                                     storeCartItems(
                                         widget.exploreimage[index]["name"],
                                         widget.exploreimage[index]["image"],
-                                        "${widget.exploreimage[index]["price"]}");
+                                        widget.exploreimage[index]["price"]);
                                   },
                                   icon: Icon(
                                     Icons.shopping_cart,

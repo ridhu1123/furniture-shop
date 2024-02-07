@@ -18,7 +18,7 @@ class _SofascreenState extends State<googlemap> {
       Completer<GoogleMapController>();
   Location _locationcontroller = new Location();
   static const LatLng _pgoogleplex = LatLng(37.42223, -122.0848);
-  static const LatLng _noWayhome = LatLng(11.740460, 75.634930);
+  static const LatLng _noWayhome = LatLng(9.99709, 76.302815);
   LatLng? _current = null;
   @override
   void initState() {
@@ -36,7 +36,6 @@ class _SofascreenState extends State<googlemap> {
       myLocationEnabled: true,
       mapToolbarEnabled: true,
       myLocationButtonEnabled: true,
-
       onMapCreated: ((GoogleMapController controller) =>
           _mapcontroller.complete(controller)),
       initialCameraPosition: CameraPosition(target: _pgoogleplex, zoom: 13),
@@ -57,8 +56,7 @@ class _SofascreenState extends State<googlemap> {
             icon: BitmapDescriptor.defaultMarker,
             position: _noWayhome),
       },
-    )
-        );
+    ));
   }
 
   Future<void> _cameraTopostion(LatLng pos) async {

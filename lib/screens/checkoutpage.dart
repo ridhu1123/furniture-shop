@@ -14,6 +14,7 @@ class Checkoutscreen extends StatefulWidget {
 }
 
 class _CheckoutscreenState extends State<Checkoutscreen> {
+  final controller = Get.put(UserRepository());
   String _selectedvalue = "1";
   String _selectedvalue1 = "1";
 
@@ -387,40 +388,9 @@ class _CheckoutscreenState extends State<Checkoutscreen> {
             Divider(
               thickness: 0.5,
             ),
+            Spacer(),
             Padding(
               padding: const EdgeInsets.only(left: 8, right: 8, bottom: 5),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Shipping fee",
-                    style: GoogleFonts.robotoSlab(color: Colors.grey[400]),
-                  ),
-                  Text(
-                    "€6.7",
-                    style: GoogleFonts.robotoSlab(color: Colors.grey[400]),
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 8, right: 8, bottom: 5),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Shipping fee",
-                    style: GoogleFonts.robotoSlab(color: Colors.grey[400]),
-                  ),
-                  Text(
-                    "€6.7",
-                    style: GoogleFonts.robotoSlab(color: Colors.grey[400]),
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 8, right: 8, top: 5),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -430,7 +400,7 @@ class _CheckoutscreenState extends State<Checkoutscreen> {
                         color: Colors.black, fontWeight: FontWeight.w500),
                   ),
                   Text(
-                    "€6.7",
+                    "₹ ${controller.total}",
                     style: GoogleFonts.robotoSlab(
                         color: Colors.black, fontWeight: FontWeight.w500),
                   )

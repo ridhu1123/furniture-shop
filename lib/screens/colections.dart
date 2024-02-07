@@ -156,7 +156,7 @@ class _CollectionsState extends State<Collections> {
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
                   return LimitedBox(
-                    maxHeight: 630,
+                    maxHeight: MediaQuery.of(context).size.height,
                     child: ListView.builder(
                       itemCount: 3,
                       itemBuilder: (context, index) {

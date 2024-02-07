@@ -30,14 +30,14 @@ class _ProfilepageState extends State<Profilepage> {
     if (camerapicked != null) {
       _image1 = camerapicked.path;
       _image = File(camerapicked.path);
-      final res = await FirebaseFirestore.instance
-          .collection("profile")
-          .doc()
-          .set({"image": _image});
-      final firebaseimage =
-          await FirebaseFirestore.instance.collection("profile").doc().get();
-      print("hlooooo ${firebaseimage.data()}");
-      prefimage = firebaseimage.data() as File;
+      // final res = await FirebaseFirestore.instance
+      //     .collection("profile")
+      //     .doc()
+      //     .set({"image": _image});
+      // final firebaseimage =
+      //     await FirebaseFirestore.instance.collection("profile").doc().get();
+      // print("hlooooo ${firebaseimage.data()}");
+      // prefimage = firebaseimage.data() as File;
       // final SharedPreferences prefs = await SharedPreferences.getInstance();
       // prefs.setString("image", _image.toString());
       // prefimage = prefs.getString("image") as File;
@@ -49,20 +49,20 @@ class _ProfilepageState extends State<Profilepage> {
   }
 
   getimage() async {
-    String profile = "profileimage";
+    // String profile = "profileimage";
     final pickedimage =
         await ImagePicker().pickImage(source: ImageSource.gallery);
 
     if (pickedimage != null) {
       _image1 = pickedimage.path;
       _image = File(pickedimage.path);
-
-      DocumentReference documentReference = FirebaseFirestore.instance
-          .collection("users")
-          .doc(shared_preferences_id);
-      CollectionReference collectionReference =
-          documentReference.collection(profile);
-      await collectionReference.doc().set({"image": _image});
+      print(" image $_image");
+      // DocumentReference documentReference = FirebaseFirestore.instance
+      //     .collection("users")
+      //     .doc(shared_preferences_id);
+      // CollectionReference collectionReference =
+      //     documentReference.collection(profile);
+      // await collectionReference.doc().set({"image": _image});
       // final firebaseimage =
       //     await FirebaseFirestore.instance.collection("users").doc(shared_preferences_id).get();
       // print("hlooooo ${.data()}");
@@ -70,8 +70,8 @@ class _ProfilepageState extends State<Profilepage> {
       // final SharedPreferences prefs = await SharedPreferences.getInstance();
       // prefs.setString("image", _image.toString());
       // prefimage = prefs.getString("image") ;
-      print("prefimage   $prefimage");
-      print("image   $_image");
+      // print("prefimage   $prefimage");
+      // print("image   $_image");
     } else {
       print("no image found");
     }
@@ -163,7 +163,7 @@ class _ProfilepageState extends State<Profilepage> {
                                 child: IconButton(
                                     onPressed: () async {
                                       getcameraimage();
-                                      print("rrrrrrrrr $image");
+                                      print("rrrrrrrrr $_image");
                                     },
                                     icon: Icon(
                                       Icons.camera_alt_rounded,
@@ -186,6 +186,7 @@ class _ProfilepageState extends State<Profilepage> {
                                           await Permission.storage.request();
                                       if (status == PermissionStatus.granted) {
                                         getimage();
+                                        print("hhhhhhhh $_image");
                                       } else {
                                         print("ssssssssssssssssss");
                                       }
@@ -225,10 +226,10 @@ class _ProfilepageState extends State<Profilepage> {
                 },
               );
             },
-            child: prefimage != null
+            child: _image != null
                 ? CircleAvatar(
                     radius: 60,
-                    backgroundImage: FileImage(prefimage!),
+                    backgroundImage: FileImage(_image!),
                   )
                 // Image.file(
                 //     _image!,

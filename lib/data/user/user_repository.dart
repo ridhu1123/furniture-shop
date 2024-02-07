@@ -12,7 +12,7 @@ class UserRepository extends GetxController {
   }
 
   var id;
-
+  RxInt total = 0.obs;
   List<Map<String, dynamic>> allDocument = [];
   var userid;
   static UserRepository get instance => Get.find();
@@ -21,34 +21,17 @@ class UserRepository extends GetxController {
     print("hhhhhhhhhhhh");
     try {
       await _db.collection("users").doc(user.id).set(user.toJson());
-
-      // SharedPreferences preferences = await SharedPreferences.getInstance();
-      // var uid = preferences.getString("id");
-      // id = uid;
-      // print('id is $id');
-      // print(user.image);
-      // var res = await _db.collection("users").doc(user.id).get();
-      // userid = res.id;
-      // print("sssssssssss ${userid}");
-      // cartscreen(id: userid);
     } catch (e) {
       throw "Somthing went wrong $e";
     }
   }
 
-  //CartItemModel user,
   Future<void> saveCartRecord(UserModel user) async {
-    // String myCart = "myCart";
-    // var res = await _db.collection("users").doc(id).get();
     String cartedItems = "cartedItems";
-    // String allItems = "allItems";
     DocumentReference documentReference =
         _db.collection("users").doc(shared_preferences_id);
     CollectionReference collectionReference =
         documentReference.collection(cartedItems);
-    // DocumentReference childocumentReference = collectionReference.doc(allItems);
-    // print("hhhhhhhhhhhh");
-    // print("sssssssssss ${userid}");
     try {
       await collectionReference.add(user.toMyCart());
     } catch (e) {
@@ -56,45 +39,53 @@ class UserRepository extends GetxController {
     }
   }
 
- Stream<List<Map<String, dynamic>>> getItemsStream() {
-  try {
-    Stream<QuerySnapshot> querySnapshotStream = FirebaseFirestore.instance
-        .collection("users")
-        .doc(shared_preferences_id)
-        .collection("cartedItems")
-        .snapshots();
+  Stream<List<Map<String, dynamic>>> getItemsStream() {
+    try {
+      Stream<QuerySnapshot> querySnapshotStream = FirebaseFirestore.instance
+          .collection("users")
+          .doc(shared_preferences_id)
+          .collection("cartedItems")
+          .snapshots();
 
-    return querySnapshotStream.map((querySnapshot) {
-      List<Map<String, dynamic>> allDocuments = [];
-      querySnapshot.docs.forEach((doc) {
-        Map<String, dynamic> documentData = doc.data() as Map<String, dynamic>;
-        allDocuments.add(documentData);
+      return querySnapshotStream.map((querySnapshot) {
+        List<Map<String, dynamic>> allDocuments = [];
+        int calculatedTotal = 0;
+        querySnapshot.docs.forEach((doc) {
+          Map<String, dynamic> documentData =
+              doc.data() as Map<String, dynamic>;
+          allDocuments.add(documentData);
+
+          // totalprice = doc["price"] as int;
+          // print(" total  $totalprice");
+        });
+
+        return allDocuments;
       });
-      return allDocuments;
-    });
-  } catch (e) {
-    // You might want to handle errors appropriately here
-    print("Error fetching items: $e");
-    return Stream.empty(); // Return an empty stream in case of error
+    } catch (e) {
+      print("Error fetching items: $e");
+      return Stream.empty();
+    }
   }
-}
 
- Future<void> saveCheckOutRecord(UserModel user) async {
-    // String myCart = "myCart";
-    // var res = await _db.collection("users").doc(id).get();
+  Future<void> saveCheckOutRecord(UserModel user) async {
     String CheckOutDetails = "CheckOutDetails";
-    // String allItems = "allItems";
     DocumentReference documentReference =
         _db.collection("users").doc(shared_preferences_id);
     CollectionReference collectionReference =
         documentReference.collection(CheckOutDetails);
-    // DocumentReference childocumentReference = collectionReference.doc(allItems);
-    // print("hhhhhhhhhhhh");
-    // print("sssssssssss ${userid}");
     try {
       await collectionReference.add(user.toMyCheckOut());
     } catch (e) {
       throw "Somthing went wrong $e";
     }
+  }
+
+  void calculateTotalPrice(List<Map<String, dynamic>> cartItems) {
+    int calculatedTotal = 0;
+    cartItems.forEach((doc) {
+      calculatedTotal += (doc['price'] ?? 0) as int;
+    });
+    total.value = calculatedTotal;
+    print("total   $total");
   }
 }

@@ -6,7 +6,7 @@ class UserModel {
   String? peymentMethods;
   String? productname;
   String? image;
-  String? price;
+  int? price;
   final String? id;
   String? name;
   final String? email;

@@ -76,7 +76,7 @@ class _Addtocart1State extends State<Addtocart1> {
       final newuser = UserModel(
           productname: widget.proName["name"],
           image: widget.proName["image"],
-          price: "${widget.proName["price"]}"
+          price: widget.proName["price"]
           // productId: userCredential.user!.uid,
           // productname: widget.proName["name"],
           // image: widget.proName["image"],

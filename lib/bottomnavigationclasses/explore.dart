@@ -16,8 +16,6 @@ class Explorescreen extends StatefulWidget {
 }
 
 class _ExplorescreenState extends State<Explorescreen> {
-  Map<String, List<String>> folderImageUrls = {};
-
   var item = [];
   var bestsellers = [];
   getcategories() async {
@@ -151,6 +149,7 @@ class _ExplorescreenState extends State<Explorescreen> {
                 child: Showallbutton(text: "Best sellers")),
             Container(
               height: 580,
+              width: double.infinity,
               child: GridView.builder(
                 // physics: NeverScrollableScrollPhysics(),
                 itemCount: bestsellers.length,

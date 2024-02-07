@@ -39,7 +39,7 @@ class _CybermondayState extends State<thirdcollection> {
     print("mmmmmmmmmmmm ${thirdcollection}");
   }
 
-  Future<void> storeCartItems(String name, String image, String price) async {
+  Future<void> storeCartItems(String name, String image, int price) async {
     try {
       // Get.put(AuthenticationRepository());
       // final userCredential = await AuthenticationRepository.instance
@@ -225,8 +225,8 @@ class _CybermondayState extends State<thirdcollection> {
                                 storeCartItems(
                                     widget.collection2["chair"][index]["name"],
                                     widget.collection2["chair"][index]["image"],
-                                    widget.collection2["chair"][index]["price"]
-                                        .toString());
+                                    widget.collection2["chair"][index]
+                                        ["price"]);
                               },
                               icon: Icon(
                                 Icons.shopping_bag,
@@ -315,8 +315,7 @@ class _CybermondayState extends State<thirdcollection> {
                                 storeCartItems(
                                     widget.collection2["lamp"][index]["name"],
                                     widget.collection2["lamp"][index]["image"],
-                                    widget.collection2["lamp"][index]["price"]
-                                        .toString());
+                                    widget.collection2["lamp"][index]["price"]);
                               },
                               icon: Icon(
                                 Icons.shopping_bag,
@@ -404,8 +403,7 @@ class _CybermondayState extends State<thirdcollection> {
                                 storeCartItems(
                                     widget.collection2["sofa"][index]["name"],
                                     widget.collection2["sofa"][index]["image"],
-                                    widget.collection2["sofa"][index]["price"]
-                                        .toString());
+                                    widget.collection2["sofa"][index]["price"]);
                               },
                               icon: Icon(
                                 Icons.shopping_bag,

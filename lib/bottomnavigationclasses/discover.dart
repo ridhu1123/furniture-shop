@@ -202,11 +202,13 @@ class _DiscoverState extends State<Discover> {
                                               bottom: BorderSide(
                                                   color: Colors.black,
                                                   width: 1.0))),
-                                      child: Text(
-                                        "SHOP NOW",
-                                        style: GoogleFonts.robotoSlab(
-                                          fontSize: 10,
-                                          color: Colors.white,
+                                      child: Center(
+                                        child: Text(
+                                          "SHOP NOW",
+                                          style: GoogleFonts.robotoSlab(
+                                            fontSize: 10,
+                                            color: Colors.white,
+                                          ),
                                         ),
                                       ),
                                     )),
@@ -391,9 +393,7 @@ Winter""",
                                             style: GoogleFonts.robotoSlab(
                                                 color: Colors.grey[400]),
                                           )
-                                        ]))
-                                       
-                                        ),
+                                        ]))),
                                   ],
                                 ),
                               ),
@@ -402,29 +402,25 @@ Winter""",
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(top: 20),
-                                child: Container(
-                                  height: 35,
-                                  width: 100,
-                                  child: ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    Addtocart1(
-                                                      proName:
-                                                          bestselling[index],
-                                                    )));
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                          shape: RoundedRectangleBorder(),
-                                          backgroundColor: Colors.black),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                            border: Border(
-                                                bottom: BorderSide(
-                                                    color: Colors.black,
-                                                    width: 1.0))),
+                                child: ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => Addtocart1(
+                                                    proName: bestselling[index],
+                                                  )));
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                        shape: RoundedRectangleBorder(),
+                                        backgroundColor: Colors.black),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          border: Border(
+                                              bottom: BorderSide(
+                                                  color: Colors.black,
+                                                  width: 1.0))),
+                                      child: Center(
                                         child: Text(
                                           "SHOP NOW",
                                           style: GoogleFonts.robotoSlab(
@@ -432,8 +428,8 @@ Winter""",
                                             color: Colors.white,
                                           ),
                                         ),
-                                      )),
-                                ),
+                                      ),
+                                    )),
                               ),
                             ],
                           ),

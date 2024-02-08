@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:irohub_project/constants/sharedpreference.dart';
 import 'package:irohub_project/screens/cartscreen.dart';
 import 'package:irohub_project/screens/giftcardscreen.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -16,6 +18,13 @@ class Profilepage extends StatefulWidget {
 }
 
 class _ProfilepageState extends State<Profilepage> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getProfileDetails();
+  }
+
   String image = "";
   File? _image;
   String _image1 = "";
@@ -78,6 +87,16 @@ class _ProfilepageState extends State<Profilepage> {
   getpreferenceimage() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefimage = prefs.getString("image") as File;
+  }
+
+  List<dynamic> details = [];
+  getProfileDetails() async {
+    final res = await FirebaseFirestore.instance
+        .collection("users")
+        .doc(shared_preferences_id)
+        .get();
+    details.add(res.data());
+    print(details);
   }
 
   @override
@@ -244,13 +263,13 @@ class _ProfilepageState extends State<Profilepage> {
         ),
         Center(
           child: Text(
-            "Gregory Bates",
+            "Username",
             style: GoogleFonts.robotoSlab(),
           ),
         ),
         Center(
           child: Text(
-            "samir.runte@newell.org",
+            "username@email.com",
             style: GoogleFonts.robotoSlab(color: Colors.grey, fontSize: 10),
           ),
         ),

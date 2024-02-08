@@ -131,14 +131,14 @@ class _HomescreenState extends State<Homescreen> {
                       leading: CircleAvatar(
                         radius: 30,
                         backgroundImage: NetworkImage(
-                            "https://img.freepik.com/free-vector/handsome-man-face-cartoon_1308-150481.jpg"),
+                            "https://i.pinimg.com/564x/39/94/fb/3994fb52d1f983d003ed6f084366bdab.jpg"),
                       ),
                       title: Text(
-                        "Gregory Bates",
+                        "Username",
                         style: GoogleFonts.robotoSlab(),
                       ),
                       subtitle: Text(
-                        "samir.runte@newell.org",
+                        "sUsername@gmail.com",
                         style: GoogleFonts.robotoSlab(
                             color: Colors.grey, fontSize: 10),
                       ),

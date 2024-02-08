@@ -43,7 +43,7 @@ class UserModel {
       "payementMethod": peymentMethods
     };
   }
-
+  
   //  UserModel.fromjson(DocumentSnapshot snapshot) {
 
   //  name=snapshot.data()["name"];

@@ -20,7 +20,6 @@ class _LoginscreenState extends State<Loginscreen> {
   static Loginscreen get instance => Get.find();
   final FirebaseAuth auth = FirebaseAuth.instance;
 
-
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(LoginController());
@@ -97,11 +96,6 @@ class _LoginscreenState extends State<Loginscreen> {
                       padding: const EdgeInsets.all(17.0),
                       child: ElevatedButton(
                         onPressed: () async {
-                          SharedPreferences prefs =
-                              await SharedPreferences.getInstance();
-                          // prefs.setString(
-                          //     "email", controller.emailcontroller.text);
-                          prefs.setString("id", shared_preferences_id);
 
                           controller.signIn();
                           print("value is $shared_preferences_id");

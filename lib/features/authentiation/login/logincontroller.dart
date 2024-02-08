@@ -69,12 +69,13 @@ class LoginController {
       SharedPreferences preferences = await SharedPreferences.getInstance();
       preferences.setString("id", userCredentials!.user!.uid);
       shared_preferences_id = userCredentials.user!.uid;
+      TFullScreenLoader.openLoadingDialog(
+          "assets/Animation - 1705692235217.json");
       // save user records
       await userController.saveUserRecordFromGoogle(userCredentials);
       preferences.setString("email", "name");
       // Remove loader
-      TFullScreenLoader.openLoadingDialog(
-          "assets/Animation - 1705692235217.json");
+
       TFullScreenLoader.stopLoading();
 
       // TFullScreenLoader.stopLoading();

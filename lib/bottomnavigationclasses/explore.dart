@@ -32,12 +32,6 @@ class _ExplorescreenState extends State<Explorescreen> {
 
     setState(() {});
     return item;
-    // var res1 = await FirebaseFirestore.instance
-    //     .collection("products")
-    //     .doc("categories")
-    //     .collection(items.toString())
-    //     .get();
-    // print(res1.docs);
   }
 
   @override

@@ -1,18 +1,11 @@
-import 'dart:ffi';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:irohub_project/screens/Filterscreen.dart';
 import 'package:irohub_project/screens/addtocart.dart';
 import 'package:irohub_project/screens/colections.dart';
 import 'package:irohub_project/screens/showallscreen.dart';
 import 'package:irohub_project/widget/textandshowall.dart';
-
-import '../screens/secondcollection.dart';
 
 class Discover extends StatefulWidget {
   const Discover({super.key});
@@ -274,41 +267,6 @@ Winter""",
                                         fontSize: 25,
                                         fontWeight: FontWeight.w500),
                                   )),
-                              Positioned(
-                                bottom: 10,
-                                left: 25,
-                                child: TextButton(
-                                    onPressed: () {
-                                      // Navigator.push(
-                                      //     context,
-                                      //     MaterialPageRoute(
-                                      //         builder: (context) =>
-                                      //             Secondcollectionpage()));
-                                    },
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          decoration: BoxDecoration(
-                                              border: Border(
-                                                  bottom: BorderSide(
-                                                      color: Colors.black,
-                                                      width: 1.0))),
-                                          child: Text(
-                                            "SHOP NOW",
-                                            style: GoogleFonts.robotoSlab(
-                                              fontSize: 10,
-                                              color: const Color.fromARGB(
-                                                  255, 0, 0, 0),
-                                            ),
-                                          ),
-                                        ),
-                                        Icon(
-                                          Icons.arrow_right,
-                                          color: Colors.black,
-                                        )
-                                      ],
-                                    )),
-                              ),
                             ],
                           ),
                         ),

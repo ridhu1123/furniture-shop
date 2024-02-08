@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
     
     <application
-        android:label="irohub_project"
+        android:label="NoWay Home"
         android:requestLegacyExternalStorage="true"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon"

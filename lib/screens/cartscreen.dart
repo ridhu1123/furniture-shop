@@ -8,7 +8,6 @@ import 'package:irohub_project/data/user/usermodel.dart';
 import 'package:irohub_project/screens/checkoutpage.dart';
 import 'package:irohub_project/screens/homescreen.dart';
 import 'package:lottie/lottie.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class cartscreen extends StatefulWidget {
   final allitems;
@@ -60,7 +59,7 @@ class _cartscreenState extends State<cartscreen> {
           .collection("users")
           .doc(shared_preferences_id)
           .collection("cartedItems")
-          .doc(cartItemId); // Use the document ID of the item to be deleted
+          .doc(cartItemId);
       await documentReference.delete();
     } catch (e) {
       throw "Something went wrong $e";
@@ -75,7 +74,6 @@ class _cartscreenState extends State<cartscreen> {
   final UserModel user = UserModel();
   @override
   Widget build(BuildContext context) {
-    final controller1 = UserRepository.instance;
     return Scaffold(
       bottomNavigationBar: InkWell(
         onTap: () {
@@ -155,7 +153,7 @@ class _cartscreenState extends State<cartscreen> {
                   } else if (snapshot.hasData) {
                     List<Map<String, dynamic>> items = snapshot.data!;
                     controller.calculateTotalPrice(items);
-                    //  total += items[Index]["price"];
+
                     if (items.isEmpty) {
                       return Column(
                         children: [
@@ -191,25 +189,6 @@ class _cartscreenState extends State<cartscreen> {
                                   fontWeight: FontWeight.w500),
                             ),
                           ),
-                          // SizedBox(height: 20),
-                          // Align(
-                          //   alignment: Alignment.center,
-                          //   child: Container(
-                          //     height: 40,
-                          //     width: 150,
-                          //     child: ElevatedButton(
-                          //       onPressed: () {
-                          //         Navigator.push(context,
-                          //             MaterialPageRoute(builder: (context) => Homescreen()));
-                          //       },
-                          //       style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
-                          //       child: Text(
-                          //         "Go Shopping",
-                          //         style: GoogleFonts.robotoSlab(color: Colors.white),
-                          //       ),
-                          //     ),
-                          //   ),
-                          // ),
                         ],
                       );
                     } else {
@@ -263,20 +242,7 @@ class _cartscreenState extends State<cartscreen> {
                                                     height: double.infinity,
                                                   ),
                                                 ),
-                                                // Positioned(
-                                                //   left: 10,
-                                                //   top: 5,
-                                                //   child: CircleAvatar(
-                                                //     radius: 10,
-                                                //     backgroundColor: Colors.black,
-                                                //     child: Text(
-                                                //       "1",
-                                                //       style: GoogleFonts.robotoSlab(
-                                                //           fontSize: 10,
-                                                //           color: Colors.white),
-                                                //     ),
-                                                //   ),
-                                                // )
+                                             
                                               ],
                                             ),
                                           ),

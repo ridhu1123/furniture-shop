@@ -2,8 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:irohub_project/constants/sharedpreference.dart';
 import 'package:irohub_project/data/user/usermodel.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 class UserRepository extends GetxController {
   @override
   void onInit() {
@@ -49,7 +47,7 @@ class UserRepository extends GetxController {
 
       return querySnapshotStream.map((querySnapshot) {
         List<Map<String, dynamic>> allDocuments = [];
-        int calculatedTotal = 0;
+        
         querySnapshot.docs.forEach((doc) {
           Map<String, dynamic> documentData =
               doc.data() as Map<String, dynamic>;

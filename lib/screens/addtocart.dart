@@ -1,15 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:five_pointed_star/five_pointed_star.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:irohub_project/data/user/user_repository.dart';
 import 'package:irohub_project/data/user/usermodel.dart';
-import 'package:irohub_project/features/shop/controllers/cartcontroller.dart';
-import 'package:irohub_project/features/shop/models/cart_item_model.dart';
-import 'package:irohub_project/firebase/authenticationRep.dart';
 import 'package:irohub_project/widget/loaders/snakbar.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class Addtocart1 extends StatefulWidget {
   final proName;
@@ -46,49 +41,23 @@ class _Addtocart1State extends State<Addtocart1> {
   bool onclick = false;
   int itemcount = 0;
   int itemcount1 = 0;
-
-  // getAllData() async {
-  //   // print('''dfdfdfdfdfdfdfdfdf''');
-  //   var res = await FirebaseFirestore.instance
-  //       .collection("products")
-  //       .doc("new")
-  //       .collection(widget.proName)
-  //       .doc("details")
-  //       .get();
-  //   // print(res.data());
-  //   // print('--------------------------------');
-  // }
-
   @override
   void initState() {
-    // getAllData();
     super.initState();
   }
 
   var id;
   Future<void> storeCartItems() async {
     try {
-      // Get.put(AuthenticationRepository());
-      // final userCredential = await AuthenticationRepository.instance
-      //     .registerWithEmailAndPassword(
-      //         emailcontroller.text.trim(), passwordcontroller.text.trim());
-
       final newuser = UserModel(
           productname: widget.proName["name"],
           image: widget.proName["image"],
-          price: widget.proName["price"]
-          // productId: userCredential.user!.uid,
-          // productname: widget.proName["name"],
-          // image: widget.proName["image"],
-          // price: "${widget.proName["price"]}",
-          // id: userCredential.user!.uid
-          );
+          price: widget.proName["price"]);
 
       final userRepository = Get.put(UserRepository());
       await userRepository.saveCartRecord(newuser);
       SnackBarLoader.successSnackbar(
           title: "", message: "Item added succesfully");
-      // print("ddddddddddddd ${userRepository}");
     } catch (e) {
       print("fuck....$e");
     }
@@ -96,10 +65,6 @@ class _Addtocart1State extends State<Addtocart1> {
 
   @override
   Widget build(BuildContext context) {
-    // var templist=[];
-    // if(){
-
-    // }
     return Scaffold(
       body: SafeArea(
         child: CustomScrollView(
@@ -228,19 +193,6 @@ class _Addtocart1State extends State<Addtocart1> {
                             style: GoogleFonts.robotoSlab(
                                 fontWeight: FontWeight.w600, fontSize: 18),
                           ),
-                          // TextButton(
-                          //     onPressed: () {},
-                          //     style: TextButton.styleFrom(
-                          //         foregroundColor: Colors.black),
-                          //     child: Row(
-                          //       children: [
-                          //         Text(
-                          //           "Show all",
-                          //           style: GoogleFonts.robotoSlab(fontSize: 12),
-                          //         ),
-                          //       const  Icon(Icons.arrow_right)
-                          //   ],
-                          // ))
                         ],
                       ),
                       LimitedBox(
@@ -252,27 +204,24 @@ class _Addtocart1State extends State<Addtocart1> {
                             return Padding(
                               padding: const EdgeInsets.only(
                                   top: 8, left: 8, right: 8),
-                              child: Stack(
-                                  // crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    GestureDetector(
-                                      onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    Addtocart1()));
-                                      },
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                            color: Colors.grey[200],
-                                            borderRadius:
-                                                BorderRadius.circular(6)),
-                                        width: 130,
-                                        height: 150,
-                                      ),
-                                    ),
-                                  ]),
+                              child: Stack(children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                Addtocart1()));
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        color: Colors.grey[200],
+                                        borderRadius: BorderRadius.circular(6)),
+                                    width: 130,
+                                    height: 150,
+                                  ),
+                                ),
+                              ]),
                             );
                           },
                         ),
@@ -521,25 +470,12 @@ class _Addtocart1State extends State<Addtocart1> {
           width: double.infinity,
           child: ElevatedButton(
               onPressed: () async {
-                // setState(() {
-                //   onclick = true;
-                // });
-                // SharedPreferences preferences =
-                //     await SharedPreferences.getInstance();
-                // var uid = preferences.getString("id");
-                // id = uid;
-                // print('id is $id');
                 storeCartItems();
-                // if (onclick = true) {
-                //   Navigator.push(context,
-                //       MaterialPageRoute(builder: (context) => cartscreen()));
-                // }
               },
               style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(),
                   backgroundColor: Colors.black),
               child: Text(
-                // onclick == true ? "GO TO CART" :
                 "ADD TO CART",
                 style: GoogleFonts.robotoSlab(color: Colors.white),
               )),

@@ -1,16 +1,10 @@
-import 'dart:ffi';
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:irohub_project/screens/cartscreen.dart';
 import 'package:irohub_project/screens/secondcollection.dart';
-import 'package:path/path.dart';
-import 'package:path_provider/path_provider.dart';
+
 
 class Collections extends StatefulWidget {
   const Collections({super.key});
@@ -23,7 +17,7 @@ class _CollectionsState extends State<Collections> {
   @override
   void initState() {
     // TODO: implement initState
-
+   super.initState();
     getdatafromthirdcollection();
   }
 
@@ -37,63 +31,6 @@ class _CollectionsState extends State<Collections> {
     print("hhhhhhhhhhhhhh ${res.data()}");
     print("3333333333333333 ${bigsale}");
   }
-  // Future<void> uploadImage(String imageName) async {
-  //   final Directory tempDir = await getTemporaryDirectory();
-  //   final File file = await File('${tempDir.path}/$imageName').create();
-
-  //   await file.writeAsBytes(
-  //       (await rootBundle.load('assets/$imageName')).buffer.asUint8List());
-
-  //   try {
-  //     await FirebaseStorage.instance
-  //         .ref('collection1 images/$imageName')
-  //         .putFile(file);
-  //   } on FirebaseException catch (e) {
-  //     // Handle any errors
-  //     print(e);
-  //   }
-  // }
-  // Future<void> uploadtofirestore() async {
-  //   await FirebaseFirestore.instance
-  //       .collection("collections")
-  //       .doc("allcollections")
-  //       .set({
-  //     "items": [
-  //       {
-  //         "image": images[0],
-  //         "shortname": shortname[0],
-  //         "names": names[0],
-  //       },
-  //       {
-  //         "image": images[1],
-  //         "shortname": shortname[1],
-  //         "names": names[1],
-  //       },
-  //       {
-  //         "image": images[2],
-  //         "shortname": shortname[2],
-  //         "names": names[2],
-  //       },
-  //     ],
-  //     "nextitems": [
-  //       {
-  //         "image": images1[0],
-  //         "shortname": shortname[0],
-  //         "names": names[0],
-  //       },
-  //       {
-  //         "image": images1[1],
-  //         "shortname": shortname[1],
-  //         "names": names[1],
-  //       },
-  //       {
-  //         "image": images1[2],
-  //         "shortname": shortname[2],
-  //         "names": names[2],
-  //       },
-  //     ]
-  //   });
-  // }
   var collection = [];
   var collection1 = [];
   getdatasfromfirestore() async {
@@ -107,9 +44,6 @@ class _CollectionsState extends State<Collections> {
 
   @override
   Widget build(BuildContext context) {
-    // for (var image in images1) {
-    //   uploadImage(basename(image));
-    // }
     return Scaffold(
       body: ListView(
         children: [
@@ -203,16 +137,6 @@ class _CollectionsState extends State<Collections> {
                                   left: 25,
                                   child: TextButton(
                                       onPressed: () {
-                                        //                              if (FirebaseAuth.instance.currentUser != null) {
-                                        // // User is signed in, proceed with Firestore write operation
-
-                                        //                          await
-                                        //                       } else {
-                                        // // User is not signed in, handle accordingly (e.g., prompt user to sign in)
-                                        //                      print("User is not signed in");
-                                        //                     }
-                                        print(
-                                            "coleeeeeeeeeeeeeeeeee ${collection1[index]}");
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(

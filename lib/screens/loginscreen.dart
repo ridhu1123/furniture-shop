@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:irohub_project/constants/sharedpreference.dart';
 import 'package:irohub_project/features/authentiation/login/logincontroller.dart';
-import 'package:irohub_project/features/authentiation/usercontroller/usercontroller.dart';
 import 'package:irohub_project/screens/forgetpassword.dart';
 import 'package:irohub_project/screens/signupscreen.dart';
 import 'package:irohub_project/utils/validators/validation.dart';
@@ -20,23 +19,11 @@ class Loginscreen extends StatefulWidget {
 class _LoginscreenState extends State<Loginscreen> {
   static Loginscreen get instance => Get.find();
   final FirebaseAuth auth = FirebaseAuth.instance;
-  // Future<UserCredential> facebooksignin() async {
-  //   final LoginResult loginResult = await FacebookAuth.instance.login();
-  //   final OAuthCredential facebookAuthCredential =
-  //       FacebookAuthProvider.credential(loginResult.accessToken!.token);
-  //   return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
-  // }
-  // getSharedPreferenceData() async {
-  //   SharedPreferences preferences = await SharedPreferences.getInstance();
-  //   var uid = preferences.getString("id");
-  //   shared_preferences_id = uid;
-  //   print('id is $shared_preferences_id');
-  // }
+
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(LoginController());
-    final userController = Get.put(Usercontroller());
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(

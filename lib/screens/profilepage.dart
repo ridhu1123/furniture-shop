@@ -1,11 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:irohub_project/constants/sharedpreference.dart';
 import 'package:irohub_project/screens/cartscreen.dart';
 import 'package:irohub_project/screens/giftcardscreen.dart';
 import 'package:permission_handler/permission_handler.dart';

@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -345,44 +344,7 @@ class _CheckoutscreenState extends State<Checkoutscreen> {
                       )
                     ],
                   )
-                  // ListView.separated(
-                  //   physics: NeverScrollableScrollPhysics(),
-                  //   separatorBuilder: (context, index) => Padding(
-                  //     padding: const EdgeInsets.only(left: 8, right: 8),
-                  //     child: Divider(),
-                  //   ),
-                  //   itemCount: paymentimages.length,
-                  //   itemBuilder: (context, index) {
-                  //     return Padding(
-                  //       padding: const EdgeInsets.only(top: 14),
-                  //       child: ListTile(
-                  //         leading: CircleAvatar(
-                  //           backgroundColor: Colors.white,
-                  //           backgroundImage: AssetImage(paymentimages[index]),
-                  //         ),
-                  //         title: Text(
-                  //           paymentid[index],
-                  //           style: GoogleFonts.robotoSlab(
-                  //               fontWeight: FontWeight.w600,
-                  //               color: Colors.grey[700]),
-                  //         ),
-                  //         subtitle: Text(
-                  //           paymentname[index],
-                  //           style: GoogleFonts.robotoSlab(color: Colors.grey),
-                  //         ),
-                  //         trailing: Radio(
-                  //           value: "3",
-                  //           groupValue: _selectedvalue,
-                  //           onChanged: (value) {
-                  //             setState(() {
-                  //               _selectedvalue = value!;
-                  //             });
-                  //           },
-                  //         ),
-                  //       ),
-                  //     );
-                  //   },
-                  // )
+                 
                   ),
             ),
             Divider(

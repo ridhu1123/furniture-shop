@@ -38,7 +38,6 @@ class _HomeState extends State<Home> {
   var newarriavls = [];
   var topdeals = [];
   var toptrends = [];
-  bool _isDataLoaded = false;
   Future getitems() async {
     var res = await FirebaseFirestore.instance
         .collection("homescreenitems")
@@ -48,35 +47,19 @@ class _HomeState extends State<Home> {
     newarriavls.addAll(res.data()?["newarrivals"]);
     topdeals.addAll(res.data()?["topdeals"]);
     toptrends.addAll(res.data()?["toptrends"]);
-
-    print("count   ${newarriavls.length}");
-    print(res.data()?["newarrivals"]);
-    // setState(() {});
-    // return newarriavls;
   }
 
   Future<void> storeCartItems(String name, String image, int price) async {
     try {
-      // Get.put(AuthenticationRepository());
-      // final userCredential = await AuthenticationRepository.instance
-      //     .registerWithEmailAndPassword(
-      //         emailcontroller.text.trim(), passwordcontroller.text.trim());
-
-      final newuser = UserModel(productname: name, image: image, price: price
-          // productId: userCredential.user!.uid,
-          // productname: widget.proName["name"],
-          // image: widget.proName["image"],
-          // price: "${widget.proName["price"]}",
-          // id: userCredential.user!.uid
-          );
+      final newuser = UserModel(productname: name, image: image, price: price);
 
       final userRepository = Get.put(UserRepository());
       await userRepository.saveCartRecord(newuser);
       SnackBarLoader.successSnackbar(
           title: "", message: "Item added succesfully");
-      // print("ddddddddddddd ${userRepository}");
+      
     } catch (e) {
-      print("fuck....$e");
+      print("error: $e");
     }
   }
 
@@ -150,64 +133,69 @@ class _HomeState extends State<Home> {
           FutureBuilder(
               future: getitems(),
               builder: (context, snapshot) {
-                return LimitedBox(
-                  maxHeight: 229,
-                  child: ListView.builder(
-                      itemCount: 3,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Addtocart1(
-                                              proName: newarriavls[index])));
-                                },
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      color: Colors.grey[200],
-                                      borderRadius: BorderRadius.circular(6)),
-                                  width: 170,
-                                  height: 170,
-                                  child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(6),
-                                      child: Image.network(
-                                        newarriavls[index]["image"],
-                                        fit: BoxFit.fill,
-                                      )),
+                if (snapshot.connectionState == ConnectionState.done) {
+                  return LimitedBox(
+                    maxHeight: 229,
+                    child: ListView.builder(
+                        itemCount: 3,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Addtocart1(
+                                                proName: newarriavls[index])));
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        color: Colors.grey[200],
+                                        borderRadius: BorderRadius.circular(6)),
+                                    width: 170,
+                                    height: 170,
+                                    child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(6),
+                                        child: Image.network(
+                                          newarriavls[index]["image"],
+                                          fit: BoxFit.fill,
+                                        )),
+                                  ),
                                 ),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Text(
-                                    newarriavls[index]["name"],
-                                    style: GoogleFonts.robotoSlab(),
-                                  )),
-                              RichText(
-                                  text: TextSpan(children: [
-                                TextSpan(
-                                    text: "₹ ",
-                                    style: TextStyle(color: Colors.grey[600])),
-                                TextSpan(
-                                  text: newarriavls[index]["price"].toString(),
-                                  style: GoogleFonts.robotoSlab(
-                                      color: Colors.grey[400]),
-                                )
-                              ]))
-                            ],
-                          ),
-                        );
-                      }),
-                );
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Align(
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      newarriavls[index]["name"],
+                                      style: GoogleFonts.robotoSlab(),
+                                    )),
+                                RichText(
+                                    text: TextSpan(children: [
+                                  TextSpan(
+                                      text: "₹ ",
+                                      style:
+                                          TextStyle(color: Colors.grey[600])),
+                                  TextSpan(
+                                    text:
+                                        newarriavls[index]["price"].toString(),
+                                    style: GoogleFonts.robotoSlab(
+                                        color: Colors.grey[400]),
+                                  )
+                                ]))
+                              ],
+                            ),
+                          );
+                        }),
+                  );
+                }
+                return Container(width: 170, height: 170);
               }),
           InkWell(
               onTap: () {
@@ -223,68 +211,73 @@ class _HomeState extends State<Home> {
           FutureBuilder(
               future: getitems(),
               builder: (context, snapshot) {
-                return LimitedBox(
-                  maxHeight: 230,
-                  child: ListView.builder(
-                      itemCount: 4,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Addtocart1(
-                                                proName: toptrends[index],
-                                              )));
-                                },
-                                child: Container(
-                                    decoration: BoxDecoration(
-                                        color: Colors.grey[200],
-                                        borderRadius: BorderRadius.circular(6)),
-                                    width: 170,
-                                    height: 170,
-                                    child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(6),
-                                        child: Image.network(
-                                          toptrends[index]["image"],
-                                          fit: BoxFit.fill,
-                                        ))),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Text(
-                                    toptrends[index]["name"],
-                                    style: GoogleFonts.robotoSlab(),
-                                  )),
-                              Align(
-                                  alignment: Alignment.topLeft,
-                                  child: RichText(
-                                      text: TextSpan(children: [
-                                    TextSpan(
-                                        text: "₹ ",
-                                        style:
-                                            TextStyle(color: Colors.grey[600])),
-                                    TextSpan(
-                                      text:
-                                          toptrends[index]["price"].toString(),
-                                      style: GoogleFonts.robotoSlab(
-                                          color: Colors.grey[400]),
-                                    )
-                                  ])))
-                            ],
-                          ),
-                        );
-                      }),
-                );
+                if (snapshot.connectionState == ConnectionState.done) {
+                  return LimitedBox(
+                    maxHeight: 230,
+                    child: ListView.builder(
+                        itemCount: 4,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Addtocart1(
+                                                  proName: toptrends[index],
+                                                )));
+                                  },
+                                  child: Container(
+                                      decoration: BoxDecoration(
+                                          color: Colors.grey[200],
+                                          borderRadius:
+                                              BorderRadius.circular(6)),
+                                      width: 170,
+                                      height: 170,
+                                      child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(6),
+                                          child: Image.network(
+                                            toptrends[index]["image"],
+                                            fit: BoxFit.fill,
+                                          ))),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Align(
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      toptrends[index]["name"],
+                                      style: GoogleFonts.robotoSlab(),
+                                    )),
+                                Align(
+                                    alignment: Alignment.topLeft,
+                                    child: RichText(
+                                        text: TextSpan(children: [
+                                      TextSpan(
+                                          text: "₹ ",
+                                          style: TextStyle(
+                                              color: Colors.grey[600])),
+                                      TextSpan(
+                                        text: toptrends[index]["price"]
+                                            .toString(),
+                                        style: GoogleFonts.robotoSlab(
+                                            color: Colors.grey[400]),
+                                      )
+                                    ])))
+                              ],
+                            ),
+                          );
+                        }),
+                  );
+                }
+                return Container(width: 170, height: 170);
               }),
           InkWell(
               onTap: () {
@@ -300,113 +293,110 @@ class _HomeState extends State<Home> {
           FutureBuilder(
               future: getitems(),
               builder: (context, snapshot) {
-                return LimitedBox(
-                  maxHeight: 700,
-                  child: ListView.separated(
-                      separatorBuilder: (context, index) =>
-                          Divider(thickness: 0.5, indent: width / 3.1),
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: 5,
-                      itemBuilder: (context, index) {
-                        return InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Addtocart1(
-                                          proName: topdeals[index],
-                                        )));
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                top: 8, bottom: 8, left: 8, right: 8),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                      color: Colors.grey[200],
-                                      borderRadius: BorderRadius.circular(6)),
-                                  width: 90,
-                                  height: 90,
-                                  child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(6),
-                                      child: Image.network(
-                                        topdeals[index]["image"],
-                                        fit: BoxFit.fill,
-                                      )),
-                                ),
-                                Flexible(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 8, right: 10, top: 8),
-                                        child: Text(
-                                          topdeals[index]["name"],
-                                          style: GoogleFonts.robotoSlab(),
-                                        ),
-                                      ),
-                                      Row(
-                                        children: [
-                                          Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 8),
-                                              child: RichText(
-                                                  text: TextSpan(children: [
-                                                TextSpan(
-                                                    text: "₹ ",
-                                                    style: TextStyle(
-                                                        color:
-                                                            Colors.grey[600])),
-                                                TextSpan(
-                                                  text: topdeals[index]["price"]
-                                                      .toString(),
-                                                  style: GoogleFonts.robotoSlab(
-                                                      color: Colors.grey[400]),
-                                                )
-                                              ]))),
-                                          IconButton(
-                                              color: Colors.black,
-                                              onPressed: () {
-                                                storeCartItems(
-                                                    topdeals[index]["name"],
-                                                    topdeals[index]["image"],
-                                                    topdeals[index]["price"]);
-                                              },
-                                              icon: Icon(
-                                                Icons.shopping_bag,
-                                                color: Color.fromARGB(
-                                                    255, 241, 71, 59),
-                                                size: 18,
-                                              )),
-                                        ],
-                                      ),
-                                    ],
+                if (snapshot.connectionState == ConnectionState.done) {
+                  return LimitedBox(
+                    maxHeight: 700,
+                    child: ListView.separated(
+                        separatorBuilder: (context, index) =>
+                            Divider(thickness: 0.5, indent: width / 3.1),
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: 5,
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Addtocart1(
+                                            proName: topdeals[index],
+                                          )));
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 8, bottom: 8, left: 8, right: 8),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        color: Colors.grey[200],
+                                        borderRadius: BorderRadius.circular(6)),
+                                    width: 90,
+                                    height: 90,
+                                    child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(6),
+                                        child: Image.network(
+                                          topdeals[index]["image"],
+                                          fit: BoxFit.fill,
+                                        )),
                                   ),
-                                ),
-                              ],
+                                  Flexible(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 8, right: 10, top: 8),
+                                          child: Text(
+                                            topdeals[index]["name"],
+                                            style: GoogleFonts.robotoSlab(),
+                                          ),
+                                        ),
+                                        Row(
+                                          children: [
+                                            Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 8),
+                                                child: RichText(
+                                                    text: TextSpan(children: [
+                                                  TextSpan(
+                                                      text: "₹ ",
+                                                      style: TextStyle(
+                                                          color: Colors
+                                                              .grey[600])),
+                                                  TextSpan(
+                                                    text: topdeals[index]
+                                                            ["price"]
+                                                        .toString(),
+                                                    style:
+                                                        GoogleFonts.robotoSlab(
+                                                            color: Colors
+                                                                .grey[400]),
+                                                  )
+                                                ]))),
+                                            IconButton(
+                                                color: Colors.black,
+                                                onPressed: () {
+                                                  storeCartItems(
+                                                      topdeals[index]["name"],
+                                                      topdeals[index]["image"],
+                                                      topdeals[index]["price"]);
+                                                },
+                                                icon: Icon(
+                                                  Icons.shopping_bag,
+                                                  color: Color.fromARGB(
+                                                      255, 241, 71, 59),
+                                                  size: 18,
+                                                )),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        );
-                      }),
-                );
+                          );
+                        }),
+                  );
+                }
+                return Container(height: 700);
               })
         ],
       ),
     );
   }
-  // var newarrivals1=[];
-  //  Future<void> addditemtostorage()async{
-  //     UserCredential userCredential=await FirebaseAuth.instance.signInAnonymously();
-  //     var uid=userCredential.user!.uid;
-  //     await FirebaseFirestore.instance.collection("users").doc(uid).set({
-  //       "image": newarrivals,
-
-  //     });
-  // }
 }

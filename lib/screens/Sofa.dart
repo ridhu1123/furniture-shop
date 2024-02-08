@@ -5,7 +5,6 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:irohub_project/data/user/user_repository.dart';
 import 'package:irohub_project/data/user/usermodel.dart';
-import 'package:irohub_project/screens/Filterscreen.dart';
 import 'package:irohub_project/screens/addtocart.dart';
 
 class Sofascreen extends StatefulWidget {
@@ -53,7 +52,7 @@ class _SofascreenState extends State<Sofascreen> {
       await userRepository.saveCartRecord(newuser);
       // print("ddddddddddddd ${userRepository}");
     } catch (e) {
-      print("fuck....$e");
+      print("error: $e");
     }
   }
 

@@ -1,7 +1,4 @@
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
@@ -19,12 +16,7 @@ class Showallscreen extends StatefulWidget {
 
 class _ShowallscreenState extends State<Showallscreen> {
   var size, height, width;
-  @override
-  List Carousilimage = [
-    "https://i.pinimg.com/564x/44/f2/d7/44f2d7ecb050d611f20e5ac54056b7c5.jpg",
-    "https://i.pinimg.com/564x/e4/59/ba/e459ba1bf1de4ea4dc81acee68d8fb30.jpg",
-    "https://i.pinimg.com/564x/84/05/c4/8405c4fdc6d8bac92e9aca82fe627b5d.jpg"
-  ];
+
 
   @override
   void initState() {
@@ -121,14 +113,7 @@ class _ShowallscreenState extends State<Showallscreen> {
                                         child: IconButton(
                                             color: Colors.black,
                                             onPressed: () {
-                                              // Navigator.push(
-                                              //     context,
-                                              //     MaterialPageRoute(
-                                              //         builder: (context) =>
-                                              //             cartscreen(
-                                              //                 allitems:
-                                              //                     widget.items[
-                                              //                         index])));
+                                             
                                             },
                                             icon: Icon(
                                               Icons.shopping_bag,

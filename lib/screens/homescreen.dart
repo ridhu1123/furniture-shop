@@ -10,8 +10,8 @@ import 'package:irohub_project/bottomnavigationclasses/home.dart';
 import 'package:irohub_project/screens/cartscreen.dart';
 import 'package:irohub_project/screens/colections.dart';
 import 'package:irohub_project/screens/loginscreen.dart';
-
 import 'package:irohub_project/screens/profilepage.dart';
+import 'package:irohub_project/screens/search_screen.dart';
 import 'package:irohub_project/screens/showallscreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -296,10 +296,6 @@ class _HomescreenState extends State<Homescreen> {
                   ),
                 ),
               ),
-              // Text(
-              //   "about this app",
-              //   style: GoogleFonts.robotoSlab(),
-              // )
             ],
           ),
         ),
@@ -321,8 +317,10 @@ class _HomescreenState extends State<Homescreen> {
                 children: [
                   IconButton(
                     onPressed: () {
-                      // Navigator.push(context,
-                      //     MaterialPageRoute(builder: (context) => Sofa()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Searchscreen()));
                     },
                     icon: Icon(
                       Icons.search_outlined,

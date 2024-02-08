@@ -71,8 +71,10 @@ class LoginController {
       shared_preferences_id = userCredentials.user!.uid;
       // save user records
       await userController.saveUserRecordFromGoogle(userCredentials);
-        preferences.setString("email", "name");
+      preferences.setString("email", "name");
       // Remove loader
+      TFullScreenLoader.openLoadingDialog(
+          "assets/Animation - 1705692235217.json");
       TFullScreenLoader.stopLoading();
 
       // TFullScreenLoader.stopLoading();
@@ -84,7 +86,8 @@ class LoginController {
       Get.to(() => Homescreen());
     } catch (e) {
       TFullScreenLoader.stopLoading();
-      SnackBarLoader.errorSnackbar(title: "Oh Snap!", message: e.toString());
+      SnackBarLoader.errorSnackbar(
+          title: "Oh Snap!", message: "Something went wrong");
     }
   }
 }

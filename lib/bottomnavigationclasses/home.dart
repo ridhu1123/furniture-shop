@@ -57,7 +57,6 @@ class _HomeState extends State<Home> {
       await userRepository.saveCartRecord(newuser);
       SnackBarLoader.successSnackbar(
           title: "", message: "Item added succesfully");
-      
     } catch (e) {
       print("error: $e");
     }

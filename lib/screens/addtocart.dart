@@ -156,28 +156,51 @@ class _Addtocart1State extends State<Addtocart1> {
                         style: GoogleFonts.robotoSlab(
                             fontSize: 18, fontWeight: FontWeight.w600),
                       ),
-                      SizedBox(
-                        width: 400,
-                        height: 50,
-                        child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: colors.length,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.all(8),
-                                child: InkWell(
-                                  onTap: () {
-                                    setState(() {
-                                      // selectedindex = index;
-                                    });
-                                  },
-                                  child: CircleAvatar(
-                                    radius: 22,
-                                    backgroundColor: colors[index],
-                                  ),
-                                ),
-                              );
-                            }),
+                      Stack(
+                        children: [
+                          SizedBox(
+                            width: 400,
+                            height: 50,
+                            child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: colors.length,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.all(8),
+                                    child: InkWell(
+                                      onTap: () {
+                                        setState(() {
+                                          // selectedindex = index;
+                                        });
+                                      },
+                                      child: CircleAvatar(
+                                        radius: 20,
+                                        backgroundColor: colors[index],
+                                      ),
+                                    ),
+                                  );
+                                }),
+                          ),
+                          Container(
+                            width: 340,
+                            height: 50,
+                            decoration: BoxDecoration(
+                                color: Colors.amberAccent.withOpacity(0.3),
+                                borderRadius: BorderRadius.circular(8)),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 13),
+                              child: Text(
+                                "CURRENTLY UNAVAILABLE !",
+                                style: GoogleFonts.robotoSlab(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ),
+                          )
+                        ],
                       ),
                       const Divider(
                         thickness: 1,
@@ -207,11 +230,11 @@ class _Addtocart1State extends State<Addtocart1> {
                               child: Stack(children: [
                                 GestureDetector(
                                   onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                Addtocart1()));
+                                    // Navigator.push(
+                                    //     context,
+                                    //     MaterialPageRoute(
+                                    //         builder: (context) =>
+                                    //             Addtocart1()));
                                   },
                                   child: Container(
                                     decoration: BoxDecoration(
@@ -241,9 +264,9 @@ class _Addtocart1State extends State<Addtocart1> {
                         height: 5,
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(right: 5, top: 8),
+                        padding: const EdgeInsets.only(right: 8, top: 8),
                         child: Text(
-                            "I've always been eager to learn different languages, I was born and raised in a country where there's a great diversity in minority languages, Apart from my mother tongue and our country's national language which I can both speak fluently, I can speak English as well with great confidence."),
+                            "Furniture enhances living spaces with functionality and style. From plush sofas offering relaxation to sturdy dining tables fostering shared meals, furniture shapes the ambiance of homes. Beds provide tranquil sanctuaries for rest, while coffee tables serve as focal points for gathering and conversation. With diverse designs and materials, furniture pieces blend practicality with aesthetics, elevating the comfort and charm of every room."),
                       ),
                       SizedBox(
                         height: 10,

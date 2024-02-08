@@ -21,6 +21,8 @@ class cartscreen extends StatefulWidget {
 
 class _cartscreenState extends State<cartscreen> {
   final controller = Get.put(UserRepository());
+  final controlller2 = UserRepository();
+
   List<Map<String, dynamic>> allDocument = [];
   int total = 0;
   int shippingFee = 40;

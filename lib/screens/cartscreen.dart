@@ -122,7 +122,7 @@ class _cartscreenState extends State<cartscreen> {
               ],
             ),
             Padding(
-              padding: EdgeInsets.only(left: 20),
+              padding: const EdgeInsets.only(left: 20),
               child: Align(
                 alignment: Alignment.topLeft,
                 child: Text(
@@ -132,10 +132,10 @@ class _cartscreenState extends State<cartscreen> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
-            Divider(
+            const Divider(
               thickness: 0.5,
             ),
             StreamBuilder(
@@ -168,7 +168,7 @@ class _cartscreenState extends State<cartscreen> {
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 25,
                           ),
                           Align(
@@ -178,7 +178,7 @@ class _cartscreenState extends State<cartscreen> {
                               style: GoogleFonts.robotoSlab(color: Colors.grey),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 15,
                           ),
                           Align(
@@ -242,7 +242,6 @@ class _cartscreenState extends State<cartscreen> {
                                                     height: double.infinity,
                                                   ),
                                                 ),
-                                             
                                               ],
                                             ),
                                           ),
@@ -298,7 +297,7 @@ class _cartscreenState extends State<cartscreen> {
                                                                   .circular(20),
                                                           color: Colors.black),
                                                     ),
-                                                    SizedBox(
+                                                    const SizedBox(
                                                       width: 5,
                                                     ),
                                                     Text(
@@ -308,7 +307,7 @@ class _cartscreenState extends State<cartscreen> {
                                                               color: Colors
                                                                   .grey[400]),
                                                     ),
-                                                    SizedBox(
+                                                    const SizedBox(
                                                       width: 8,
                                                     ),
                                                     Text(
@@ -317,7 +316,7 @@ class _cartscreenState extends State<cartscreen> {
                                                           color:
                                                               Colors.grey[400]),
                                                     ),
-                                                    SizedBox(
+                                                    const SizedBox(
                                                       width: 8,
                                                     ),
                                                     Text(
@@ -327,7 +326,7 @@ class _cartscreenState extends State<cartscreen> {
                                                               color:
                                                                   Colors.grey),
                                                     ),
-                                                    SizedBox(
+                                                    const SizedBox(
                                                       width: 5,
                                                     ),
                                                     Text(
@@ -337,7 +336,7 @@ class _cartscreenState extends State<cartscreen> {
                                                               color:
                                                                   Colors.black),
                                                     ),
-                                                    SizedBox(
+                                                    const SizedBox(
                                                       width: 30,
                                                     ),
                                                     IconButton(
@@ -349,7 +348,7 @@ class _cartscreenState extends State<cartscreen> {
                                                                 "${itemIds[index]}");
                                                           });
                                                         },
-                                                        icon: Icon(
+                                                        icon: const Icon(
                                                           Icons.delete_rounded,
                                                           color: Colors.black,
                                                         ))

@@ -125,10 +125,10 @@ class _HomescreenState extends State<Homescreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => Profilepage()));
+                              builder: (context) =>const Profilepage()));
                     },
                     child: ListTile(
-                      leading: CircleAvatar(
+                      leading:const CircleAvatar(
                         radius: 30,
                         backgroundImage: NetworkImage(
                             "https://i.pinimg.com/564x/39/94/fb/3994fb52d1f983d003ed6f084366bdab.jpg"),
@@ -154,8 +154,8 @@ class _HomescreenState extends State<Homescreen> {
                   },
                   icon: Row(
                     children: [
-                      Icon(Icons.home),
-                      SizedBox(
+                    const  Icon(Icons.home),
+                    const  SizedBox(
                         width: 10,
                       ),
                       Text(
@@ -171,12 +171,12 @@ class _HomescreenState extends State<Homescreen> {
                 child: IconButton(
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Collections()));
+                        MaterialPageRoute(builder: (context) =>const Collections()));
                   },
                   icon: Row(
                     children: [
-                      Icon(Icons.collections_bookmark_outlined),
-                      SizedBox(
+                     const Icon(Icons.collections_bookmark_outlined),
+                     const SizedBox(
                         width: 10,
                       ),
                       Text(
@@ -202,8 +202,8 @@ class _HomescreenState extends State<Homescreen> {
                   },
                   icon: Row(
                     children: [
-                      Icon(Icons.deblur),
-                      SizedBox(
+                    const  Icon(Icons.deblur),
+                   const   SizedBox(
                         width: 10,
                       ),
                       Text(

@@ -41,23 +41,22 @@ class SignupController extends GetxController {
       SharedPreferences preferences = await SharedPreferences.getInstance();
       preferences.setString("id", userCredential.user!.uid);
       shared_preferences_id = userCredential.user!.uid;
-      //  print("uidddddddddddddddd $preferences")
       final newuser = UserModel(
         id: userCredential.user!.uid,
         name: namecontroller.text.trim(),
         email: emailcontroller.text.trim(),
         phonenumber: phonenumbercontroller.text.trim(),
-        // cart: []
       );
 
       final userRepository = Get.put(UserRepository());
       await userRepository.saveUserRecord(newuser);
-      SnackBarLoader.successSnackbar(
-          title: "Congratulaton", message: "Your account has been created");
       TFullScreenLoader.openLoadingDialog(
           "assets/Animation - 1705692235217.json");
+      SnackBarLoader.successSnackbar(
+          title: "Congratulaton", message: "Your account has been created");
+
       // clearTextEditingController();
-      Get.off(Loginscreen());
+      Get.off(() => Loginscreen());
     } catch (e) {
       SnackBarLoader.errorSnackbar(
           title: "Oh Snap!", message: "Somthing went wrong");

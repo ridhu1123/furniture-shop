@@ -40,15 +40,18 @@ class LoginController {
       SharedPreferences preferences = await SharedPreferences.getInstance();
       preferences.setString("id", userCredentials.user!.uid);
       shared_preferences_id = userCredentials.user!.uid;
-      //  SharedPreferences preferences = await SharedPreferences.getInstance();
       preferences.setString("email", emailcontroller.text);
       // TFullScreenLoader.stopLoading();
       // AuthenticationRepository.instance.screenRedirect();
 
       // localstorage.write("userId", value.)
 
-      Get.to(() => Homescreen());
-    } catch (e) {}
+      Get.offAll(() => Homescreen());
+    } catch (e) {
+      TFullScreenLoader.stopLoading();
+      SnackBarLoader.errorSnackbar(
+          title: "Oh Snap!", message: "Something went wrong");
+    }
   }
 
   // google signIn
@@ -57,10 +60,6 @@ class LoginController {
       // Start loading
       TFullScreenLoader.openLoadingDialog(
           "assets/Animation - 1705692235217.json");
-      // if (!loginFormKey.currentState!.validate()) {
-      //   TFullScreenLoader.stopLoading();
-      //   return;
-      // }
       Get.put(AuthenticationRepository());
 
       // User Authenticaion
@@ -69,22 +68,16 @@ class LoginController {
       SharedPreferences preferences = await SharedPreferences.getInstance();
       preferences.setString("id", userCredentials!.user!.uid);
       shared_preferences_id = userCredentials.user!.uid;
-      TFullScreenLoader.openLoadingDialog(
-          "assets/Animation - 1705692235217.json");
+
       // save user records
       await userController.saveUserRecordFromGoogle(userCredentials);
       preferences.setString("email", "name");
       // Remove loader
-
+      TFullScreenLoader.openLoadingDialog(
+          "assets/Animation - 1705692235217.json");
       TFullScreenLoader.stopLoading();
-
-      // TFullScreenLoader.stopLoading();
-      // AuthenticationRepository.instance.screenRedirect();
-
-      // localstorage.write("userId", value.)
-
       // Navigation
-      Get.to(() => Homescreen());
+      Get.offAll(() => Homescreen());
     } catch (e) {
       TFullScreenLoader.stopLoading();
       SnackBarLoader.errorSnackbar(

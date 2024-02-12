@@ -23,8 +23,7 @@ class SnackBarLoader {
     Get.snackbar(title, message,
         isDismissible: true,
         shouldIconPulse: true,
-        colorText: Colors.black,
-        
+        colorText: Colors.blue,
         snackPosition: SnackPosition.BOTTOM,
         duration: Duration(seconds: duration),
         margin: EdgeInsets.all(8),

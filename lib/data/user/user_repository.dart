@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:irohub_project/constants/sharedpreference.dart';
 import 'package:irohub_project/data/user/usermodel.dart';
+
 class UserRepository extends GetxController {
   @override
   void onInit() {
@@ -47,7 +48,7 @@ class UserRepository extends GetxController {
 
       return querySnapshotStream.map((querySnapshot) {
         List<Map<String, dynamic>> allDocuments = [];
-        
+
         querySnapshot.docs.forEach((doc) {
           Map<String, dynamic> documentData =
               doc.data() as Map<String, dynamic>;
@@ -81,7 +82,8 @@ class UserRepository extends GetxController {
   void calculateTotalPrice(List<Map<String, dynamic>> cartItems) {
     int calculatedTotal = 0;
     cartItems.forEach((doc) {
-      calculatedTotal += (doc['price'] ?? 0) as int;
+      calculatedTotal +=
+          int.parse(doc['price'].toString().replaceAll("\u{20B9}", '')) ?? 0;
     });
     total.value = calculatedTotal;
     print("total   $total");

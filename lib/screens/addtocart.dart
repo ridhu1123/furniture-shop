@@ -57,7 +57,7 @@ class _Addtocart1State extends State<Addtocart1> {
       final userRepository = Get.put(UserRepository());
       await userRepository.saveCartRecord(newuser);
       SnackBarLoader.successSnackbar(
-          title: "", message: "Item added succesfully");
+          title: "Success", message: "Item added succesfully..!");
     } catch (e) {
       print("fuck....$e");
     }

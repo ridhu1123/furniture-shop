@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:irohub_project/extensions/screensize.dart';
 import 'package:irohub_project/screens/addtocart.dart';
 import 'package:irohub_project/screens/colections.dart';
 import 'package:irohub_project/screens/showallscreen.dart';
@@ -400,13 +401,13 @@ Winter""",
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               GestureDetector(
                 onTap: () {},
                 child: Container(
-                  height: 305,
-                  width: 335,
+                  height: context.Height(0.39),
+                  width: context.Height(.42),
                   decoration: BoxDecoration(
                       boxShadow: [
                         BoxShadow(

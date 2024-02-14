@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:irohub_project/extensions/screensize.dart';
 import 'package:irohub_project/screens/thirdcollection.dart';
 
 class Secondcollectionpage extends StatefulWidget {
@@ -41,7 +42,8 @@ class _SecondcollectionpageState extends State<Secondcollectionpage> {
       Padding(
         padding: const EdgeInsets.all(14.0),
         child: Container(
-          height: 506,
+          height: context.Height(.62),
+          // height: 506,
           decoration: BoxDecoration(boxShadow: [
             BoxShadow(
                 offset: Offset(8, 9),

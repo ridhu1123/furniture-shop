@@ -9,6 +9,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:irohub_project/data/user/user_repository.dart';
 import 'package:irohub_project/data/user/usermodel.dart';
+import 'package:irohub_project/extensions/screensize.dart';
 import 'package:irohub_project/screens/addtocart.dart';
 import 'package:irohub_project/screens/showallscreen.dart';
 import 'package:irohub_project/widget/loaders/snakbar.dart';
@@ -134,7 +135,7 @@ class _HomeState extends State<Home> {
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
                   return LimitedBox(
-                    maxHeight: 229,
+                    maxHeight: context.Height(0.29),
                     child: ListView.builder(
                         itemCount: 3,
                         scrollDirection: Axis.horizontal,

@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:irohub_project/features/shop/controllers/cartcontroller.dart';
 
 import 'package:irohub_project/screens/addtocart.dart';
 
@@ -17,14 +17,13 @@ class Showallscreen extends StatefulWidget {
 class _ShowallscreenState extends State<Showallscreen> {
   var size, height, width;
 
-
+  final controller = Cartcontroller();
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     // getdata();
     print("dddddddddddddddd ${widget.items}");
-    
   }
 
   @override
@@ -113,7 +112,10 @@ class _ShowallscreenState extends State<Showallscreen> {
                                         child: IconButton(
                                             color: Colors.black,
                                             onPressed: () {
-                                             
+                                              controller.storeCartItems(
+                                                  widget.items[index]["name"],
+                                                  widget.items[index]["image"],
+                                                  widget.items[index]["price"]);
                                             },
                                             icon: Icon(
                                               Icons.shopping_bag,

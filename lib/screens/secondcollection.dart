@@ -42,7 +42,7 @@ class _SecondcollectionpageState extends State<Secondcollectionpage> {
       Padding(
         padding: const EdgeInsets.all(14.0),
         child: Container(
-          height: context.Height(.62),
+          height: context.Height(.63),
           // height: 506,
           decoration: BoxDecoration(boxShadow: [
             BoxShadow(
@@ -50,79 +50,81 @@ class _SecondcollectionpageState extends State<Secondcollectionpage> {
                 blurRadius: 10,
                 color: Color.fromARGB(255, 119, 117, 117))
           ], borderRadius: BorderRadius.circular(15), color: Colors.grey[200]),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Image.asset(
-                  widget.collection1["image"],
-                  fit: BoxFit.fill,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 10),
-                child: Align(
-                  alignment: Alignment.bottomLeft,
-                  child: Text(
-                    widget.collection1["shortname"],
-                    style: GoogleFonts.robotoSlab(
-                        color: Colors.grey[500],
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Image.asset(
+                    widget.collection1["image"],
+                    fit: BoxFit.fill,
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 10),
-                child: Align(
-                  alignment: Alignment.bottomLeft,
-                  child: Text(
-                    widget.collection1["names"],
-                    style: GoogleFonts.robotoSlab(
-                        color: Colors.black,
-                        fontSize: 30,
-                        fontWeight: FontWeight.w500),
+                Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Align(
+                    alignment: Alignment.bottomLeft,
+                    child: Text(
+                      widget.collection1["shortname"],
+                      style: GoogleFonts.robotoSlab(
+                          color: Colors.grey[500],
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400),
+                    ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 10, top: 8),
-                child: Align(
-                  alignment: Alignment.bottomLeft,
-                  child: TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => thirdcollection(
-                                      collection2: widget.collection2,
-                                      collection1: widget.collection1,
-                                    )));
-                      },
-                      child: Row(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                                border: Border(
-                                    bottom: BorderSide(
-                                        color: Colors.black, width: 1.0))),
-                            child: Text(
-                              "SHOP NOW",
-                              style: GoogleFonts.robotoSlab(
-                                fontSize: 10,
-                                color: Colors.black,
+                Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Align(
+                    alignment: Alignment.bottomLeft,
+                    child: Text(
+                      widget.collection1["names"],
+                      style: GoogleFonts.robotoSlab(
+                          color: Colors.black,
+                          fontSize: 30,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 10, top: 8),
+                  child: Align(
+                    alignment: Alignment.bottomLeft,
+                    child: TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => thirdcollection(
+                                        collection2: widget.collection2,
+                                        collection1: widget.collection1,
+                                      )));
+                        },
+                        child: Row(
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                  border: Border(
+                                      bottom: BorderSide(
+                                          color: Colors.black, width: 1.0))),
+                              child: Text(
+                                "SHOP NOW",
+                                style: GoogleFonts.robotoSlab(
+                                  fontSize: 10,
+                                  color: Colors.black,
+                                ),
                               ),
                             ),
-                          ),
-                          Icon(
-                            Icons.arrow_right,
-                            color: Colors.black,
-                          )
-                        ],
-                      )),
-                ),
-              )
-            ],
+                            Icon(
+                              Icons.arrow_right,
+                              color: Colors.black,
+                            )
+                          ],
+                        )),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       )

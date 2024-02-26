@@ -1,19 +1,12 @@
 import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:irohub_project/data/user/user_repository.dart';
-import 'package:irohub_project/data/user/usermodel.dart';
 import 'package:irohub_project/extensions/screensize.dart';
+import 'package:irohub_project/features/shop/controllers/cartcontroller.dart';
 import 'package:irohub_project/screens/addtocart.dart';
 import 'package:irohub_project/screens/showallscreen.dart';
-import 'package:irohub_project/widget/loaders/snakbar.dart';
-
 import '../imageclass/classA.dart';
 import '../imageclass/classB.dart';
 import '../imageclass/classC.dart';
@@ -35,6 +28,7 @@ class _HomeState extends State<Home> {
     setState(() {});
   }
 
+  final controller = Cartcontroller();
   List slideimage = [ClassA(), ClassB(), CLassC()];
   var newarriavls = [];
   var topdeals = [];
@@ -49,21 +43,7 @@ class _HomeState extends State<Home> {
     topdeals.addAll(res.data()?["topdeals"]);
     toptrends.addAll(res.data()?["toptrends"]);
   }
-
-  Future<void> storeCartItems(String name, String image, int price) async {
-    try {
-      final newuser = UserModel(productname: name, image: image, price: price);
-
-      final userRepository = Get.put(UserRepository());
-      await userRepository.saveCartRecord(newuser);
-      SnackBarLoader.successSnackbar(
-          title: "", message: "Item added succesfully");
-    } catch (e) {
-      print("error: $e");
-    }
-  }
-
-  @override
+ @override
   Widget build(BuildContext context) {
     var size, height, width;
 
@@ -370,7 +350,7 @@ class _HomeState extends State<Home> {
                                             IconButton(
                                                 color: Colors.black,
                                                 onPressed: () {
-                                                  storeCartItems(
+                                                  controller.storeCartItems(
                                                       topdeals[index]["name"],
                                                       topdeals[index]["image"],
                                                       topdeals[index]["price"]);

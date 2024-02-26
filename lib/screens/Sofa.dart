@@ -1,10 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:irohub_project/data/user/user_repository.dart';
-import 'package:irohub_project/data/user/usermodel.dart';
+import 'package:irohub_project/features/shop/controllers/cartcontroller.dart';
 import 'package:irohub_project/screens/addtocart.dart';
 
 class Sofascreen extends StatefulWidget {
@@ -25,8 +22,6 @@ class _SofascreenState extends State<Sofascreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    // catogaryitem();
-    // fetchproduct();
     getcategories();
   }
 
@@ -44,17 +39,18 @@ class _SofascreenState extends State<Sofascreen> {
     return items;
   }
 
-  Future<void> storeCartItems(String name, String image, int price) async {
-    try {
-      final newuser = UserModel(productname: name, image: image, price: price);
+  final controller = Cartcontroller();
+  // Future<void> storeCartItems(String name, String image, int price) async {
+  //   try {
+  //     final newuser = UserModel(productname: name, image: image, price: price);
 
-      final userRepository = Get.put(UserRepository());
-      await userRepository.saveCartRecord(newuser);
-      // print("ddddddddddddd ${userRepository}");
-    } catch (e) {
-      print("error: $e");
-    }
-  }
+  //     final userRepository = Get.put(UserRepository());
+  //     await userRepository.saveCartRecord(newuser);
+  //     // print("ddddddddddddd ${userRepository}");
+  //   } catch (e) {
+  //     print("error: $e");
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +104,11 @@ class _SofascreenState extends State<Sofascreen> {
                               child: IconButton(
                                   color: Colors.black,
                                   onPressed: () {
-                                    storeCartItems(
+                                    // storeCartItems(
+                                    // widget.exploreimage[index]["name"],
+                                    //     widget.exploreimage[index]["image"],
+                                    //     widget.exploreimage[index]["price"]);
+                                    controller.storeCartItems(
                                         widget.exploreimage[index]["name"],
                                         widget.exploreimage[index]["image"],
                                         widget.exploreimage[index]["price"]);

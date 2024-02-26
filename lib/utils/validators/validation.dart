@@ -47,7 +47,10 @@ class TValidator {
       return "phone number is required";
     }
     if (value.length < 10) {
-      return "Phone number must be at least 10 cherecters long";
+      return "Phone number must be  10 numbers long";
+    }
+    if (value.length > 10) {
+      return "Enter a valid phone number";
     }
 
     return null;

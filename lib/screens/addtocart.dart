@@ -2,9 +2,8 @@ import 'package:five_pointed_star/five_pointed_star.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:irohub_project/data/user/user_repository.dart';
-import 'package:irohub_project/data/user/usermodel.dart';
-import 'package:irohub_project/widget/loaders/snakbar.dart';
+import 'package:irohub_project/extensions/screensize.dart';
+import 'package:irohub_project/features/shop/controllers/cartcontroller.dart';
 
 class Addtocart1 extends StatefulWidget {
   final proName;
@@ -20,7 +19,7 @@ class _Addtocart1State extends State<Addtocart1> {
   final namecontroller = TextEditingController();
   final passwordcontroller = TextEditingController();
   final emailcontroller = TextEditingController();
-  // final controller = Get.put(Cartcontroller());
+  final controller = Get.put(Cartcontroller());
 
   List description = ["Sku", "Categories", "Tags", "Dimension"];
   List description1 = [
@@ -47,22 +46,6 @@ class _Addtocart1State extends State<Addtocart1> {
   }
 
   var id;
-  Future<void> storeCartItems() async {
-    try {
-      final newuser = UserModel(
-          productname: widget.proName["name"],
-          image: widget.proName["image"],
-          price: widget.proName["price"]);
-
-      final userRepository = Get.put(UserRepository());
-      await userRepository.saveCartRecord(newuser);
-      SnackBarLoader.successSnackbar(
-          title: "Success", message: "Item added succesfully..!");
-    } catch (e) {
-      print("fuck....$e");
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -421,7 +404,7 @@ class _Addtocart1State extends State<Addtocart1> {
                         height: 10,
                       ),
                       LimitedBox(
-                        maxHeight: 242,
+                        maxHeight: context.Height(.32),
                         maxWidth: 300,
                         child: ListView.builder(
                             itemCount: 4,
@@ -434,11 +417,11 @@ class _Addtocart1State extends State<Addtocart1> {
                                   children: [
                                     GestureDetector(
                                       onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    Addtocart1()));
+                                        // Navigator.push(
+                                        //     context,
+                                        //     MaterialPageRoute(
+                                        //         builder: (context) =>
+                                        //             Addtocart1()));
                                       },
                                       child: Container(
                                         decoration: BoxDecoration(
@@ -447,11 +430,15 @@ class _Addtocart1State extends State<Addtocart1> {
                                                 BorderRadius.circular(6)),
                                         width: 160,
                                         height: 190,
-                                        child: Image.network(
-                                          widget.proName["image"],
-                                          fit: BoxFit.fill,
-                                          width: double.infinity,
-                                          height: double.infinity,
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(6),
+                                          child: Image.network(
+                                            widget.proName["image"],
+                                            fit: BoxFit.fill,
+                                            width: double.infinity,
+                                            height: double.infinity,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -493,7 +480,8 @@ class _Addtocart1State extends State<Addtocart1> {
           width: double.infinity,
           child: ElevatedButton(
               onPressed: () async {
-                storeCartItems();
+                controller.storeCartItems(widget.proName["name"],
+                    widget.proName["image"], widget.proName["price"]);
               },
               style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(),

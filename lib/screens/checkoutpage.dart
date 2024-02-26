@@ -343,9 +343,7 @@ class _CheckoutscreenState extends State<Checkoutscreen> {
                         ),
                       )
                     ],
-                  )
-                 
-                  ),
+                  )),
             ),
             Divider(
               thickness: 0.5,

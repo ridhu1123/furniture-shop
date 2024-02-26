@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:irohub_project/googlemap.dart';
 import 'package:irohub_project/screens/homescreen.dart';
+import 'package:irohub_project/screens/orders.dart';
 import 'package:lottie/lottie.dart';
 
 class Thankyou extends StatelessWidget {
@@ -28,9 +29,16 @@ class Thankyou extends StatelessWidget {
                   style: GoogleFonts.robotoSlab(fontSize: 30),
                 ),
               ),
-              Text("""         Your order is completed.
-Please check the delivery status at""",
-                  style: GoogleFonts.robotoSlab(color: Colors.black)),
+              TextButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Orderscreen()));
+                },
+                child: Text("""         Your order is completed.
+Please check the delivery status at
+        # click to see your orders""",
+                    style: GoogleFonts.robotoSlab(color: Colors.black)),
+              ),
               TextButton(
                   onPressed: () {
                     Navigator.push(context,

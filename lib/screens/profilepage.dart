@@ -7,11 +7,14 @@ import 'package:image_picker/image_picker.dart';
 import 'package:irohub_project/constants/sharedpreference.dart';
 import 'package:irohub_project/screens/cartscreen.dart';
 import 'package:irohub_project/screens/giftcardscreen.dart';
+import 'package:irohub_project/screens/orders.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Profilepage extends StatefulWidget {
-  const Profilepage({super.key});
+  final name;
+  final email;
+  const Profilepage({super.key, this.name, this.email});
 
   @override
   State<Profilepage> createState() => _ProfilepageState();
@@ -36,17 +39,6 @@ class _ProfilepageState extends State<Profilepage> {
     if (camerapicked != null) {
       _image1 = camerapicked.path;
       _image = File(camerapicked.path);
-      // final res = await FirebaseFirestore.instance
-      //     .collection("profile")
-      //     .doc()
-      //     .set({"image": _image});
-      // final firebaseimage =
-      //     await FirebaseFirestore.instance.collection("profile").doc().get();
-      // print("hlooooo ${firebaseimage.data()}");
-      // prefimage = firebaseimage.data() as File;
-      // final SharedPreferences prefs = await SharedPreferences.getInstance();
-      // prefs.setString("image", _image.toString());
-      // prefimage = prefs.getString("image") as File;
       print(json.encode(_image1));
       print("filepath.............");
     } else {
@@ -63,21 +55,6 @@ class _ProfilepageState extends State<Profilepage> {
       _image1 = pickedimage.path;
       _image = File(pickedimage.path);
       print(" image $_image");
-      // DocumentReference documentReference = FirebaseFirestore.instance
-      //     .collection("users")
-      //     .doc(shared_preferences_id);
-      // CollectionReference collectionReference =
-      //     documentReference.collection(profile);
-      // await collectionReference.doc().set({"image": _image});
-      // final firebaseimage =
-      //     await FirebaseFirestore.instance.collection("users").doc(shared_preferences_id).get();
-      // print("hlooooo ${.data()}");
-      // prefimage = firebaseimage.data() as File;
-      // final SharedPreferences prefs = await SharedPreferences.getInstance();
-      // prefs.setString("image", _image.toString());
-      // prefimage = prefs.getString("image") ;
-      // print("prefimage   $prefimage");
-      // print("image   $_image");
     } else {
       print("no image found");
     }
@@ -263,13 +240,13 @@ class _ProfilepageState extends State<Profilepage> {
         ),
         Center(
           child: Text(
-            "Username",
+            widget.name,
             style: GoogleFonts.robotoSlab(),
           ),
         ),
         Center(
           child: Text(
-            "username@email.com",
+            widget.email,
             style: GoogleFonts.robotoSlab(color: Colors.grey, fontSize: 10),
           ),
         ),
@@ -289,8 +266,8 @@ class _ProfilepageState extends State<Profilepage> {
         ),
         InkWell(
           onTap: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => cartscreen()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => Orderscreen()));
           },
           child: ListTile(
             leading: Text(

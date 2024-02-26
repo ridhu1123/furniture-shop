@@ -52,28 +52,36 @@ class _SplashscreenState extends State<Splashscreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    getSharedPreferenceData();
-    getVaidationData().whenComplete(() async {
-      Timer(Duration(seconds: 2),
-          () => Get.offAll(finalEmail == null ? Firstscreen() : Homescreen()));
+    getSharedPreferenceData().whenComplete(() async {
+      Timer(
+          Duration(seconds: 2),
+          () => Get.offAll(
+              shared_preferences_id == null ? Firstscreen() : Homescreen()));
     });
+    // getVaidationData().whenComplete(() async {
+    //   Timer(Duration(seconds: 2),
+    //       () => Get.offAll(finalEmail == null ? Firstscreen() : Homescreen()));
+    // });
   }
 
-  getSharedPreferenceData() async {
+  Future getSharedPreferenceData() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var uid = preferences.getString("id");
-    shared_preferences_id = uid;
+    setState(() {
+      shared_preferences_id = uid;
+    });
+
     print('id is $shared_preferences_id');
   }
 
-  Future getVaidationData() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    var obtainedEmail = prefs.getString("email");
-    setState(() {
-      finalEmail = obtainedEmail;
-    });
-    print(finalEmail);
-  }
+  // Future getVaidationData() async {
+  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   var obtainedEmail = prefs.getString("email");
+  //   setState(() {
+  //     finalEmail = obtainedEmail;
+  //   });
+  //   print(finalEmail);
+  // }
 
   @override
   Widget build(BuildContext context) {

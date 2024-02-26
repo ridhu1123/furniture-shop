@@ -71,7 +71,7 @@ class LoginController {
 
       // save user records
       await userController.saveUserRecordFromGoogle(userCredentials);
-      preferences.setString("email", "name");
+      // preferences.setString("email", userCredentials.user!.uid);
       // Remove loader
       TFullScreenLoader.openLoadingDialog(
           "assets/Animation - 1705692235217.json");

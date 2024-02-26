@@ -7,6 +7,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:irohub_project/bottomnavigationclasses/discover.dart';
 import 'package:irohub_project/bottomnavigationclasses/explore.dart';
 import 'package:irohub_project/bottomnavigationclasses/home.dart';
+import 'package:irohub_project/constants/sharedpreference.dart';
 import 'package:irohub_project/screens/cartscreen.dart';
 import 'package:irohub_project/screens/colections.dart';
 import 'package:irohub_project/screens/loginscreen.dart';
@@ -42,6 +43,13 @@ class _HomescreenState extends State<Homescreen> {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   var topdeals = [];
   List<Color> iconcolor = [Colors.white, Colors.black, Colors.black];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getUserData();
+  }
 
   var size, height, width;
   bool _isfavourite = false;
@@ -86,15 +94,20 @@ class _HomescreenState extends State<Homescreen> {
         .get();
 
     item.addAll(res.data()?["exploreitems"]);
-    print("sssssssssss $item");
+    // print("sssssssssss $item");
     setState(() {});
     return item;
-    // var res1 = await FirebaseFirestore.instance
-    //     .collection("products")
-    //     .doc("categories")
-    //     .collection(items.toString())
-    //     .get();
-    // print(res1.docs);
+  }
+
+  String name = "";
+  String email = "";
+  getUserData() async {
+    var res = await FirebaseFirestore.instance
+        .collection("users")
+        .doc(shared_preferences_id)
+        .get();
+    name = res["Fullname"];
+    email = res["email"];
   }
 
   List screens = [Home(), Explorescreen(), Discover()];
@@ -125,20 +138,20 @@ class _HomescreenState extends State<Homescreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>const Profilepage()));
+                              builder: (context) =>  Profilepage(name: name,email: email,)));
                     },
                     child: ListTile(
-                      leading:const CircleAvatar(
+                      leading: const CircleAvatar(
                         radius: 30,
                         backgroundImage: NetworkImage(
                             "https://i.pinimg.com/564x/39/94/fb/3994fb52d1f983d003ed6f084366bdab.jpg"),
                       ),
                       title: Text(
-                        "Username",
+                        name.toString(),
                         style: GoogleFonts.robotoSlab(),
                       ),
                       subtitle: Text(
-                        "sUsername@gmail.com",
+                        email.toString(),
                         style: GoogleFonts.robotoSlab(
                             color: Colors.grey, fontSize: 10),
                       ),
@@ -154,8 +167,8 @@ class _HomescreenState extends State<Homescreen> {
                   },
                   icon: Row(
                     children: [
-                    const  Icon(Icons.home),
-                    const  SizedBox(
+                      const Icon(Icons.home),
+                      const SizedBox(
                         width: 10,
                       ),
                       Text(
@@ -170,13 +183,15 @@ class _HomescreenState extends State<Homescreen> {
                 padding: const EdgeInsets.all(8.0),
                 child: IconButton(
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) =>const Collections()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Collections()));
                   },
                   icon: Row(
                     children: [
-                     const Icon(Icons.collections_bookmark_outlined),
-                     const SizedBox(
+                      const Icon(Icons.collections_bookmark_outlined),
+                      const SizedBox(
                         width: 10,
                       ),
                       Text(
@@ -202,8 +217,8 @@ class _HomescreenState extends State<Homescreen> {
                   },
                   icon: Row(
                     children: [
-                    const  Icon(Icons.deblur),
-                   const   SizedBox(
+                      const Icon(Icons.deblur),
+                      const SizedBox(
                         width: 10,
                       ),
                       Text(

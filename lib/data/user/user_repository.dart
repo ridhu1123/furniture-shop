@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:irohub_project/constants/sharedpreference.dart';
 import 'package:irohub_project/data/user/usermodel.dart';
+import 'package:irohub_project/screens/checkoutpage.dart';
 
 class UserRepository extends GetxController {
   @override
@@ -74,6 +75,7 @@ class UserRepository extends GetxController {
         documentReference.collection(CheckOutDetails);
     try {
       await collectionReference.add(user.toMyCheckOut());
+      Get.to(Checkoutscreen());
     } catch (e) {
       throw "Somthing went wrong $e";
     }
@@ -87,5 +89,24 @@ class UserRepository extends GetxController {
     });
     total.value = calculatedTotal;
     print("total   $total");
+  }
+
+
+ Stream<List<Map<String, dynamic>>> getCheckout(){
+   try {
+     Stream<QuerySnapshot> getitems=FirebaseFirestore.instance.collection("users").doc(shared_preferences_id).collection("CheckOutDetails").snapshots();
+     return getitems.map((event) {
+       List<Map<String, dynamic>> alldatas = [];
+       event.docs.forEach((doc) {
+        Map<String, dynamic> checkoutdata =
+              doc.data() as Map<String, dynamic>;
+              alldatas.add(checkoutdata);
+       });
+       return alldatas;
+     });
+   } catch (e) {
+    print("error : $e");
+     return Stream.empty();
+   }
   }
 }

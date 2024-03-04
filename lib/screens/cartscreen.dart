@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:irohub_project/constants/sharedpreference.dart';
 import 'package:irohub_project/data/user/user_repository.dart';
 import 'package:irohub_project/data/user/usermodel.dart';
+import 'package:irohub_project/features/shop/controllers/checkoutcontroller.dart';
 import 'package:irohub_project/screens/checkoutpage.dart';
 import 'package:irohub_project/screens/homescreen.dart';
 import 'package:lottie/lottie.dart';
@@ -75,31 +76,32 @@ class _cartscreenState extends State<cartscreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: InkWell(
-        onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      cartitems.isEmpty ? Homescreen() : Checkoutscreen()));
-        },
-        child: Container(
-          color: Colors.black,
-          height: 70,
-          width: double.infinity,
-          child: Center(
-            child: cartitems.isEmpty
-                ? Text(
-                    "GO SHOPPING",
-                    style: GoogleFonts.robotoSlab(color: Colors.white),
-                  )
-                : Text(
-                    "CHECKOUT",
-                    style: GoogleFonts.robotoSlab(color: Colors.white),
-                  ),
-          ),
-        ),
-      ),
+      // bottomNavigationBar:
+      // InkWell(
+      //   onTap: () {
+      //     Navigator.push(
+      //         context,
+      //         MaterialPageRoute(
+      //             builder: (context) =>
+      //                 cartitems.isEmpty ? Homescreen() : Checkoutscreen()));
+      //   },
+      //   child: Container(
+      //     color: Colors.black,
+      //     height: 70,
+      //     width: double.infinity,
+      //     child: Center(
+      //       child: cartitems.isEmpty
+      //           ? Text(
+      //               "GO SHOPPING",
+      //               style: GoogleFonts.robotoSlab(color: Colors.white),
+      //             )
+      //           : Text(
+      //               "CHECKOUT",
+      //               style: GoogleFonts.robotoSlab(color: Colors.white),
+      //             ),
+      //     ),
+      //   ),
+      // ),
       body: SafeArea(
         child: Column(
           children: [
@@ -427,7 +429,29 @@ class _cartscreenState extends State<cartscreen> {
                           ),
                           SizedBox(
                             height: 15,
-                          )
+                          ),
+                          InkWell(
+                            onTap: () {
+                              controller.saveCheckOutRecord(
+                                  UserModel(checkoutitem: "${items}"));
+                              // Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (context) => Checkoutscreen()));
+                            },
+                            child: Container(
+                              color: Colors.black,
+                              height: 70,
+                              width: double.infinity,
+                              child: Center(
+                                child: Text(
+                                  "CHECKOUT",
+                                  style: GoogleFonts.robotoSlab(
+                                      color: Colors.white),
+                                ),
+                              ),
+                            ),
+                          ),
                         ],
                       );
                     }

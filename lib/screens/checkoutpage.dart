@@ -46,7 +46,8 @@ class _CheckoutscreenState extends State<Checkoutscreen> {
     return Scaffold(
       bottomNavigationBar: InkWell(
         onTap: () {
-          storeCheckOutItems();
+          // storeCheckOutItems();
+          Get.to(Thankyou());
         },
         child: Container(
           color: Colors.black,

@@ -18,7 +18,7 @@ class _OrderscreenState extends State<Orderscreen> {
     return Scaffold(
         body: SafeArea(
       child: StreamBuilder(
-          stream: controller.getItemsStream(),
+          stream: controller.getCheckout(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(
@@ -31,6 +31,7 @@ class _OrderscreenState extends State<Orderscreen> {
               return Text('Error: ${snapshot.error}');
             } else if (snapshot.hasData) {
               List<Map<String, dynamic>> items = snapshot.data!;
+              print("dataaa $items");
               controller.calculateTotalPrice(items);
 
               if (items.isEmpty) {
@@ -114,12 +115,12 @@ class _OrderscreenState extends State<Orderscreen> {
                                         ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(6),
-                                          child: Image.network(
-                                            items[index]["image"],
-                                            fit: BoxFit.fill,
-                                            width: double.infinity,
-                                            height: double.infinity,
-                                          ),
+                                          // child: Image.network(
+                                          //   items[index]["image"],
+                                          //   fit: BoxFit.fill,
+                                          //   width: double.infinity,
+                                          //   height: double.infinity,
+                                          // ),
                                         ),
                                       ],
                                     ),
@@ -133,12 +134,12 @@ class _OrderscreenState extends State<Orderscreen> {
                                       Padding(
                                         padding: const EdgeInsets.only(
                                             left: 8, bottom: 10),
-                                        child: Text(
-                                          items[index]["productname"],
-                                          // controller.allDocument[index]["name"],
-                                          style: GoogleFonts.robotoSlab(
-                                              fontWeight: FontWeight.w500),
-                                        ),
+                                        child: Text(""
+                                            // items[index]["productname"],
+                                            // // controller.allDocument[index]["name"],
+                                            // style: GoogleFonts.robotoSlab(
+                                            //     fontWeight: FontWeight.w500),
+                                            ),
                                       ),
                                       Padding(
                                           padding: const EdgeInsets.only(
@@ -150,11 +151,11 @@ class _OrderscreenState extends State<Orderscreen> {
                                                 style: TextStyle(
                                                     color: Colors.grey[600])),
                                             TextSpan(
-                                              text: items[index]["price"]
-                                                  .toString(),
-                                              style: GoogleFonts.robotoSlab(
-                                                  color: Colors.grey[400]),
-                                            )
+                                                // text: items[index]["price"]
+                                                //     .toString(),
+                                                // style: GoogleFonts.robotoSlab(
+                                                //     color: Colors.grey[400]),
+                                                )
                                           ]))),
                                       Padding(
                                         padding: const EdgeInsets.only(

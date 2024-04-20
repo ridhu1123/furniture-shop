@@ -96,146 +96,149 @@ class _ProfilepageState extends State<Profilepage> {
                 fontSize: 30, fontWeight: FontWeight.w500),
           ),
         ),
-        Center(
-          child: InkWell(
-            onTap: () {
-              showModalBottomSheet(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20))),
-                context: context,
-                builder: (context) {
-                  return Container(
-                    height: 150,
-                    decoration:
-                        BoxDecoration(borderRadius: BorderRadius.circular(19)),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                height: 3.5,
-                                width: 30,
-                                decoration: BoxDecoration(
-                                    color: Colors.grey[600],
-                                    borderRadius: BorderRadius.circular(15)),
-                              ),
-                            )
-                          ],
-                        ),
-                        Align(
-                          alignment: Alignment.topLeft,
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 18),
-                            child: Text(
-                              "Profile photo",
-                              style: GoogleFonts.robotoSlab(
-                                  fontSize: 20, fontWeight: FontWeight.w500),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 20),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Container(
-                                height: 60,
-                                width: 60,
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    shape: BoxShape.circle,
-                                    border: Border.all(
-                                        width: 1,
-                                        color: const Color.fromARGB(
-                                            255, 219, 218, 218))),
-                                child: IconButton(
-                                    onPressed: () async {
-                                      getcameraimage();
-                                      print("rrrrrrrrr $_image");
-                                    },
-                                    icon: Icon(
-                                      Icons.camera_alt_rounded,
-                                      color: Colors.green,
-                                    )),
-                              ),
-                              Container(
-                                height: 60,
-                                width: 60,
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    shape: BoxShape.circle,
-                                    border: Border.all(
-                                        width: 1,
-                                        color: const Color.fromARGB(
-                                            255, 219, 218, 218))),
-                                child: IconButton(
-                                    onPressed: () async {
-                                      var status =
-                                          await Permission.storage.request();
-                                      if (status == PermissionStatus.granted) {
-                                        getimage();
-                                        print("hhhhhhhh $_image");
-                                      } else {
-                                        print("ssssssssssssssssss");
-                                      }
-                                    },
-                                    icon: Icon(
-                                      Icons.photo,
-                                      color: Colors.green,
-                                    )),
-                              ),
-                              Container(
-                                height: 60,
-                                width: 60,
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    shape: BoxShape.circle,
-                                    border: Border.all(
-                                        width: 1,
-                                        color: const Color.fromARGB(
-                                            255, 219, 218, 218))),
-                                child: IconButton(
-                                    onPressed: () async {
-                                      final SharedPreferences prefs =
-                                          await SharedPreferences.getInstance();
-                                      prefs.remove("image");
-                                    },
-                                    icon: Icon(
-                                      Icons.delete,
-                                      color: Colors.green,
-                                    )),
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  );
-                },
-              );
-            },
-            child: _image != null
-                ? CircleAvatar(
-                    radius: 60,
-                    backgroundImage: FileImage(_image!),
-                  )
-                // Image.file(
-                //     _image!,
-                //     fit: BoxFit.fill,
-                //   )
-                : CircleAvatar(
+      const  Center(
+          // child:
+          //  InkWell(
+          //   onTap: () {
+          //     showModalBottomSheet(
+          //       shape: RoundedRectangleBorder(
+          //           borderRadius: BorderRadius.only(
+          //               topLeft: Radius.circular(20),
+          //               topRight: Radius.circular(20))),
+          //       context: context,
+          //       builder: (context) {
+          //         return Container(
+          //           height: 150,
+          //           decoration:
+          //               BoxDecoration(borderRadius: BorderRadius.circular(19)),
+          //           child: Column(
+          //             children: [
+          //               Row(
+          //                 mainAxisAlignment: MainAxisAlignment.center,
+          //                 children: [
+          //                   Padding(
+          //                     padding: const EdgeInsets.all(8.0),
+          //                     child: Container(
+          //                       height: 3.5,
+          //                       width: 30,
+          //                       decoration: BoxDecoration(
+          //                           color: Colors.grey[600],
+          //                           borderRadius: BorderRadius.circular(15)),
+          //                     ),
+          //                   )
+          //                 ],
+          //               ),
+          //               Align(
+          //                 alignment: Alignment.topLeft,
+          //                 child: Padding(
+          //                   padding: const EdgeInsets.only(left: 18),
+          //                   child: Text(
+          //                     "Profile photo",
+          //                     style: GoogleFonts.robotoSlab(
+          //                         fontSize: 20, fontWeight: FontWeight.w500),
+          //                   ),
+          //                 ),
+          //               ),
+          //               Padding(
+          //                 padding: const EdgeInsets.only(top: 20),
+          //                 child: Row(
+          //                   mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //                   children: [
+          //                     Container(
+          //                       height: 60,
+          //                       width: 60,
+          //                       decoration: BoxDecoration(
+          //                           color: Colors.white,
+          //                           shape: BoxShape.circle,
+          //                           border: Border.all(
+          //                               width: 1,
+          //                               color: const Color.fromARGB(
+          //                                   255, 219, 218, 218))),
+          //                       child: IconButton(
+          //                           onPressed: () async {
+          //                             getcameraimage();
+          //                             print("rrrrrrrrr $_image");
+          //                           },
+          //                           icon: Icon(
+          //                             Icons.camera_alt_rounded,
+          //                             color: Colors.green,
+          //                           )),
+          //                     ),
+          //                     Container(
+          //                       height: 60,
+          //                       width: 60,
+          //                       decoration: BoxDecoration(
+          //                           color: Colors.white,
+          //                           shape: BoxShape.circle,
+          //                           border: Border.all(
+          //                               width: 1,
+          //                               color: const Color.fromARGB(
+          //                                   255, 219, 218, 218))),
+          //                       child: IconButton(
+          //                           onPressed: () async {
+          //                             var status =
+          //                                 await Permission.storage.request();
+          //                             if (status == PermissionStatus.granted) {
+          //                               getimage();
+          //                               print("hhhhhhhh $_image");
+          //                             } else {
+          //                               print("ssssssssssssssssss");
+          //                             }
+          //                           },
+          //                           icon: Icon(
+          //                             Icons.photo,
+          //                             color: Colors.green,
+          //                           )),
+          //                     ),
+          //                     Container(
+          //                       height: 60,
+          //                       width: 60,
+          //                       decoration: BoxDecoration(
+          //                           color: Colors.white,
+          //                           shape: BoxShape.circle,
+          //                           border: Border.all(
+          //                               width: 1,
+          //                               color: const Color.fromARGB(
+          //                                   255, 219, 218, 218))),
+          //                       child: IconButton(
+          //                           onPressed: () async {
+          //                             final SharedPreferences prefs =
+          //                                 await SharedPreferences.getInstance();
+          //                             prefs.remove("image");
+          //                           },
+          //                           icon: Icon(
+          //                             Icons.delete,
+          //                             color: Colors.green,
+          //                           )),
+          //                     )
+          //                   ],
+          //                 ),
+          //               )
+          //             ],
+          //           ),
+          //         );
+          //       },
+          //     );
+          //   },
+            child:
+            //  _image != null
+            //     ? CircleAvatar(
+            //         radius: 60,
+            //         backgroundImage: FileImage(_image!),
+            //       )
+            //     // Image.file(
+            //     //     _image!,
+            //     //     fit: BoxFit.fill,
+            //     //   )
+            //     : 
+                CircleAvatar(
                     radius: 60,
                     backgroundImage: NetworkImage(
                         "https://i.pinimg.com/564x/39/94/fb/3994fb52d1f983d003ed6f084366bdab.jpg"),
                   ),
-          ),
+          // ),
         ),
-        SizedBox(
+     const   SizedBox(
           height: 10,
         ),
         Center(
@@ -250,7 +253,7 @@ class _ProfilepageState extends State<Profilepage> {
             style: GoogleFonts.robotoSlab(color: Colors.grey, fontSize: 10),
           ),
         ),
-        SizedBox(
+     const   SizedBox(
           height: 20,
         ),
         ListTile(

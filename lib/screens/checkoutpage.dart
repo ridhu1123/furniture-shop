@@ -47,7 +47,7 @@ class _CheckoutscreenState extends State<Checkoutscreen> {
       bottomNavigationBar: InkWell(
         onTap: () {
           // storeCheckOutItems();
-          Get.to(Thankyou());
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const Thankyou()));
         },
         child: Container(
           color: Colors.black,
